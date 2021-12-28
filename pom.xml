@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+        <module>msg-common</module>
+        <module>msg-handler</module>
+        <module>msg-service-api</module>
+        <module>msg-service-api-impl</module>
+        <module>msg-support</module>
+        <module>msg-web</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.6</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.imwj.msg</groupId>
+    <artifactId>MessageCenter</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--mysql驱动包-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.35</version>
+                <exclusions></exclusions>
+            </dependency>
+            <!--hutool工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.7.15</version>
+            </dependency>
+            <!--guava工具包-->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>31.0.1-jre</version>
+            </dependency>
+            <!--http库-->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>4.9.2</version>
+            </dependency>
+            <!--fastjson包-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.78</version>
+            </dependency>
+            <!--腾讯sdk(目前用在短信上)-->
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java</artifactId>
+                <version>3.1.390</version>
+            </dependency>
+            <!--apollo-->
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-client-config-data</artifactId>
+                <version>1.9.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
