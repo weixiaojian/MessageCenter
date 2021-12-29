@@ -14,8 +14,8 @@ import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
  */
 public class TxSmsTest {
 
-    private static final String secretId = "AKIDnPmsiHacOu98sLXS6TZOwFH3YnlSs0rR";
-    private static final String secretKey = "KM8droVv65oIVS9cnhLjqgFYbNt75mCM";
+    private static final String secretId = "";
+    private static final String secretKey = "";
 
     public static void main(String[] args) {
         try{
