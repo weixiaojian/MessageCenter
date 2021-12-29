@@ -1,7 +1,8 @@
 # 端口配置
 server:
   port: 80
-# 数据库相关的信息配置 TODO
+
+# 数据库相关的信息配置
 spring:
   application:
     name: MessageCenter
@@ -10,3 +11,41 @@ spring:
     username: root
     password: 123456
     driver-class-name: org.gjt.mm.mysql.Driver
+  # kafka相关的信息配置
+  kafka:
+    bootstrap-servers: 42.192.123.193:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto:
+        offset:
+          reset: earliest
+      auto-commit-interval: 1000
+      enable-auto-commit: true
+
+# HTTP 连接配置
+ok:
+  http:
+    connect-timeout: 30
+    keep-alive-duration: 300
+    max-idle-connections: 200
+    read-timeout: 30
+    write-timeout: 30
+
+# 腾讯云账号相关的信息配置
+tencent:
+  sms:
+    account:
+      secret-id: AKIDnPmsiHacOu98sLXS6TZOwFH3YnlSs0rR
+      secret-key: KM8droVv65oIVS9cnhLjqgFYbNt75mCM
+      sign_name: 我的笔记
+      sms-sdk-app-id: 1400617401
+      template-id: 1259389
+
+# kafka写入的topicName
+austin:
+  topic:
+    name: MESSAGE_CENTER
