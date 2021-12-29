@@ -1,14 +1,15 @@
-package com.imwj.msg;
+package com.imwj.msg.domain;
 
+import com.imwj.msg.dto.ContentModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.swing.text.html.parser.ContentModel;
 import java.util.Set;
 
 /**
+ * 发送任务信息
  * @author langao_q
  * @since 2021-12-28 11:07
  */
