@@ -21,7 +21,7 @@ public class TaskPendingHolder {
      * 线程池的参数
      */
     private Integer coreSize = 3;
-    private Integer maxSize = 10;
+    private Integer maxSize = 5;
     private Integer queueSize = 100;
     private Map<String, ExecutorService> taskPendingHolder = new HashMap<>(32);
 

@@ -1,86 +1,27 @@
 # 消息发送中心
-## kafka安装
-* docker安装：[http://imwj.club/article/95](http://imwj.club/article/95)
-* Docker compose环境安装
-    1. 下载当前稳定版
-    ```
-    sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    ```
-    2. 将可执行权限应用于二进制文件/创建软链：
-                      
-    ```
-    sudo chmod +x /usr/local/bin/docker-compose
-    sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-    ```
-    3. 测试是否安装成功
-       
-    ```
-    docker-compose --version
-    ```
-* 新建搭建kafka环境的docker-compose.yml文件，文件中的TODO的ip需要换成自己服务器的外网ip，同时要打开服务器的2181、9092、9000端口
-```
-version: '3'
-services:
-  zookepper:
-    image: wurstmeister/zookeeper                    # 原镜像`wurstmeister/zookeeper`
-    container_name: zookeeper                        # 容器名为'zookeeper'
-    volumes:                                         # 数据卷挂载路径设置,将本机目录映射到容器目录
-      - "/etc/localtime:/etc/localtime"
-    ports:                                           # 映射端口
-      - "2181:2181"
+## 项目中的技术点
+* SpringBoot、Mybatis Plus、MySql、Kafka、Redis、Elk、Prometheus
+* SpringBoot：更加敏捷地开发Spring应用程序，专注于应用程序的功能，不用在Spring的配置上多花功夫（约定大于配置）
+* Mybatis Plus：为简化开发而生，只做增强不做改变，引入它不会对现有工程产生影响，如丝般顺滑。
+* MySql：最流行的关系型数据库
+* Kafka：是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者在网站中的所有动作流数据（解耦、异步和削峰）
+* Redis：基于内存亦可持久化的高性能内存读写、Key-Value数据库
+* Elk：Elasticsearch , Logstash, Kibana的缩写，目前主流的一种日志系统（排查处理问题）
+* Prometheus：是一个开源的服务监控系统和时间序列数据库（监控告警系统）
 
-  kafka:
-    image: wurstmeister/kafka                                # 原镜像`wurstmeister/kafka`
-    container_name: kafka                                    # 容器名为'kafka'
-    volumes:                                                 # 数据卷挂载路径设置,将本机目录映射到容器目录
-      - "/etc/localtime:/etc/localtime"
-    environment:                                                       # 设置环境变量,相当于docker run命令中的-e
-      KAFKA_BROKER_ID: 0                                               # 在kafka集群中，每个kafka都有一个BROKER_ID来区分自己
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://ip:9092 # TODO 将kafka的地址端口注册给zookeeper
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092                        # 配置kafka的监听端口
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181                # zookeeper地址
-      KAFKA_CREATE_TOPICS: "hello_world"
-    ports:                              # 映射端口
-      - "9092:9092"
-    depends_on:                         # 解决容器依赖启动先后问题
-      - zookepper
+## 项目构成
+* msg-common：公共Module 主要存放一些公共的实体、常量、枚举等等
+* msg-handler：处理程序Module 业务的实际处理程序项目如：kafka消费者、调用第三方SDK等等
+* msg-service-api：接口Module 供web层调用，只提供接口 不做具体实现
+* msg-service-api-impl：接口实现Module，service的实际实现 如：责任链处理类、service-api接口的实现
+* msg-support：业务支持Module，如：dao操作数据库、责任链串联和实际执行
+* msg-web：对外暴露Module，如：web、controller等操作
 
-  kafka-manager:
-    image: sheepkiller/kafka-manager                         # 原镜像`sheepkiller/kafka-manager`
-    container_name: kafka-manager                            # 容器名为'kafka-manager'
-    environment:                        # 设置环境变量,相当于docker run命令中的-e
-      ZK_HOSTS: zookeeper:2181  #  zookeeper地址
-      APPLICATION_SECRET: xxxxx
-      KAFKA_MANAGER_AUTH_ENABLED: "true"  # 开启kafka-manager权限校验
-      KAFKA_MANAGER_USERNAME: admin       # 登陆账户
-      KAFKA_MANAGER_PASSWORD: 123456      # 登陆密码
-    ports:                              # 映射端口
-      - "9000:9000"
-    depends_on:                         # 解决容器依赖启动先后问题
-      - kafka
-```
-* 编译docker-compose.yml下载zookepper、kafka的镜像并运行（docker-compose.yml文件目录下执行）
-```
-docker-compose up -d
-```
-* 查看镜像运行情况 并进入kafka容器
-```
-docker ps 
-docker exec -it kafka sh
-```
-* 创建topic
-```
-$KAFKA_HOME/bin/kafka-topics.sh --create --topic MESSAGE_CENTER --partitions 4 --zookeeper zookeeper:2181 --replication-factor 1 
-```
-* 查询topic信息
-```
-$KAFKA_HOME/bin/kafka-topics.sh --zookeeper zookeeper:2181 --describe --topic MESSAGE_CENTER
-```
-* 启动消费者
-```
-$KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --from-beginning --topic MESSAGE_CENTER
-```
-* 启动生产者
-```
-$KAFKA_HOME/bin/kafka-console-producer.sh --topic=MESSAGE_CENTER --broker-list kafka:9092
-```
+## 消息发送流程
+* 调用web的/sms/sendSmsTest接口(传入手机号和数据库中的模板表的id)
+* 进发送消息任务模型封装、责任链上下文封装，PipelineConfig类配置责任链的内容
+* 执行责任链(前置参数校验、组装参数、后置参数校验、发送消息至MQ)，将数据推送到Kafka中
+* 自定义消费者信息，配置多个线程池 对应 多个kafka监听线程，这里的话根据ChannelType * MessageType来决定生成多少个线程池和kafka监听线程
+* kafka监听类：MsgReceiver，多个kafka监听线程配置类：ReceiverStart，多个线程池配置类：TaskPendingHolder
+* MsgReceiver监听到数据后比对groupId是否和kafka中的一致，一致就封装好Task数据 然后准备推送
+* 此处并不是直接推送，根据groupId获取指定的线程池 然后线程执行Task任务，Task调用实际的实现类中的handler然后进行推送和记录发送日志

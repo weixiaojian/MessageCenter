@@ -33,6 +33,9 @@ public class Task implements Runnable {
 
     @Override
     public void run() {
+        // 0.TODO 丢弃消息
+
+        // 1.TODO 平台通用去重
 
         // 2. 真正发送消息
         if (CollUtil.isNotEmpty(taskInfo.getReceiver())) {

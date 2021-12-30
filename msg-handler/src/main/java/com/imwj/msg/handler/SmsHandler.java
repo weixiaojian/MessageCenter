@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -28,7 +29,7 @@ public class SmsHandler extends Handler {
         channelCode = ChannelType.SMS.getCode();
     }
 
-    @Autowired
+    @Resource
     private SmsRecordDao smsRecordDao;
 
     @Autowired

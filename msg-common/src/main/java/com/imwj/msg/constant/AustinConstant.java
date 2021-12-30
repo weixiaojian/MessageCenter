@@ -1,6 +1,7 @@
 package com.imwj.msg.constant;
 
 /**
+ * 系统常量
  * @author langao_q
  * @since 2021-12-29 19:04
  */
