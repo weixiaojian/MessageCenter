@@ -8,8 +8,8 @@ import lombok.ToString;
 
 /**
  * 发送渠道类型枚举
- *
- * @author 3y
+ * @author langao_q
+ * @since 2021-12-29 17:29
  */
 @Getter
 @ToString

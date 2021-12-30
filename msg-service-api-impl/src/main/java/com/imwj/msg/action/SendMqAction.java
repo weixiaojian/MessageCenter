@@ -3,7 +3,7 @@ package com.imwj.msg.action;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.base.Throwables;
-import com.imwj.msg.domain.ProcessContext;
+import com.imwj.msg.pipeline.ProcessContext;
 import com.imwj.msg.domain.SendTaskModel;
 import com.imwj.msg.enums.RespStatusEnum;
 import com.imwj.msg.pipeline.BusinessProcess;

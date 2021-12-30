@@ -40,7 +40,7 @@ public class CodeGenerator {
     /**
      * 指定生成的表名（要大写）
      */
-    private final String[] tableNames = new String[]{"message_template"};
+    private final String[] tableNames = new String[]{"sms_record"};
 
     /**
      * 项目路径

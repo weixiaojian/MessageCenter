@@ -3,7 +3,7 @@ package com.imwj.msg.action;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ReUtil;
 import com.alibaba.fastjson.JSON;
-import com.imwj.msg.domain.ProcessContext;
+import com.imwj.msg.pipeline.ProcessContext;
 import com.imwj.msg.domain.SendTaskModel;
 import com.imwj.msg.domain.TaskInfo;
 import com.imwj.msg.enums.ChannelType;

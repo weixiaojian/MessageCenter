@@ -12,12 +12,13 @@ import com.imwj.msg.dto.ContentModel;
 import com.imwj.msg.enums.ChannelType;
 import com.imwj.msg.enums.RespStatusEnum;
 import com.imwj.msg.pipeline.BusinessProcess;
+import com.imwj.msg.pipeline.ProcessContext;
 import com.imwj.msg.util.ContentHolderUtil;
 import com.imwj.msg.util.TaskInfoUtils;
 import com.imwj.msg.vo.BasicResultVO;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -30,7 +31,7 @@ import java.util.*;
 @Slf4j
 public class AssembleAction implements BusinessProcess {
 
-    @Autowired
+    @Resource
     private MessageTemplateDao messageTemplateDao;
 
     @Override
@@ -67,7 +68,7 @@ public class AssembleAction implements BusinessProcess {
                     .businessId(TaskInfoUtils.generateBusinessId(messageTemplate.getId(), messageTemplate.getTemplateType()))
                     .receiver(new HashSet<>(Arrays.asList(messageParam.getReceiver().split(String.valueOf(StrUtil.C_COMMA)))))
                     .idType(messageTemplate.getIdType())
-                    .sendChannel(messageTemplate.getTemplateType())
+                    .sendChannel(messageTemplate.getSendChannel())
                     .msgType(messageTemplate.getMsgType())
                     .sendAccount(messageTemplate.getSendAccount())
                     .contentModel(getContentModelValue(messageTemplate, messageParam))

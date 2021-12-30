@@ -3,6 +3,7 @@ package com.imwj.msg.controller;
 import com.imwj.msg.domain.MessageParam;
 import com.imwj.msg.domain.RetResult;
 import com.imwj.msg.domain.SendRequest;
+import com.imwj.msg.domain.SendResponse;
 import com.imwj.msg.enums.BusinessCode;
 import com.imwj.msg.service.SendService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +36,8 @@ public class SendController {
         SendRequest sendRequest = new SendRequest().setCode(BusinessCode.COMMON_SEND.getCode())
                 .setMessageTemplateId(templateId)
                 .setMessageParam(messageParam);
-        return RetResult.success(sendService.send(sendRequest));
+        SendResponse sendResponse = sendService.send(sendRequest);
+        return RetResult.success(sendResponse);
     }
 
 }

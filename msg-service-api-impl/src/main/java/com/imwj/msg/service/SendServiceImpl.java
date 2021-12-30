@@ -1,6 +1,7 @@
 package com.imwj.msg.service;
 
 import com.imwj.msg.domain.*;
+import com.imwj.msg.pipeline.ProcessContext;
 import com.imwj.msg.pipeline.ProcessController;
 import com.imwj.msg.vo.BasicResultVO;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,6 @@ public class SendServiceImpl implements SendService{
                 .response(BasicResultVO.success()).build();
 
         ProcessContext process = processController.process(context);
-
         return new SendResponse(process.getResponse().getCode(), process.getResponse().getMsg());
     }
 

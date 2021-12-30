@@ -1,6 +1,5 @@
-package com.imwj.msg.domain;
+package com.imwj.msg.pipeline;
 
-import com.imwj.msg.pipeline.ProcessModel;
 import com.imwj.msg.vo.BasicResultVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

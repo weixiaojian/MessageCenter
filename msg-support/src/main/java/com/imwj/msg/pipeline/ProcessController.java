@@ -2,12 +2,10 @@ package com.imwj.msg.pipeline;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
-import com.imwj.msg.domain.ProcessContext;
 import com.imwj.msg.enums.RespStatusEnum;
 import com.imwj.msg.vo.BasicResultVO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +17,6 @@ import java.util.Map;
  */
 @Data
 @Slf4j
-@Component
 public class ProcessController {
     /**
      * 责任链list：PreParamCheckAction、AfterParamCheckAction、AssembleAction、SendMqAction

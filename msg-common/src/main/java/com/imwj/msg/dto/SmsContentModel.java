@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * @author 3y
+ * @author langao_q
+ * @since 2021-12-29 19:05
  * <p>
  * 短信内容模型
  *

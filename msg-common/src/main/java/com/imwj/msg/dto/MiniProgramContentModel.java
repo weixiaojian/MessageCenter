@@ -1,7 +1,8 @@
 package com.imwj.msg.dto;
 
 /**
- * @author 3y
+ * @author langao_q
+ * @since 2021-12-29 19:05
  */
 public class MiniProgramContentModel extends ContentModel {
 
