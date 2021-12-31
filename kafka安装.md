@@ -66,6 +66,8 @@ docker-compose up -d
 ```
 docker ps 
 docker exec -it kafka sh
+
+#容器不停止退出：ctrl+P+Q
 ```
 * 创建topic
 ```

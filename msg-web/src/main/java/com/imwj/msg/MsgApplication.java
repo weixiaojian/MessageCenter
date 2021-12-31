@@ -10,7 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MsgApplication {
 
+
     public static void main(String[] args) {
+        // apollo的地址
+        System.setProperty("apollo.config-service", "http://127.0.0.1:8080");
+
         SpringApplication.run(MsgApplication.class, args);
     }
 

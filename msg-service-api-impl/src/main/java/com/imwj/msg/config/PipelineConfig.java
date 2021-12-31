@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * 链路组装配置类
  * @author langao_q
  * @since 2021-12-30 10:06
  */
