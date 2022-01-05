@@ -36,8 +36,8 @@ public class Task implements Runnable {
     public void run() {
         // 0.TODO 丢弃消息
 
-        // 1.平台通用去重
-        deduplicationRuleService.duplication(taskInfo);
+        // 1.TODO 平台通用去重
+        //deduplicationRuleService.duplication(taskInfo);
 
         // 2. 真正发送消息
         if (CollUtil.isNotEmpty(taskInfo.getReceiver())) {

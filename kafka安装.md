@@ -85,3 +85,16 @@ $KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --from-b
 ```
 $KAFKA_HOME/bin/kafka-console-producer.sh --topic=MESSAGE_CENTER --broker-list kafka:9092
 ```
+
+# kafka内存不足导致启动失败（在容器未启动状态下 修改容器内的文件）
+* 由于服务是腾讯云的轻量服务器 内存只有2g，kafka是通过docker安装的没有挂载配置文件 所以只能到容器里面去修改配置，但容器因为内存不足启动不了 此处就有冲突了...
+* 解决方案：通过`docker inspect 容器ID`的命令查看容器详细信息，找到MergedDir配置项（这个就是容器内部目录，后面的目录就是对应的本机目录），修改该目录下的配置文件即可
+* 步骤：
+```
+ 容器详细信息："MergedDir":"/var/lib/docker/overlay2/cf8a69f383ffae245a18d68b9cd4e71f538d57ae727e4d0f18156243d4c4c9b2/merged"
+ 
+ 本机上找到的对应目录：/var/lib/docker/overlay2/cf8a69f383ffae245a18d68b9cd4e71f538d57ae727e4d0f18156243d4c4c9b2/diff/opt/kafka_2.13-2.8.1
+ 
+ 修改kafka_2.13-2.8.1/bin/kafka-server-start.sh即可：export KAFKA_HEAP_OPTS="-Xmx256m -Xms128m"
+```
+
