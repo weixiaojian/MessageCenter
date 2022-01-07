@@ -1,6 +1,7 @@
 package com.imwj.msg.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
@@ -21,20 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     private static final String DEDUPLICATION_RULE_KEY = "deduplication";
+    private static final String DISCARD_MESSAGE_KEY = "discard";
 
     @ApolloConfig("message.center")
     private Config config;
 
-    @Value("${test:666666}")
-    private String test;
+    @Value("${discard:000}")
+    private String discard_Val;
 
     @RequestMapping("/getApollo")
     public RetResult getApollo(){
-
-        log.info("test的值：{}" , test);
-
         JSONObject property = JSON.parseObject(config.getProperty(DEDUPLICATION_RULE_KEY, AustinConstant.APOLLO_DEFAULT_VALUE_JSON_OBJECT));
-        return RetResult.success(property);
+        JSONArray discard = JSON.parseArray(config.getProperty(DISCARD_MESSAGE_KEY, AustinConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY));
+        return RetResult.success(discard_Val + property + discard.toJSONString());
     }
 
 }

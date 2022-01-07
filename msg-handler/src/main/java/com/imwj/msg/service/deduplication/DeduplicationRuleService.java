@@ -22,14 +22,13 @@ import java.util.Date;
 public class DeduplicationRuleService {
 
     /**
-     * 配置样例：{"contentDeduplication":{"num":1,"time":300},"frequencyDeduplication":{"num":5}}
+     * 配置样例：key=deduplication   value={"contentDeduplication":{"num":1,"time":300},"frequencyDeduplication":{"num":5}}
      */
     private static final String DEDUPLICATION_RULE_KEY = "deduplication";
     private static final String CONTENT_DEDUPLICATION = "contentDeduplication";
     private static final String FREQUENCY_DEDUPLICATION = "frequencyDeduplication";
     private static final String TIME = "time";
     private static final String NUM = "num";
-
     @Autowired
     private ContentDeduplicationService contentDeduplicationService;
 
