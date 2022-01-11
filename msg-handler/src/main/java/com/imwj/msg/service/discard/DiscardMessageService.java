@@ -5,7 +5,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
 import com.imwj.msg.constant.AustinConstant;
+import com.imwj.msg.domain.AnchorInfo;
 import com.imwj.msg.domain.TaskInfo;
+import com.imwj.msg.enums.AnchorState;
+import com.imwj.msg.util.LogUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,6 +37,7 @@ public class DiscardMessageService {
                 AustinConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY));
         //如果模板id在apollo的配置中配置了要丢弃  则丢弃该消息
         if (array.contains(String.valueOf(taskInfo.getMessageTemplateId()))) {
+            LogUtils.print(AnchorInfo.builder().businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).state(AnchorState.DISCARD.getCode()).build());
             return true;
         }
         return false;

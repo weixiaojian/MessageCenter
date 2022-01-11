@@ -1,9 +1,13 @@
 package com.imwj.msg.receiver;
 
 import com.alibaba.fastjson.JSON;
+import com.imwj.msg.domain.AnchorInfo;
+import com.imwj.msg.domain.LogParam;
 import com.imwj.msg.domain.TaskInfo;
+import com.imwj.msg.enums.AnchorState;
 import com.imwj.msg.pending.Task;
 import com.imwj.msg.pending.TaskPendingHolder;
+import com.imwj.msg.util.LogUtils;
 import com.imwj.msg.utils.GroupIdMappingUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -24,6 +28,8 @@ import java.util.Optional;
 @Slf4j
 public class MsgReceiver {
 
+    private static final String LOG_BIZ_TYPE = "Receiver#consumer";
+
     @Autowired
     private ApplicationContext context;
 
@@ -40,11 +46,11 @@ public class MsgReceiver {
             if(groupId.equals(messageGroupId)){
                 log.info("【"+groupId+"】消费开始：" + JSON.toJSONString(taskInfos));
                 for(TaskInfo taskInfo : taskInfos){
+                    LogUtils.print(LogParam.builder().bizType(LOG_BIZ_TYPE).object(taskInfo).build(), AnchorInfo.builder().ids(taskInfo.getReceiver()).businessId(taskInfo.getBusinessId()).state(AnchorState.RECEIVE.getCode()).build());
                     Task task = context.getBean(Task.class).setTaskInfo(taskInfo);
                     taskPendingHolder.route(groupId).execute(task);
                 }
             }
         }
     }
-
 }

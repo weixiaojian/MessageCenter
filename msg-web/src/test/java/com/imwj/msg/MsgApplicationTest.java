@@ -1,11 +1,8 @@
 package com.imwj.msg;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
-import com.imwj.msg.constant.AustinConstant;
+import com.imwj.msg.handler.HandlerHolder;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
@@ -15,18 +12,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class MsgApplicationTest {
 
-    private static final String DEDUPLICATION_RULE_KEY = "deduplication";
-
-    /**
-     * 从aplllo配置中获取配置
-     */
-    @ApolloConfig("message.center")
-    private Config config;
+    @Autowired
+    private HandlerHolder handlerHolder;
 
     @Test
     public void test(){
-        JSONObject property = JSON.parseObject(config.getProperty(DEDUPLICATION_RULE_KEY, AustinConstant.APOLLO_DEFAULT_VALUE_JSON_OBJECT));
-        System.out.println(property.toJSONString());
+        System.out.println(handlerHolder.handlers);
+        System.out.println(handlerHolder.route(30));
+        System.out.println(handlerHolder.route(40));
     }
 
 }

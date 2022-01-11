@@ -2,6 +2,8 @@ package com.imwj.msg.handler;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
+import com.google.common.base.Throwables;
 import com.imwj.msg.dao.SmsRecordDao;
 import com.imwj.msg.domain.SmsParam;
 import com.imwj.msg.domain.SmsRecord;
@@ -36,7 +38,7 @@ public class SmsHandler extends Handler {
     private SmsScript tencentSmsScript;
 
     @Override
-    public void handler(TaskInfo taskInfo) {
+    public boolean handler(TaskInfo taskInfo) {
         //1.调用腾讯接口发送短信
         SmsParam smsParam = SmsParam.builder()
                 .phones(taskInfo.getReceiver())
@@ -46,14 +48,19 @@ public class SmsHandler extends Handler {
                 .supplierName("腾讯云通知类消息渠道")
                 .build();
 
-        List<SmsRecord> recordList = tencentSmsScript.send(smsParam);
-
-        //2.记录短信发送日志
-        if (!CollUtil.isEmpty(recordList)) {
-            for(SmsRecord smsRecord : recordList){
-                smsRecordDao.insert(smsRecord);
+        try {
+            List<SmsRecord> recordList = tencentSmsScript.send(smsParam);
+            if(CollUtil.isNotEmpty(recordList)){
+                for(SmsRecord smsRecord : recordList){
+                    smsRecordDao.insert(smsRecord);
+                }
             }
+            return true;
+        }catch (Exception e){
+            log.error("SmsHandler#handler fail:{},params:{}",
+                    Throwables.getStackTraceAsString(e), JSON.toJSONString(smsParam));
         }
+        return false;
     }
 
     /**

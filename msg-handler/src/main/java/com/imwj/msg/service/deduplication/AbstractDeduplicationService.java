@@ -2,8 +2,10 @@ package com.imwj.msg.service.deduplication;
 
 import cn.hutool.core.collection.CollUtil;
 import com.imwj.msg.constant.AustinConstant;
+import com.imwj.msg.domain.AnchorInfo;
 import com.imwj.msg.domain.DeduplicationParam;
 import com.imwj.msg.domain.TaskInfo;
+import com.imwj.msg.util.LogUtils;
 import com.imwj.msg.util.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +42,16 @@ public abstract class AbstractDeduplicationService {
             if(value != null && Integer.valueOf(value) > param.getCountNum()){
                 filterSet.add(receiver);
             }else{
-                Queue<String> readyPutRedisReceiver;
                 redisSet.add(receiver);
             }
         }
         // 不符合条件的用户：需要更新Redis(无记录添加，有记录则累加次数)
         putInRedis(redisSet, redisValue, param);
         // 剔除符合去重条件的用户
-        taskInfo.getReceiver().removeAll(filterSet);
+        if (CollUtil.isNotEmpty(filterSet)) {
+            taskInfo.getReceiver().removeAll(filterSet);
+            LogUtils.print(AnchorInfo.builder().businessId(taskInfo.getBusinessId()).ids(filterSet).state(param.getAnchorState().getCode()).build());
+        }
     }
 
     /**

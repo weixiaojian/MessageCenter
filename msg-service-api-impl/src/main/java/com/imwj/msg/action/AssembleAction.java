@@ -106,6 +106,12 @@ public class AssembleAction implements BusinessProcess {
                 ReflectUtil.setFieldValue(contentModel, field, resultValue);
             }
         }
+        // 如果 url 字段存在，则在url拼接对应的埋点参数
+        String url = (String) ReflectUtil.getFieldValue(contentModel, "url");
+        if (StrUtil.isNotBlank(url)) {
+            String resultUrl = TaskInfoUtils.generateUrl(url, messageTemplate.getId(), messageTemplate.getTemplateType());
+            ReflectUtil.setFieldValue(contentModel, "url", resultUrl);
+        }
         return contentModel;
     }
 

@@ -25,11 +25,11 @@ public class MessageTemplateController {
     private MessageTemplateDao messageTemplateDao;
 
     /**
-     * 插入一条模板数据
+     * 插入一条短信模板数据
      * @return
      */
-    @GetMapping("/insert")
-    public RetResult insert() {
+    @GetMapping("/insertSms")
+    public RetResult insertSms() {
         MessageTemplate messageTemplate = MessageTemplate.builder()
                 .name("短信模板")
                 .auditStatus(10)
@@ -56,6 +56,40 @@ public class MessageTemplateController {
         messageTemplateDao.insert(messageTemplate);
         return RetResult.success(messageTemplate);
     }
+
+    /**
+     * 插入一条短信模板数据
+     * @return
+     */
+    @GetMapping("/insertEmail")
+    public RetResult insertEmail() {
+        MessageTemplate messageTemplate = MessageTemplate.builder()
+                .name("邮件模板")
+                .auditStatus(10)
+                .flowId("test")
+                .msgStatus(10)
+                .idType(40)
+                .sendChannel(40)
+                .templateType(20)
+                .msgType(10)
+                .expectPushTime("0")
+                .msgContent("{\"content\":\"{$contentValue}\",\"title\":\"{$title}\"}")
+                .sendAccount(66)
+                .creator("yyyyc")
+                .updator("yyyyu")
+                .team("yyyt")
+                .proposer("yyyy22")
+                .auditor("yyyyyyz")
+                .isDeleted(0)
+                .created(Math.toIntExact(DateUtil.currentSeconds()))
+                .updated(Math.toIntExact(DateUtil.currentSeconds()))
+                .deduplicationTime(1)
+                .isNightShield(0)
+                .build();
+        messageTemplateDao.insert(messageTemplate);
+        return RetResult.success(messageTemplate);
+    }
+
 
     /**
      * 查询所有的模板数据

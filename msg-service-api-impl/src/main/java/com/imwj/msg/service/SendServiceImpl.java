@@ -1,6 +1,10 @@
 package com.imwj.msg.service;
 
-import com.imwj.msg.domain.*;
+import cn.monitor4all.logRecord.annotation.OperationLog;
+import com.imwj.msg.domain.BatchSendRequest;
+import com.imwj.msg.domain.SendRequest;
+import com.imwj.msg.domain.SendResponse;
+import com.imwj.msg.domain.SendTaskModel;
 import com.imwj.msg.pipeline.ProcessContext;
 import com.imwj.msg.pipeline.ProcessController;
 import com.imwj.msg.vo.BasicResultVO;
@@ -21,6 +25,7 @@ public class SendServiceImpl implements SendService{
     private ProcessController processController;
 
     @Override
+    @OperationLog(bizType = "SendService#send", bizId = "#sendRequest.messageTemplateId", msg = "#sendRequest")
     public SendResponse send(SendRequest sendRequest) {
         //发送消息任务模型封装
         SendTaskModel sendTaskModel = SendTaskModel.builder()

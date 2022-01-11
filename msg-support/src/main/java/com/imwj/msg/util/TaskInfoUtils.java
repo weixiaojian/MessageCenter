@@ -22,4 +22,17 @@ public class TaskInfoUtils {
         Integer today = Integer.valueOf(DateUtil.format(new Date(), AustinConstant.YYYYMMDD));
         return Long.valueOf(String.format("%d%s", templateType * TYPE_FLAG + templateId, today));
     }
+
+    /**
+     * 对url添加平台参数（用于追踪数据)
+     */
+    public static String generateUrl(String url, Long templateId, Integer templateType) {
+        url = url.trim();
+        Long businessId = generateBusinessId(templateId, templateType);
+        if (url.indexOf('?') == -1) {
+            return url + "?track_code_bid=" + businessId;
+        } else {
+            return url + "&track_code_bid=" + businessId;
+        }
+    }
 }

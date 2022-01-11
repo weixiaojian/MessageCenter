@@ -1,6 +1,9 @@
 package com.imwj.msg.handler;
 
+import com.imwj.msg.domain.AnchorInfo;
 import com.imwj.msg.domain.TaskInfo;
+import com.imwj.msg.enums.AnchorState;
+import com.imwj.msg.util.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -31,7 +34,12 @@ public abstract class Handler{
     }
 
     public void doHandler(TaskInfo taskInfo) {
-        handler(taskInfo);
+        //消息处理失败日志
+        if(!handler(taskInfo)){
+            LogUtils.print(AnchorInfo.builder().state(AnchorState.SEND_FAIL.getCode()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).build());
+        }
+        //消息处理成功日志
+        LogUtils.print(AnchorInfo.builder().state(AnchorState.SEND_SUCCESS.getCode()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).build());
     }
 
     /**
@@ -40,6 +48,6 @@ public abstract class Handler{
      * @param taskInfo
      * @return
      */
-    public abstract void handler(TaskInfo taskInfo);
+    public abstract boolean handler(TaskInfo taskInfo);
 
 }

@@ -8,6 +8,7 @@ import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
 import com.imwj.msg.constant.AustinConstant;
 import com.imwj.msg.domain.DeduplicationParam;
 import com.imwj.msg.domain.TaskInfo;
+import com.imwj.msg.enums.AnchorState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +51,7 @@ public class DeduplicationRuleService {
         DeduplicationParam contentParams = DeduplicationParam.builder()
                 .deduplicationTime(contentDeduplication.getLong(TIME))
                 .countNum(contentDeduplication.getInteger(NUM)).taskInfo(taskInfo)
+                .anchorState(AnchorState.CONTENT_DEDUPLICATION)
                 .build();
         contentDeduplicationService.deduplication(contentParams);
 
@@ -58,6 +60,7 @@ public class DeduplicationRuleService {
         DeduplicationParam businessParams = DeduplicationParam.builder()
                 .deduplicationTime(seconds)
                 .countNum(frequencyDeduplication.getInteger(NUM)).taskInfo(taskInfo)
+                .anchorState(AnchorState.RULE_DEDUPLICATION)
                 .build();
         frequencyDeduplicationService.deduplication(businessParams);
     }

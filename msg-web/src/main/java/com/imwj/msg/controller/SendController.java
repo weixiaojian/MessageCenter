@@ -40,4 +40,19 @@ public class SendController {
         return RetResult.success(sendResponse);
     }
 
+    @GetMapping("/sendEmailTest")
+    public RetResult sendEmailTest(String phone, Long templateId) {
+        //邮件内容
+        Map<String, String> variables = new HashMap<>(8);
+        variables.put("contentValue", "6666");
+        variables.put("title", "EmailTest");
+        MessageParam messageParam = new MessageParam().setReceiver(phone).setVariables(variables);
+
+        SendRequest sendRequest = new SendRequest().setCode(BusinessCode.COMMON_SEND.getCode())
+                .setMessageTemplateId(templateId)
+                .setMessageParam(messageParam);
+        SendResponse sendResponse = sendService.send(sendRequest);
+        return RetResult.success(sendResponse);
+    }
+
 }

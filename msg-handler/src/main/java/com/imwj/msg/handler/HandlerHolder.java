@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 public class HandlerHolder {
 
-    private Map<Integer, Handler> handlers = new HashMap<Integer, Handler>(32);
+    public Map<Integer, Handler> handlers = new HashMap<Integer, Handler>(32);
 
     public void putHandler(Integer channelCode, Handler handler) {
         handlers.put(channelCode, handler);
