@@ -44,8 +44,7 @@ public class SmsHandler extends Handler {
                 .phones(taskInfo.getReceiver())
                 .content(getSmsContent(taskInfo))
                 .messageTemplateId(taskInfo.getMessageTemplateId())
-                .supplierId(10)
-                .supplierName("腾讯云通知类消息渠道")
+                .sendAccount(taskInfo.getSendAccount())
                 .build();
 
         try {

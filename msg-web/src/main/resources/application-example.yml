@@ -7,15 +7,7 @@ ok:
     read-timeout: 30
     write-timeout: 30
 
-# 腾讯云账号相关的信息配置 TODO
-tencent:
-  sms:
-    account:
-      secret-id:
-      secret-key:
-      sign_name:
-      sms-sdk-app-id:
-      template-id:
+# 腾讯云账号相关的信息配置（配置到apollo中） TODO
 
 # 数据库相关的信息配置 TODO
 spring:

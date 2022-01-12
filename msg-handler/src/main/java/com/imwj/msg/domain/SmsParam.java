@@ -30,12 +30,7 @@ public class SmsParam {
     private String content;
 
     /**
-     * 渠道商Id
+     * 发送账号
      */
-    private Integer supplierId;
-
-    /**
-     * 渠道商名字
-     */
-    private String supplierName;
+    private Integer sendAccount;
 }
