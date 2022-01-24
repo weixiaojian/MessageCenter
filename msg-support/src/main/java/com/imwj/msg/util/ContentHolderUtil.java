@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author langao_q
  * 内容占位符 替换
- * austin占位符格式{$var}
+ * 占位符格式{$var}
  */
 public class ContentHolderUtil {
 

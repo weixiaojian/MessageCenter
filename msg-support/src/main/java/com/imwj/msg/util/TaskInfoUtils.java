@@ -1,7 +1,7 @@
 package com.imwj.msg.util;
 
 import cn.hutool.core.date.DateUtil;
-import com.imwj.msg.constant.AustinConstant;
+import com.imwj.msg.constant.MessageCenterConstant;
 
 import java.util.Date;
 
@@ -19,7 +19,7 @@ public class TaskInfoUtils {
      * (固定16位)
      */
     public static Long generateBusinessId(Long templateId, Integer templateType) {
-        Integer today = Integer.valueOf(DateUtil.format(new Date(), AustinConstant.YYYYMMDD));
+        Integer today = Integer.valueOf(DateUtil.format(new Date(), MessageCenterConstant.YYYYMMDD));
         return Long.valueOf(String.format("%d%s", templateType * TYPE_FLAG + templateId, today));
     }
 

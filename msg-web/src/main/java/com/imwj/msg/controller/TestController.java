@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
-import com.imwj.msg.constant.AustinConstant;
+import com.imwj.msg.constant.MessageCenterConstant;
 import com.imwj.msg.domain.RetResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,8 +32,8 @@ public class TestController {
 
     @RequestMapping("/getApollo")
     public RetResult getApollo(){
-        JSONObject property = JSON.parseObject(config.getProperty(DEDUPLICATION_RULE_KEY, AustinConstant.APOLLO_DEFAULT_VALUE_JSON_OBJECT));
-        JSONArray discard = JSON.parseArray(config.getProperty(DISCARD_MESSAGE_KEY, AustinConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY));
+        JSONObject property = JSON.parseObject(config.getProperty(DEDUPLICATION_RULE_KEY, MessageCenterConstant.APOLLO_DEFAULT_VALUE_JSON_OBJECT));
+        JSONArray discard = JSON.parseArray(config.getProperty(DISCARD_MESSAGE_KEY, MessageCenterConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY));
         return RetResult.success(discard_Val + property + discard.toJSONString());
     }
 

@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Throwables;
-import com.imwj.msg.constant.AustinConstant;
+import com.imwj.msg.constant.MessageCenterConstant;
 import com.imwj.msg.dao.MessageTemplateDao;
 import com.imwj.msg.domain.*;
 import com.imwj.msg.dto.ContentModel;
@@ -40,7 +40,7 @@ public class AssembleAction implements BusinessProcess {
         Long messageTemplateId = sendTaskModel.getMessageTemplateId();
         try {
             MessageTemplate messageTemplate = messageTemplateDao.selectById(messageTemplateId);
-            if (messageTemplate == null || messageTemplate.getIsDeleted().equals(AustinConstant.TRUE)) {
+            if (messageTemplate == null || messageTemplate.getIsDeleted().equals(MessageCenterConstant.TRUE)) {
                 context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.TEMPLATE_NOT_FOUND));
                 return;
             }

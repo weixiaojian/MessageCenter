@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
-import com.imwj.msg.constant.AustinConstant;
+import com.imwj.msg.constant.MessageCenterConstant;
 import com.imwj.msg.domain.DeduplicationParam;
 import com.imwj.msg.domain.TaskInfo;
 import com.imwj.msg.enums.AnchorState;
@@ -43,7 +43,7 @@ public class DeduplicationRuleService {
     private Config config;
 
     public void duplication(TaskInfo taskInfo) {
-        JSONObject property = JSON.parseObject(config.getProperty(DEDUPLICATION_RULE_KEY, AustinConstant.APOLLO_DEFAULT_VALUE_JSON_OBJECT));
+        JSONObject property = JSON.parseObject(config.getProperty(DEDUPLICATION_RULE_KEY, MessageCenterConstant.APOLLO_DEFAULT_VALUE_JSON_OBJECT));
         JSONObject contentDeduplication = property.getJSONObject(CONTENT_DEDUPLICATION);
         JSONObject frequencyDeduplication = property.getJSONObject(FREQUENCY_DEDUPLICATION);
 

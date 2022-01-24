@@ -1,4 +1,4 @@
-# kafka安装
+# redis安装
 * docker安装：[http://imwj.club/article/95](http://imwj.club/article/95)
 * Docker compose环境安装
     1. 下载当前稳定版
@@ -52,7 +52,7 @@ services:
 ```
 docker-compose up -d
 ```
-* 查看镜像运行情况 并进入kafka容器
+* 查看镜像运行情况 并进入redis容器
 ```
 docker ps 
 docker exec -it redis redis-cli

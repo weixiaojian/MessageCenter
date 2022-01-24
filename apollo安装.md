@@ -95,7 +95,7 @@ public class DiscardMessageService {
      */
     public boolean isDiscard(TaskInfo taskInfo) {
         JSONArray array = JSON.parseArray(config.getProperty(DISCARD_MESSAGE_KEY,
-                AustinConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY));
+                MessageCenterConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY));
         //如果模板id在apollo的配置中配置了要丢弃  则丢弃该消息
         if (array.contains(String.valueOf(taskInfo.getMessageTemplateId()))) {
             return true;

@@ -13,7 +13,7 @@ public class MsgApplication {
 
     public static void main(String[] args) {
         // apollo的地址
-        System.setProperty("apollo.config-service", "http://127.0.0.1:8080");
+        System.setProperty("apollo.config-service", "http://192.168.31.129:8080");
 
         SpringApplication.run(MsgApplication.class, args);
     }

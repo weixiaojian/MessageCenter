@@ -98,10 +98,10 @@ scrape_configs:
   1. http://ip:9100/metrics( 查看服务器的指标)
   2. http://ip:8899/metrics（查看docker容器的指标） 
   3. http://ip:9090/(prometheus的原生web-ui)
-  4. http://ip:3000/(Grafana开源的监控可视化组件页面，最终使用的ui页面
+  4. http://ip:3000/(Grafana开源的监控可视化组件页面，最终使用的ui页面），账号/密码：admin
 
 ## Grafana配置监控
-* 数据源配置：左侧设置图标 > Configuration > Add data source > URL设置为`http://ip:3000` > 保存
+* 数据源配置：左侧设置图标 > Configuration > Add data source > URL设置为`http://ip:9090` > 保存
 * 配置对应模板：左侧+号图标 > Import > 输入模板id > Load > 输入监控名称 > Import即可
 * 常用的模板ID：服务器(8919)、docker(893)、jvm(4701)、springboot(12900)；模板查找地址`https://grafana.com/grafana/dashboards/ `
 

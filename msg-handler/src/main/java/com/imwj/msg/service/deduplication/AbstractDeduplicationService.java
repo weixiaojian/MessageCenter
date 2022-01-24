@@ -1,7 +1,7 @@
 package com.imwj.msg.service.deduplication;
 
 import cn.hutool.core.collection.CollUtil;
-import com.imwj.msg.constant.AustinConstant;
+import com.imwj.msg.constant.MessageCenterConstant;
 import com.imwj.msg.domain.AnchorInfo;
 import com.imwj.msg.domain.DeduplicationParam;
 import com.imwj.msg.domain.TaskInfo;
@@ -67,7 +67,7 @@ public abstract class AbstractDeduplicationService {
             if(redisValue.get(key) != null){
                 keyValues.put(key, String.valueOf(Integer.valueOf(redisValue.get(key)) + 1));
             }else{
-                keyValues.put(key, String.valueOf(AustinConstant.TRUE));
+                keyValues.put(key, String.valueOf(MessageCenterConstant.TRUE));
             }
         }
         if (CollUtil.isNotEmpty(keyValues)) {

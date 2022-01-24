@@ -5,7 +5,7 @@ package com.imwj.msg.constant;
  * @author langao_q
  * @since 2021-12-29 19:04
  */
-public class AustinConstant {
+public class MessageCenterConstant {
     /**
      * boolean转换
      */

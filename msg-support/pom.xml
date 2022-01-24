@@ -94,5 +94,10 @@
             <groupId>cn.monitor4all</groupId>
             <artifactId>log-record-starter</artifactId>
         </dependency>
+        <!--grayLog-->
+        <dependency>
+            <groupId>de.siegmar</groupId>
+            <artifactId>logback-gelf</artifactId>
+        </dependency>
     </dependencies>
 </project>

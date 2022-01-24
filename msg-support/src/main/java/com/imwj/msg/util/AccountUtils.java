@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
-import com.imwj.msg.constant.AustinConstant;
+import com.imwj.msg.constant.MessageCenterConstant;
 import org.springframework.stereotype.Component;
 
 /**
@@ -30,7 +30,7 @@ public class AccountUtils {
      * @return
      */
     public <T> T getAccount(Integer sendAccount, String apolloKey, String prefix, T t) {
-        String accountValues = config.getProperty(apolloKey, AustinConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY);
+        String accountValues = config.getProperty(apolloKey, MessageCenterConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY);
         JSONArray jsonArray = JSON.parseArray(accountValues);
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
