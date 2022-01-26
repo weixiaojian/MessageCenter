@@ -1,4 +1,4 @@
-package com.imwj.msg.service.deduplication;
+package com.imwj.msg.service.deduplication.service;
 
 import cn.hutool.core.collection.CollUtil;
 import com.imwj.msg.constant.MessageCenterConstant;
@@ -18,7 +18,7 @@ import java.util.*;
  * @since 2021-12-31 11:35
  */
 @Slf4j
-public abstract class AbstractDeduplicationService {
+public abstract class AbstractDeduplicationService implements DeduplicationService {
 
     @Autowired
     private RedisUtils redisUtils;

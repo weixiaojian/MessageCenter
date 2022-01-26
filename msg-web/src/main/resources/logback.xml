@@ -5,7 +5,7 @@
     <property name="logDir" value="logs"/>
 
     <!--grayLogIp-->
-    <springProperty scope="context" name="grayLogIp" source="192.168.31.129"/>
+    <springProperty scope="context" name="grayLogIp" source="msg.grayLogIp"/>
 
     <!-- 打印到控制台 -->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
@@ -82,7 +82,7 @@
 
     <appender name="GELF" class="de.siegmar.logbackgelf.GelfUdpAppender">
         <!-- Graylog服务的地址 -->
-        <graylogHost>192.168.31.129</graylogHost>
+        <graylogHost>${grayLogIp}</graylogHost>
         <!-- UDP Input端口 -->
         <graylogPort>12201</graylogPort>
         <!-- 最大GELF数据块大小（单位：字节），508为建议最小值，最大值为65467 -->

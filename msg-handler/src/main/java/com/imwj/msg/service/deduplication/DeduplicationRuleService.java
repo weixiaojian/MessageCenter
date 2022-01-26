@@ -9,6 +9,8 @@ import com.imwj.msg.constant.MessageCenterConstant;
 import com.imwj.msg.domain.DeduplicationParam;
 import com.imwj.msg.domain.TaskInfo;
 import com.imwj.msg.enums.AnchorState;
+import com.imwj.msg.service.deduplication.service.ContentDeduplicationService;
+import com.imwj.msg.service.deduplication.service.FrequencyDeduplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

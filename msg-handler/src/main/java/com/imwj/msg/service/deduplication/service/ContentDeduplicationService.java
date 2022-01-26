@@ -1,4 +1,4 @@
-package com.imwj.msg.service.deduplication;
+package com.imwj.msg.service.deduplication.service;
 
 import cn.hutool.crypto.digest.DigestUtil;
 import com.alibaba.fastjson.JSON;

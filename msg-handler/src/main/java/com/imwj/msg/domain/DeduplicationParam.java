@@ -1,5 +1,6 @@
 package com.imwj.msg.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.imwj.msg.enums.AnchorState;
 import lombok.Builder;
 import lombok.Data;
@@ -23,11 +24,13 @@ public class DeduplicationParam {
      * 去重时间
      * 单位：秒
      */
+    @JSONField(name = "time")
     private Long deduplicationTime;
 
     /**
      * 需达到的次数去重
      */
+    @JSONField(name = "time")
     private Integer countNum;
 
     /**
