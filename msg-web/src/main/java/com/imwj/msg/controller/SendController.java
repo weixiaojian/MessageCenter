@@ -4,6 +4,8 @@ import com.imwj.msg.domain.RetResult;
 import com.imwj.msg.domain.SendRequest;
 import com.imwj.msg.domain.SendResponse;
 import com.imwj.msg.service.SendService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,7 @@ import javax.annotation.Resource;
  * @author langao_q
  * @since 2021-12-29 10:26
  */
+@Api("发送消息")
 @Slf4j
 @RestController
 @RequestMapping("/sms")
@@ -30,6 +33,7 @@ public class SendController {
      * @param sendRequest
      * @return
      */
+    @ApiOperation("/发送短信")
     @GetMapping("/sendSmsTest")
     public RetResult sendSmsTest(@RequestBody SendRequest sendRequest) {
         SendResponse sendResponse = sendService.send(sendRequest);
@@ -41,10 +45,10 @@ public class SendController {
      * @param sendRequest
      * @return
      */
+    @ApiOperation("/发送邮件")
     @GetMapping("/sendEmailTest")
     public RetResult sendEmailTest(@RequestBody SendRequest sendRequest) {
         SendResponse sendResponse = sendService.send(sendRequest);
         return RetResult.success(sendResponse);
     }
-
 }

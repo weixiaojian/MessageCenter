@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.imwj.msg.dao.MessageTemplateDao;
 import com.imwj.msg.domain.MessageTemplate;
 import com.imwj.msg.domain.RetResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,7 @@ import java.util.List;
  * @author langao_q
  * @since 2021-12-29 16:13
  */
+@Api("模板管理")
 @RestController
 @RequestMapping("/messageTemplate")
 public class MessageTemplateController {
@@ -28,6 +31,7 @@ public class MessageTemplateController {
      * 插入一条短信模板数据
      * @return
      */
+    @ApiOperation("/插入一条短信模板数据")
     @GetMapping("/insertSms")
     public RetResult insertSms() {
         MessageTemplate messageTemplate = MessageTemplate.builder()
@@ -58,9 +62,10 @@ public class MessageTemplateController {
     }
 
     /**
-     * 插入一条短信模板数据
+     * 插入一条邮件模板数据
      * @return
      */
+    @ApiOperation("/插入一条邮件模板数据")
     @GetMapping("/insertEmail")
     public RetResult insertEmail() {
         MessageTemplate messageTemplate = MessageTemplate.builder()
@@ -94,6 +99,7 @@ public class MessageTemplateController {
     /**
      * 查询所有的模板数据
      */
+    @ApiOperation("/查询所有的模板数据")
     @GetMapping("/query")
     public RetResult query() {
         QueryWrapper<MessageTemplate> queryWrapper = new QueryWrapper<>();
