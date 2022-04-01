@@ -35,7 +35,7 @@ services:
       - "/etc/localtime:/etc/localtime"
     environment:                                                       # 设置环境变量,相当于docker run命令中的-e
       KAFKA_BROKER_ID: 0                                               # 在kafka集群中，每个kafka都有一个BROKER_ID来区分自己
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://ip:9092 # TODO 将kafka的地址端口注册给zookeeper
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://ip:9092                  # TODO 注意这里要改ip
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092                        # 配置kafka的监听端口
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181                # zookeeper地址
       KAFKA_CREATE_TOPICS: "hello_world"

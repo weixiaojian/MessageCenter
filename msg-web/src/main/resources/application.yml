@@ -1,7 +1,7 @@
 # 端口配置
 server:
   port: 80
-# 数据库相关的信息配置 TODO
+# 数据库相关的信息配置
 spring:
   application:
     name: MessageCenter
@@ -10,3 +10,60 @@ spring:
     username: root
     password: 123456
     driver-class-name: org.gjt.mm.mysql.Driver
+  # kafka相关的信息配置
+  kafka:
+    bootstrap-servers: 192.168.156.128:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto:
+        offset:
+          reset: earliest
+      auto-commit-interval: 1000
+      enable-auto-commit: true
+  # redis 相关配置
+  redis:
+    host: 192.168.156.128
+    port: 6379
+    password: 123456
+
+mybatis-plus:
+  mapper-locations: classpath:/com/imwj/msg/dao/xml/*.xml
+  type-aliases-package: com.imwj.msg
+  global-config:
+    banner: false
+    db-config:
+      id-type: UUID
+      table-underline: true
+    mapper-registry-cache: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    jdbc-type-for-null: null
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+# HTTP 连接配置 T0D0
+ok:
+  http:
+    connect-timeout: 30
+    keep-alive-duration: 300
+    max-idle-connections: 200
+    read-timeout: 30
+    write-timeout: 30
+
+# 消息topicName
+msg:
+  topic:
+    name: MESSAGE_CENTER
+  grayLogIp: 192.168.156.128
+
+# apollo
+app:
+  id: MessageCenter
+apollo:
+  bootstrap:
+    enabled: true
+    namespaces: message.center

@@ -51,7 +51,7 @@ networks:
     graylog:
       driver: bridge
 ```
-* 编译docker-compose.yml下载redis的镜像并运行（docker-compose.yml文件目录下执行）
+* 编译docker-compose.yml下载镜像
 ```
 docker-compose up -d
 ```
