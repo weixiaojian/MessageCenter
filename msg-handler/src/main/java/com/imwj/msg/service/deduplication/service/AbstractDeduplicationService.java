@@ -5,8 +5,8 @@ import com.imwj.msg.constant.MessageCenterConstant;
 import com.imwj.msg.domain.AnchorInfo;
 import com.imwj.msg.domain.DeduplicationParam;
 import com.imwj.msg.domain.TaskInfo;
-import com.imwj.msg.util.LogUtils;
-import com.imwj.msg.util.RedisUtils;
+import com.imwj.msg.utils.LogUtils;
+import com.imwj.msg.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 

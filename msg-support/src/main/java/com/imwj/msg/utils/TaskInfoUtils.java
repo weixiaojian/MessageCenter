@@ -1,4 +1,4 @@
-package com.imwj.msg.util;
+package com.imwj.msg.utils;
 
 import cn.hutool.core.date.DateUtil;
 import com.imwj.msg.constant.MessageCenterConstant;

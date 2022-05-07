@@ -1,4 +1,4 @@
-package com.imwj.msg.util;
+package com.imwj.msg.utils;
 
 import cn.monitor4all.logRecord.bean.LogDTO;
 import cn.monitor4all.logRecord.service.CustomLogListener;

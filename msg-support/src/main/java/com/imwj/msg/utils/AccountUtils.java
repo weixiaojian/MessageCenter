@@ -1,4 +1,4 @@
-package com.imwj.msg.util;
+package com.imwj.msg.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

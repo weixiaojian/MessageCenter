@@ -13,8 +13,8 @@ import com.imwj.msg.enums.ChannelType;
 import com.imwj.msg.enums.RespStatusEnum;
 import com.imwj.msg.pipeline.BusinessProcess;
 import com.imwj.msg.pipeline.ProcessContext;
-import com.imwj.msg.util.ContentHolderUtil;
-import com.imwj.msg.util.TaskInfoUtils;
+import com.imwj.msg.utils.ContentHolderUtil;
+import com.imwj.msg.utils.TaskInfoUtils;
 import com.imwj.msg.vo.BasicResultVO;
 import lombok.extern.slf4j.Slf4j;
 

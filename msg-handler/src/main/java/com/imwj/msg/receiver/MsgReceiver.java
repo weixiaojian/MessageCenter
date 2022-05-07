@@ -7,7 +7,7 @@ import com.imwj.msg.domain.TaskInfo;
 import com.imwj.msg.enums.AnchorState;
 import com.imwj.msg.pending.Task;
 import com.imwj.msg.pending.TaskPendingHolder;
-import com.imwj.msg.util.LogUtils;
+import com.imwj.msg.utils.LogUtils;
 import com.imwj.msg.utils.GroupIdMappingUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

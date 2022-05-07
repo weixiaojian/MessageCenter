@@ -9,7 +9,7 @@ import com.imwj.msg.domain.SmsParam;
 import com.imwj.msg.domain.SmsRecord;
 import com.imwj.msg.domain.TencentSmsParam;
 import com.imwj.msg.enums.SmsStatus;
-import com.imwj.msg.util.AccountUtils;
+import com.imwj.msg.utils.AccountUtils;
 import com.tencentcloudapi.common.Credential;
 import com.tencentcloudapi.common.profile.ClientProfile;
 import com.tencentcloudapi.common.profile.HttpProfile;
@@ -74,6 +74,7 @@ public class TencentSmsScript implements SmsScript {
                     .phone(Long.valueOf(phone))
                     .supplierId(tencentSmsParam.getSupplierId())
                     .supplierName(tencentSmsParam.getSupplierName())
+                    .msgContent(smsParam.getContent())
                     .seriesId(sendStatus.getSerialNo())
                     .chargingNum(Math.toIntExact(sendStatus.getFee()))
                     .status(SmsStatus.SEND_SUCCESS.getCode())

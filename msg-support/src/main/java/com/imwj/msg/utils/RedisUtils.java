@@ -1,4 +1,4 @@
-package com.imwj.msg.util;
+package com.imwj.msg.utils;
 
 import cn.hutool.core.collection.CollUtil;
 import com.google.common.base.Throwables;

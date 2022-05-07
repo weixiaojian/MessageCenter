@@ -7,7 +7,7 @@ import com.google.common.base.Throwables;
 import com.imwj.msg.domain.TaskInfo;
 import com.imwj.msg.dto.EmailContentModel;
 import com.imwj.msg.enums.ChannelType;
-import com.imwj.msg.util.AccountUtils;
+import com.imwj.msg.utils.AccountUtils;
 import com.sun.mail.util.MailSSLSocketFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.imwj.msg.util;
+package com.imwj.msg.utils;
 
 import org.springframework.context.expression.MapAccessor;
 import org.springframework.expression.spel.support.StandardEvaluationContext;

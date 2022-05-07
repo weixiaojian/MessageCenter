@@ -60,7 +60,7 @@ public class SendController {
     private SendService sendService;
 
     /**
-     * 发送短信 {"code":"send","messageParam":{"receiver":"15200985202","variables":{"contentValue":"6666"}},"messageTemplateId":1}
+     * 发送短信 {"code":"send","messageParam":{"receiver":"15200985202","variables":{"conten":"6666"}},"messageTemplateId":1}
      * @param sendRequest
      * @return
      */
@@ -72,7 +72,7 @@ public class SendController {
     }
 
     /**
-     * 发送邮件 {"code":"send","messageParam":{"receiver":"2916863213@qq.com","variables":{"title":"EmailTest","contentValue":"6666"}},"messageTemplateId":2}
+     * 发送邮件 {"code":"send","messageParam":{"receiver":"2916863213@qq.com","variables":{"title":"EmailTest","content":"6666"}},"messageTemplateId":2}
      * @param sendRequest
      * @return
      */

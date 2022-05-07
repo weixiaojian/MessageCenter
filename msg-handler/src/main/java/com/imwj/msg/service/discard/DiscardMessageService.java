@@ -8,7 +8,7 @@ import com.imwj.msg.constant.MessageCenterConstant;
 import com.imwj.msg.domain.AnchorInfo;
 import com.imwj.msg.domain.TaskInfo;
 import com.imwj.msg.enums.AnchorState;
-import com.imwj.msg.util.LogUtils;
+import com.imwj.msg.utils.LogUtils;
 import org.springframework.stereotype.Service;
 
 /**
