@@ -22,14 +22,13 @@ public class ThreadPoolConfig {
      * @return
      */
     public static ExecutorService getThreadPool(Integer coreSize, Integer maxSize, Integer queueSize) {
-        ThreadPoolExecutor threadPoolExecutor = ExecutorBuilder.create()
+        return ExecutorBuilder.create()
                 .setCorePoolSize(coreSize)
                 .setMaxPoolSize(maxSize)
                 .setKeepAliveTime(60, TimeUnit.SECONDS)
                 .setWorkQueue(new LinkedBlockingQueue<>(queueSize))
                 .setHandler(new ThreadPoolExecutor.CallerRunsPolicy())
                 .build();
-        return threadPoolExecutor;
     }
 
 }

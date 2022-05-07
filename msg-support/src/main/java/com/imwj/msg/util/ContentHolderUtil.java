@@ -26,7 +26,7 @@ public class ContentHolderUtil {
 
 	private static final StandardEvaluationContext EVALUTION_CONTEXT;
 
-	private static PropertyPlaceholderHelper propertyPlaceholderHelper = new PropertyPlaceholderHelper(
+	private static final PropertyPlaceholderHelper propertyPlaceholderHelper = new PropertyPlaceholderHelper(
 			PLACE_HOLDER_PREFIX, PLACE_HOLDER_ENDFIX);
 
 	static {
@@ -41,7 +41,7 @@ public class ContentHolderUtil {
 	}
 
 	private static class CustomPlaceholderResolver implements PropertyPlaceholderHelper.PlaceholderResolver {
-		private Map<String, String> paramMap;
+		private final Map<String, String> paramMap;
 
 		public CustomPlaceholderResolver(Map<String, String> paramMap) {
 			super();

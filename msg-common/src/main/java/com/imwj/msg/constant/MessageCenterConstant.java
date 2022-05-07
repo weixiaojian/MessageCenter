@@ -16,7 +16,7 @@ public class MessageCenterConstant {
     /**
      * 时间格式
      */
-    public final static String YYYYMMDD = "yyyyMMdd";
+    public final static String YYYY_MM_DD = "yyyyMMdd";
 
 
     /**

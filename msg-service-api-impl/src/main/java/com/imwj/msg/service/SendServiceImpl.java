@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * 消息发送实现类
@@ -30,7 +31,7 @@ public class SendServiceImpl implements SendService{
         //发送消息任务模型封装
         SendTaskModel sendTaskModel = SendTaskModel.builder()
                 .messageTemplateId(sendRequest.getMessageTemplateId())
-                .messageParamList(Arrays.asList(sendRequest.getMessageParam()))
+                .messageParamList(Collections.singletonList(sendRequest.getMessageParam()))
                 .build();
         //责任链上下文封装
         ProcessContext context = ProcessContext.builder()

@@ -11,7 +11,7 @@ import java.util.Date;
  * @since 2021-12-29 19:11
  */
 public class TaskInfoUtils {
-    private static int TYPE_FLAG = 1000000;
+    private static final int TYPE_FLAG = 1000000;
 
     /**
      * 生成BusinessId
@@ -19,7 +19,7 @@ public class TaskInfoUtils {
      * (固定16位)
      */
     public static Long generateBusinessId(Long templateId, Integer templateType) {
-        Integer today = Integer.valueOf(DateUtil.format(new Date(), MessageCenterConstant.YYYYMMDD));
+        Integer today = Integer.valueOf(DateUtil.format(new Date(), MessageCenterConstant.YYYY_MM_DD));
         return Long.valueOf(String.format("%d%s", templateType * TYPE_FLAG + templateId, today));
     }
 

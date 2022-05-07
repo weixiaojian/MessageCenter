@@ -39,7 +39,7 @@ public abstract class AbstractDeduplicationService implements DeduplicationServi
             String key = deduplicationSingleKey(taskInfo, receiver);
             String value = redisValue.get(key);
             //判断是否符合条件
-            if(value != null && Integer.valueOf(value) > param.getCountNum()){
+            if(value != null && Integer.parseInt(value) > param.getCountNum()){
                 filterSet.add(receiver);
             }else{
                 redisSet.add(receiver);
