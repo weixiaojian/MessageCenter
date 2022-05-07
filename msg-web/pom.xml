@@ -33,6 +33,11 @@
         </dependency>
         <dependency>
             <groupId>com.imwj.msg</groupId>
+            <artifactId>msg-cron</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.imwj.msg</groupId>
             <artifactId>msg-service-api-impl</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

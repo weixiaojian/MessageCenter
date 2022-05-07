@@ -37,6 +37,10 @@ public class MessageTemplate implements Serializable {
      * 当前消息审核状态： 10.待审核 20.审核成功 30.被拒绝
      */
     private Integer auditStatus;
+    /**
+     * 定时任务Id(由xxl-job返回)
+     */
+    private Integer cronTaskId;
 
     /**
      * 工单ID
