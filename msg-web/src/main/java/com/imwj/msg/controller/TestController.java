@@ -28,13 +28,13 @@ public class TestController {
     private Config config;
 
     @Value("${discard:000}")
-    private String discard_Val;
+    private String discardVal;
 
     @RequestMapping("/getApollo")
     public RetResult getApollo(){
         JSONObject property = JSON.parseObject(config.getProperty(DEDUPLICATION_RULE_KEY, MessageCenterConstant.APOLLO_DEFAULT_VALUE_JSON_OBJECT));
         JSONArray discard = JSON.parseArray(config.getProperty(DISCARD_MESSAGE_KEY, MessageCenterConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY));
-        return RetResult.success(discard_Val + property + discard.toJSONString());
+        return RetResult.success(discardVal + property + discard.toJSONString());
     }
 
 }

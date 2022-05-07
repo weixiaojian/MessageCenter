@@ -13,6 +13,10 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public enum MessageType {
+
+    /**
+     * 各个枚举值
+     */
     NOTICE(10,"通知类消息","notice"),
     MARKETING(20,"营销类消息","marketing"),
     AUTH_CODE(30,"验证码消息","auth_code")
@@ -31,7 +35,7 @@ public enum MessageType {
     /**
      * 英文标识
      */
-    private String code_en;
+    private String codeEn;
 
 
     /**

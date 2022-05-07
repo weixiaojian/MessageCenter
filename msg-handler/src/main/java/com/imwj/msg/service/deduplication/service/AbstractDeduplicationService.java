@@ -27,6 +27,7 @@ public abstract class AbstractDeduplicationService implements DeduplicationServi
      * redis去重
      * @param param
      */
+    @Override
     public void deduplication(DeduplicationParam param){
         TaskInfo taskInfo = param.getTaskInfo();
         HashSet<String> filterSet = new HashSet<>(taskInfo.getReceiver().size());
@@ -71,7 +72,7 @@ public abstract class AbstractDeduplicationService implements DeduplicationServi
             }
         }
         if (CollUtil.isNotEmpty(keyValues)) {
-            redisUtils.pipelineSetEX(keyValues, param.getDeduplicationTime());
+            redisUtils.pipelineSetEx(keyValues, param.getDeduplicationTime());
         }
     }
 

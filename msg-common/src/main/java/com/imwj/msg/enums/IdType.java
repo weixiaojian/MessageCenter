@@ -14,6 +14,10 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public enum IdType {
+
+    /**
+     * 各个枚举值
+     */
     USER_ID(10, "userId"),
     DID(20, "did"),
     PHONE(30, "phone"),

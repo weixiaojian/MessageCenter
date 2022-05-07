@@ -16,6 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 public enum DeduplicationType {
 
+    /**
+     * 各个枚举值
+     */
     CONTENT(10, "N分钟相同内容去重"),
     FREQUENCY(20, "一天内N次相同渠道去重"),
     ;

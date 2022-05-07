@@ -13,41 +13,12 @@ import javax.annotation.PostConstruct;
  * @author langao_q
  * @since 2021-12-30 15:50
  */
-public abstract class Handler{
+public interface Handler{
 
     /**
-     * 标识渠道的Code
-     * 子类初始化的时候指定
-     */
-    protected Integer channelCode;
-
-
-    @Autowired
-    private HandlerHolder handlerHolder;
-
-    /**
-     * 初始化渠道和handler的映射关系
-     */
-    @PostConstruct
-    public void init(){
-        handlerHolder.putHandler(channelCode,this);
-    }
-
-    public void doHandler(TaskInfo taskInfo) {
-        //消息处理失败日志
-        if(!handler(taskInfo)){
-            LogUtils.print(AnchorInfo.builder().state(AnchorState.SEND_FAIL.getCode()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).build());
-        }
-        //消息处理成功日志
-        LogUtils.print(AnchorInfo.builder().state(AnchorState.SEND_SUCCESS.getCode()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).build());
-    }
-
-    /**
-     * 统一处理的handler接口
-     *
+     * 处理器
      * @param taskInfo
-     * @return
      */
-    public abstract boolean handler(TaskInfo taskInfo);
+    void doHandler(TaskInfo taskInfo);
 
 }

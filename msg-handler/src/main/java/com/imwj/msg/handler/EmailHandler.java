@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class EmailHandler extends Handler {
+public class EmailHandler extends BaseHandler implements Handler {
 
     private static final String SMS_ACCOUNT_KEY = "emailAccount";
     private static final String PREFIX = "email_";

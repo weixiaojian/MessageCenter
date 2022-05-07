@@ -17,6 +17,9 @@ import lombok.ToString;
 public enum ChannelType {
 
 
+    /**
+     * 各个枚举值
+     */
     IM(10, "IM(站内信)", ImContentModel.class, "im"),
     PUSH(20, "push(通知栏)", PushContentModel.class, "push"),
     SMS(30, "sms(短信)", SmsContentModel.class, "sms"),
@@ -43,7 +46,7 @@ public enum ChannelType {
     /**
      * 英文标识
      */
-    private String code_en;
+    private String codeEn;
 
     /**
      * 通过code获取class

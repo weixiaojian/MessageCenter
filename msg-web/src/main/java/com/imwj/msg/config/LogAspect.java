@@ -27,6 +27,8 @@ import java.net.URLDecoder;
 @Slf4j
 public class LogAspect {
 
+    private static final String REQUEST_GET = "GET";
+
     @Autowired
     private HttpServletRequest request;
 
@@ -60,7 +62,7 @@ public class LogAspect {
         try {
             //请求参数
             String params = "";
-            if("GET".equals(request.getMethod())){
+            if(REQUEST_GET.equals(request.getMethod())){
                 params = JSONUtil.toJsonStr(request.getParameterMap());
             }else{
                 params = getRequestParams(joinPoint, request.getMethod());
