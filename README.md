@@ -1,4 +1,13 @@
 # 消息发送中心
+## 端口使用情况
+* 项目端口：80
+* zookeeper：2181；kafka：9092；kafka-manager：9000
+* redis端口：6379；密码：123456
+* apollo服务请求端口：8080；后台地址：http://127.0.0.1:8070；账号/密码：apollo/admin
+* GrayLog服务地址：http://192.168.31.129:9009/
+* Prometheus服务地址：http://ip:3000/
+* Swagger服务地址：http://127.0.0.1/swagger-ui/
+
 ## 项目中的技术点
 * SpringBoot、Mybatis Plus、MySql、Kafka、Redis、Elk、Prometheus
 * SpringBoot：更加敏捷地开发Spring应用程序，专注于应用程序的功能，不用在Spring的配置上多花功夫（约定大于配置）
