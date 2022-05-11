@@ -7,6 +7,9 @@ package com.imwj.msg.enums;
  */
 public enum ScheduleTypeEnum {
 
+    /**
+     * 任务类型
+     */
     NONE,
     /**
      * schedule by cron

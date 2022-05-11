@@ -3,18 +3,13 @@ package com.imwj.msg.controller;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.imwj.msg.dao.MessageTemplateDao;
 import com.imwj.msg.domain.*;
 import com.imwj.msg.enums.BusinessCode;
 import com.imwj.msg.enums.RespStatusEnum;
 import com.imwj.msg.page.PageVo;
-import com.imwj.msg.page.RetPage;
 import com.imwj.msg.service.SendService;
 import com.imwj.msg.service.impl.MessageTemplateServiceImpl;
-import com.imwj.msg.service.messageTemplateService;
 import com.imwj.msg.utils.ConvertMap;
 import com.imwj.msg.vo.BasicResultVO;
 import com.imwj.msg.vo.MessageTemplateVo;
@@ -39,7 +34,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/messageTemplate")
 public class MessageTemplateController {
 
-    private static final List<String> flatFieldName = Arrays.asList("msgContent");
+    private static final List<String> FLAT_FIEL_NAME = Arrays.asList("msgContent");
 
     @Resource
     private MessageTemplateDao messageTemplateDao;
@@ -126,7 +121,7 @@ public class MessageTemplateController {
     @ApiOperation("/查询所有的模板数据")
     @GetMapping("/list")
     public BasicResultVO query(PageVo pageVo) {
-        List<Map<String, Object>> result = ConvertMap.flatList(messageTemplateService.queryList(pageVo), flatFieldName);
+        List<Map<String, Object>> result = ConvertMap.flatList(messageTemplateService.queryList(pageVo), FLAT_FIEL_NAME);
         long count = messageTemplateService.count();
         MessageTemplateVo messageTemplateVo = MessageTemplateVo.builder().count(count).rows(result).build();
         return BasicResultVO.success(messageTemplateVo);
@@ -149,7 +144,7 @@ public class MessageTemplateController {
     @GetMapping("query/{id}")
     @ApiOperation("/根据Id查找")
     public BasicResultVO queryById(@PathVariable("id") Long id) {
-        Map<String, Object> result = ConvertMap.flatSingle(messageTemplateService.queryById(id), flatFieldName);
+        Map<String, Object> result = ConvertMap.flatSingle(messageTemplateService.queryById(id), FLAT_FIEL_NAME);
         return BasicResultVO.success(result);
     }
 

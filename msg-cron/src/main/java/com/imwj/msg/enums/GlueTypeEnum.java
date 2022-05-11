@@ -7,6 +7,9 @@ package com.imwj.msg.enums;
  */
 public enum GlueTypeEnum {
 
+    /**
+     * 类型
+     */
     BEAN,
     GLUE_GROOVY,
     GLUE_SHELL,

@@ -8,6 +8,9 @@ package com.imwj.msg.enums;
  */
 public enum ExecutorRouteStrategyEnum {
 
+    /**
+     * 类型
+     */
     FIRST,
     LAST,
     ROUND,
