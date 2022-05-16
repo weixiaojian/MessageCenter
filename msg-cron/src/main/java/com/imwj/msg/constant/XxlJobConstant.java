@@ -17,9 +17,15 @@ public class XxlJobConstant {
     public static final String STOP_URL = "/jobinfo/stop";
 
     /**
+     * 执行器组接口路径
+     */
+    public static final String JOB_GROUP_PAGE_LIST = "/jobgroup/pageList";
+    public static final String JOB_GROUP_INSERT_URL = "/jobgroup/save";
+
+    /**
      * 执行器名称
      */
-    public static final String HANDLER_NAME = "austinJobHandler";
+    public static final String JOB_HANDLER_NAME = "msgJobHandler";
 
     /**
      * 超时时间
@@ -30,4 +36,9 @@ public class XxlJobConstant {
      * 失败重试次数
      */
     public static final Integer RETRY_COUNT = 2;
+
+    /**
+     * 立即执行的任务 延迟时间(秒数)
+     */
+    public static final Integer DELAY_TIME = 5;
 }

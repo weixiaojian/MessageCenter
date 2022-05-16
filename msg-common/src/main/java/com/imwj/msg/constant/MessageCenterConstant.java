@@ -18,6 +18,10 @@ public class MessageCenterConstant {
      */
     public final static String YYYY_MM_DD = "yyyyMMdd";
 
+    /**
+     * cron时间格式
+     */
+    public final static String CRON_FORMAT = "ss mm HH dd MM ? yyyy-yyyy";
 
     /**
      * apollo默认的值

@@ -11,7 +11,6 @@ import com.imwj.msg.vo.BasicResultVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -41,7 +40,7 @@ public class SendServiceImpl implements SendService{
                 .response(BasicResultVO.success()).build();
 
         ProcessContext process = processController.process(context);
-        return new SendResponse(process.getResponse().getCode(), process.getResponse().getMsg());
+        return new SendResponse(process.getResponse().getStatus(), process.getResponse().getMsg());
     }
 
     @Override
