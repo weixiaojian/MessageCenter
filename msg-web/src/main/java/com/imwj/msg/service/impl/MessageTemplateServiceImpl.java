@@ -77,6 +77,13 @@ public class MessageTemplateServiceImpl implements messageTemplateService {
 
     @Override
     public void deleteByIds(List<Long> ids) {
+        //如果模板下有定时任务 则也需要删除
+        List<MessageTemplate> messageTemplates = messageTemplateDao.selectBatchIds(ids);
+        for(MessageTemplate messageTemplate : messageTemplates){
+            if(messageTemplate.getCronTaskId() > 0){
+                cronTaskService.deleteCronTask(messageTemplate.getCronTaskId());
+            }
+        }
         messageTemplateDao.deleteBatchIds(ids);
     }
 
