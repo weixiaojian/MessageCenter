@@ -2,14 +2,15 @@ package com.imwj.msg.utils;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
-import com.imwj.msg.constant.MessageCenterConstant;
+import com.imwj.common.constant.MessageCenterConstant;
+import com.imwj.common.enums.RespStatusEnum;
 import com.imwj.msg.constant.XxlJobConstant;
 import com.imwj.msg.domain.MessageTemplate;
 import com.imwj.msg.entity.XxlJobGroup;
 import com.imwj.msg.entity.XxlJobInfo;
 import com.imwj.msg.enums.*;
 import com.imwj.msg.service.CronTaskService;
-import com.imwj.msg.vo.BasicResultVO;
+import com.imwj.common.vo.BasicResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

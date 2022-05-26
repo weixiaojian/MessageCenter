@@ -1,7 +1,7 @@
 package com.imwj.msg.service;
 
 import com.imwj.msg.domain.MessageTemplate;
-import com.imwj.msg.page.PageVo;
+import com.imwj.common.page.PageVo;
 
 import java.util.List;
 

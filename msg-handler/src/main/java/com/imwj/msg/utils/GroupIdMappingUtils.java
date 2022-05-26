@@ -1,8 +1,8 @@
 package com.imwj.msg.utils;
 
-import com.imwj.msg.domain.TaskInfo;
-import com.imwj.msg.enums.ChannelType;
-import com.imwj.msg.enums.MessageType;
+import com.imwj.common.domain.TaskInfo;
+import com.imwj.common.enums.ChannelType;
+import com.imwj.common.enums.MessageType;
 
 import java.util.ArrayList;
 import java.util.List;

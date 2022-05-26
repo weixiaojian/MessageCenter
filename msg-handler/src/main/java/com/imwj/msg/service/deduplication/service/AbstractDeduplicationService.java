@@ -1,10 +1,10 @@
 package com.imwj.msg.service.deduplication.service;
 
 import cn.hutool.core.collection.CollUtil;
-import com.imwj.msg.constant.MessageCenterConstant;
-import com.imwj.msg.domain.AnchorInfo;
+import com.imwj.common.constant.MessageCenterConstant;
+import com.imwj.common.domain.AnchorInfo;
 import com.imwj.msg.domain.DeduplicationParam;
-import com.imwj.msg.domain.TaskInfo;
+import com.imwj.common.domain.TaskInfo;
 import com.imwj.msg.utils.LogUtils;
 import com.imwj.msg.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;

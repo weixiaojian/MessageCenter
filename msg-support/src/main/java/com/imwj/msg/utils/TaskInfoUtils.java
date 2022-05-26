@@ -1,7 +1,7 @@
 package com.imwj.msg.utils;
 
 import cn.hutool.core.date.DateUtil;
-import com.imwj.msg.constant.MessageCenterConstant;
+import com.imwj.common.constant.MessageCenterConstant;
 
 import java.util.Date;
 

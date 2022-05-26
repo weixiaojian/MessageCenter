@@ -2,7 +2,7 @@ package com.imwj.msg.service.deduplication.service;
 
 import cn.hutool.crypto.digest.DigestUtil;
 import com.alibaba.fastjson.JSON;
-import com.imwj.msg.domain.TaskInfo;
+import com.imwj.common.domain.TaskInfo;
 import org.springframework.stereotype.Service;
 
 /**

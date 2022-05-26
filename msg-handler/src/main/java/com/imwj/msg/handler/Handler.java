@@ -1,6 +1,6 @@
 package com.imwj.msg.handler;
 
-import com.imwj.msg.domain.TaskInfo;
+import com.imwj.common.domain.TaskInfo;
 
 /**
  * 发送各个渠道的handler

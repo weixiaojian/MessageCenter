@@ -1,8 +1,8 @@
 package com.imwj.msg.handler;
 
-import com.imwj.msg.domain.AnchorInfo;
-import com.imwj.msg.domain.TaskInfo;
-import com.imwj.msg.enums.AnchorState;
+import com.imwj.common.domain.AnchorInfo;
+import com.imwj.common.domain.TaskInfo;
+import com.imwj.common.enums.AnchorState;
 import com.imwj.msg.utils.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 

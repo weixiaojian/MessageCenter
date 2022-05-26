@@ -7,7 +7,7 @@ import com.imwj.msg.domain.SendResponse;
 import com.imwj.msg.domain.SendTaskModel;
 import com.imwj.msg.pipeline.ProcessContext;
 import com.imwj.msg.pipeline.ProcessController;
-import com.imwj.msg.vo.BasicResultVO;
+import com.imwj.common.vo.BasicResultVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

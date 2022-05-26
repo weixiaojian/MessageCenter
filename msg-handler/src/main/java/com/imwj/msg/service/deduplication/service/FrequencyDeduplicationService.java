@@ -1,7 +1,7 @@
 package com.imwj.msg.service.deduplication.service;
 
 import cn.hutool.core.util.StrUtil;
-import com.imwj.msg.domain.TaskInfo;
+import com.imwj.common.domain.TaskInfo;
 import org.springframework.stereotype.Service;
 
 /**

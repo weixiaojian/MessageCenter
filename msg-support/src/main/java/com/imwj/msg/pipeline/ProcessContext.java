@@ -1,6 +1,6 @@
 package com.imwj.msg.pipeline;
 
-import com.imwj.msg.vo.BasicResultVO;
+import com.imwj.common.vo.BasicResultVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

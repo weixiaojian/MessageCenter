@@ -3,8 +3,8 @@ package com.imwj.msg.utils;
 import cn.monitor4all.logRecord.bean.LogDTO;
 import cn.monitor4all.logRecord.service.CustomLogListener;
 import com.alibaba.fastjson.JSON;
-import com.imwj.msg.domain.AnchorInfo;
-import com.imwj.msg.domain.LogParam;
+import com.imwj.common.domain.AnchorInfo;
+import com.imwj.common.domain.LogParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

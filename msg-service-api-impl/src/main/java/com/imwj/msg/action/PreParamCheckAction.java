@@ -5,9 +5,9 @@ import cn.hutool.core.util.StrUtil;
 import com.imwj.msg.domain.MessageParam;
 import com.imwj.msg.pipeline.ProcessContext;
 import com.imwj.msg.domain.SendTaskModel;
-import com.imwj.msg.enums.RespStatusEnum;
+import com.imwj.common.enums.RespStatusEnum;
 import com.imwj.msg.pipeline.BusinessProcess;
-import com.imwj.msg.vo.BasicResultVO;
+import com.imwj.common.vo.BasicResultVO;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;

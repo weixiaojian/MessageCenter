@@ -2,8 +2,8 @@ package com.imwj.msg.pipeline;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
-import com.imwj.msg.enums.RespStatusEnum;
-import com.imwj.msg.vo.BasicResultVO;
+import com.imwj.common.enums.RespStatusEnum;
+import com.imwj.common.vo.BasicResultVO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 

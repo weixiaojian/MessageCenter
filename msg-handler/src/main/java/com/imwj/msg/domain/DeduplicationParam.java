@@ -1,7 +1,8 @@
 package com.imwj.msg.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.imwj.msg.enums.AnchorState;
+import com.imwj.common.domain.TaskInfo;
+import com.imwj.common.enums.AnchorState;
 import lombok.Builder;
 import lombok.Data;
 

@@ -1,5 +1,6 @@
 package com.imwj.msg.domain;
 
+import com.imwj.common.domain.TaskInfo;
 import com.imwj.msg.pipeline.ProcessModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

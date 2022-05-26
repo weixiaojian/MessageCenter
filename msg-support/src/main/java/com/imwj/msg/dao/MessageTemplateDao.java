@@ -3,7 +3,7 @@ package com.imwj.msg.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.imwj.msg.domain.MessageTemplate;
-import com.imwj.msg.page.PageVo;
+import com.imwj.common.page.PageVo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

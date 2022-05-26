@@ -2,9 +2,9 @@ package com.imwj.msg.service.deduplication.build;
 
 import cn.hutool.core.date.DateUtil;
 import com.imwj.msg.domain.DeduplicationParam;
-import com.imwj.msg.domain.TaskInfo;
-import com.imwj.msg.enums.AnchorState;
-import com.imwj.msg.enums.DeduplicationType;
+import com.imwj.common.domain.TaskInfo;
+import com.imwj.common.enums.AnchorState;
+import com.imwj.common.enums.DeduplicationType;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

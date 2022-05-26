@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
-import com.imwj.msg.constant.MessageCenterConstant;
+import com.imwj.common.constant.MessageCenterConstant;
 import org.springframework.stereotype.Component;
 
 /**

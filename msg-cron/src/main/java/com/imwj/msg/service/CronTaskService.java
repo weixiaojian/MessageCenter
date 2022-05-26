@@ -2,7 +2,7 @@ package com.imwj.msg.service;
 
 import com.imwj.msg.entity.XxlJobGroup;
 import com.imwj.msg.entity.XxlJobInfo;
-import com.imwj.msg.vo.BasicResultVO;
+import com.imwj.common.vo.BasicResultVO;
 
 /**
  * @author wj

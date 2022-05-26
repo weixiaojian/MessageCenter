@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
-import com.imwj.msg.constant.MessageCenterConstant;
-import com.imwj.msg.domain.AnchorInfo;
-import com.imwj.msg.domain.TaskInfo;
-import com.imwj.msg.enums.AnchorState;
+import com.imwj.common.constant.MessageCenterConstant;
+import com.imwj.common.domain.AnchorInfo;
+import com.imwj.common.domain.TaskInfo;
+import com.imwj.common.enums.AnchorState;
 import com.imwj.msg.utils.LogUtils;
 import org.springframework.stereotype.Service;
 

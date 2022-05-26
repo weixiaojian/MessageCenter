@@ -1,10 +1,10 @@
 package com.imwj.msg.receiver;
 
 import com.alibaba.fastjson.JSON;
-import com.imwj.msg.domain.AnchorInfo;
-import com.imwj.msg.domain.LogParam;
-import com.imwj.msg.domain.TaskInfo;
-import com.imwj.msg.enums.AnchorState;
+import com.imwj.common.domain.AnchorInfo;
+import com.imwj.common.domain.LogParam;
+import com.imwj.common.domain.TaskInfo;
+import com.imwj.common.enums.AnchorState;
 import com.imwj.msg.pending.Task;
 import com.imwj.msg.pending.TaskPendingHolder;
 import com.imwj.msg.utils.LogUtils;

@@ -1,6 +1,6 @@
 package com.imwj.msg.controller;
 
-import com.imwj.msg.domain.RetResult;
+import com.imwj.common.domain.RetResult;
 import com.imwj.msg.domain.SendRequest;
 import com.imwj.msg.domain.SendResponse;
 import com.imwj.msg.service.SendService;

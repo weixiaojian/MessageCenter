@@ -2,7 +2,7 @@ package com.imwj.msg;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
-import com.imwj.msg.domain.LogParam;
+import com.imwj.common.domain.LogParam;
 
 /**
  * @author langao_q

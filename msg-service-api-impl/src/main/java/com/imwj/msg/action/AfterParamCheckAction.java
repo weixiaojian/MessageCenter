@@ -5,12 +5,12 @@ import cn.hutool.core.util.ReUtil;
 import com.alibaba.fastjson.JSON;
 import com.imwj.msg.pipeline.ProcessContext;
 import com.imwj.msg.domain.SendTaskModel;
-import com.imwj.msg.domain.TaskInfo;
-import com.imwj.msg.enums.ChannelType;
-import com.imwj.msg.enums.IdType;
-import com.imwj.msg.enums.RespStatusEnum;
+import com.imwj.common.domain.TaskInfo;
+import com.imwj.common.enums.ChannelType;
+import com.imwj.common.enums.IdType;
+import com.imwj.common.enums.RespStatusEnum;
 import com.imwj.msg.pipeline.BusinessProcess;
-import com.imwj.msg.vo.BasicResultVO;
+import com.imwj.common.vo.BasicResultVO;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Iterator;
