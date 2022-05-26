@@ -36,7 +36,7 @@ public class MsgReceiver {
     @Autowired
     private TaskPendingHolder taskPendingHolder;
 
-    @KafkaListener(topics = "#{'${msg.topic.name}'}")
+    @KafkaListener(topics = "#{'${msg.business.topic.name}'}")
     public void consumer(ConsumerRecord<?, String> consumerRecord, @Header(KafkaHeaders.GROUP_ID) String groupId) {
         Optional<String> kafkaMessage = Optional.ofNullable(consumerRecord.value());
         if(kafkaMessage.isPresent()){

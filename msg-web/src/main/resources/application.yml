@@ -1,7 +1,8 @@
-# 端口配置
+##################### server-port properties #####################
 server:
   port: 80
-# 数据库相关的信息配置
+
+##################### database properties ######################
 spring:
   application:
     name: MessageCenter
@@ -30,6 +31,7 @@ spring:
     port: 6379
     password: 123456
 
+##################### mybatis-plus properties #####################
 mybatis-plus:
   mapper-locations: classpath:/com/imwj/msg/dao/xml/*.xml
   type-aliases-package: com.imwj.msg
@@ -45,7 +47,7 @@ mybatis-plus:
     jdbc-type-for-null: null
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 
-# HTTP 连接配置
+##################### HTTP properties #####################
 ok:
   http:
     connect-timeout: 30
@@ -54,15 +56,7 @@ ok:
     read-timeout: 30
     write-timeout: 30
 
-# 消息topicName
-msg:
-  topic:
-    name: MESSAGE_CENTER
-  grayLogIp: 192.168.156.128
-  upload:
-    path: e:/upload
-
-# apollo
+##################### apollo properties #####################
 app:
   id: MessageCenter
 apollo:
@@ -70,10 +64,11 @@ apollo:
     enabled: true
     namespaces: message.center
 
+##################### xxl-job properties #####################
 xxl:
   job:
     admin:
-      addresses: http://192.168.156.128:8899/xxl-job-admin # 调度中心部署跟地址 [选填]：如调度中心集群部署存在多个地址则用逗号分隔。执行器将会使用该地址进行"执行器心跳注册"和"任务结果回调"；为空则关闭自动注册；
+      addresses: http://127.0.0.1:8899/xxl-job-admin # 调度中心部署跟地址 [选填]：如调度中心集群部署存在多个地址则用逗号分隔。执行器将会使用该地址进行"执行器心跳注册"和"任务结果回调"；为空则关闭自动注册；
       username: admin # 后台用户名
       password: 123456 # 后台密码
     executor:
@@ -84,3 +79,26 @@ xxl:
       logpath:  # 执行器运行日志文件存储磁盘路径 [选填] ：需要对该路径拥有读写权限；为空则使用默认路径；
       logretentiondays: 30 # 执行器日志文件保存天数 [选填] ： 过期日志自动清理, 限制值大于等于3时生效; 否则, 如-1, 关闭自动清理功能；
     accessToken:  # 执行器通讯TOKEN [选填]：非空时启用；
+
+##################### monitor properties #####################
+management:
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+##################### msgCenter properties #####################
+msg:
+  business:
+    topic:
+      name: MESSAGE_CENTER
+    grayLogIp: 192.168.156.128
+    upload:
+      path: e:/upload

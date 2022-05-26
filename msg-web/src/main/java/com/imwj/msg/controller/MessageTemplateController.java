@@ -51,7 +51,7 @@ public class MessageTemplateController {
     @Autowired
     private SendService sendService;
 
-    @Value("${msg.upload.path}")
+    @Value("${msg.business.upload.path}")
     private String uploadPath;
 
 
