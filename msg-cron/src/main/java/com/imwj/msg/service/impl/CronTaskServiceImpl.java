@@ -54,10 +54,12 @@ public class CronTaskServiceImpl implements CronTaskService {
             returnT = JSON.parseObject(response.body(), ReturnT.class);
             // 插入时需要返回Id，而更新时不需要
             if (response.isOk() && ReturnT.SUCCESS_CODE == returnT.getCode()) {
-                Integer taskId = Integer.parseInt(String.valueOf(returnT.getContent()));
-                return BasicResultVO.success(taskId);
-            } else if (path.contains(XxlJobConstant.UPDATE_URL)) {
-                return BasicResultVO.success();
+                if (path.contains(XxlJobConstant.INSERT_URL)) {
+                    Integer taskId = Integer.parseInt(String.valueOf(returnT.getContent()));
+                    return BasicResultVO.success(taskId);
+                } else if (path.contains(XxlJobConstant.UPDATE_URL)) {
+                    return BasicResultVO.success();
+                }
             }
         } catch (Exception e) {
             log.error("CronTaskService#saveTask fail,e:{},param:{},response:{}", Throwables.getStackTraceAsString(e)

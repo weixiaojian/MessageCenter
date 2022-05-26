@@ -2,7 +2,6 @@ package com.imwj.common.enums;
 
 
 import com.imwj.common.dto.*;
-import com.imwj.msg.dto.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

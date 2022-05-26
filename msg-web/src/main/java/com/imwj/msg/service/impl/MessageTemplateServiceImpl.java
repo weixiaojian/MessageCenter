@@ -80,7 +80,7 @@ public class MessageTemplateServiceImpl implements messageTemplateService {
         //如果模板下有定时任务 则也需要删除
         List<MessageTemplate> messageTemplates = messageTemplateDao.selectBatchIds(ids);
         for(MessageTemplate messageTemplate : messageTemplates){
-            if(messageTemplate.getCronTaskId() > 0){
+            if(messageTemplate.getCronTaskId() != null && messageTemplate.getCronTaskId() > 0){
                 cronTaskService.deleteCronTask(messageTemplate.getCronTaskId());
             }
         }
@@ -119,7 +119,7 @@ public class MessageTemplateServiceImpl implements messageTemplateService {
         if (taskId != null) {
             cronTaskService.startCronTask(taskId);
             MessageTemplate clone = ObjectUtil.clone(messageTemplate).setMsgStatus(MessageStatus.RUN.getCode()).setCronTaskId(taskId).setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
-            messageTemplateDao.insert(clone);
+            messageTemplateDao.updateById(clone);
             return BasicResultVO.success();
         }
         return BasicResultVO.fail();
@@ -133,7 +133,7 @@ public class MessageTemplateServiceImpl implements messageTemplateService {
         // 1.修改模板状态
         MessageTemplate messageTemplate = messageTemplateDao.selectById(id);
         MessageTemplate clone = ObjectUtil.clone(messageTemplate).setMsgStatus(MessageStatus.STOP.getCode()).setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
-        messageTemplateDao.insert(clone);
+        messageTemplateDao.updateById(clone);
         // 2.暂停定时任务
         return cronTaskService.stopCronTask(clone.getCronTaskId());
     }
