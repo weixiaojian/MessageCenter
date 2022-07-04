@@ -82,8 +82,6 @@ public class MessageTemplateController {
                 .isDeleted(0)
                 .created(Math.toIntExact(DateUtil.currentSeconds()))
                 .updated(Math.toIntExact(DateUtil.currentSeconds()))
-                .deduplicationTime(1)
-                .isNightShield(0)
                 .build();
         messageTemplateService.saveOrUpdate(messageTemplate);
 
@@ -117,8 +115,6 @@ public class MessageTemplateController {
                 .isDeleted(0)
                 .created(Math.toIntExact(DateUtil.currentSeconds()))
                 .updated(Math.toIntExact(DateUtil.currentSeconds()))
-                .deduplicationTime(1)
-                .isNightShield(0)
                 .build();
         messageTemplateService.saveOrUpdate(messageTemplate);
         return RetResult.success(messageTemplate);

@@ -47,8 +47,9 @@ public class XxlJobUtils {
             scheduleConf = messageTemplate.getExpectPushTime();
         }
 
-        XxlJobInfo xxlJobInfo = XxlJobInfo.builder().jobGroup(1).jobDesc(messageTemplate.getName())
-                .jobGroup(queryJobGroupId()).jobDesc(messageTemplate.getName())
+        XxlJobInfo xxlJobInfo = XxlJobInfo.builder()
+                .jobGroup(queryJobGroupId())
+                .jobDesc(messageTemplate.getName())
                 .author(messageTemplate.getCreator())
                 .scheduleConf(scheduleConf)
                 .scheduleType(ScheduleTypeEnum.CRON.name())

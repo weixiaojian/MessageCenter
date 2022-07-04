@@ -46,7 +46,7 @@ public class MessageTemplate implements Serializable {
      * 1. 目前阶段直接填入Id测试
      * 2. 正常是需要通过ID获取文件遍历每个Id
      */
-    private String cronCrowdId;
+    private String cronCrowdPath;
     /**
      * 工单ID
      */
@@ -132,13 +132,4 @@ public class MessageTemplate implements Serializable {
      */
     private Integer updated;
 
-    /**
-     * 去重时间 单位小时
-     */
-    private Integer deduplicationTime;
-
-    /**
-     * 是否夜间屏蔽：0.夜间不屏蔽 1.夜间屏蔽
-     */
-    private Integer isNightShield;
 }

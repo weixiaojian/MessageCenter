@@ -140,7 +140,6 @@ public class MessageTemplateServiceImpl implements messageTemplateService {
         messageTemplate.setFlowId(StrUtil.EMPTY)
                 .setMsgStatus(MessageStatus.INIT.getCode()).setAuditStatus(AuditStatus.WAIT_AUDIT.getCode())
                 .setCreator("imwj").setUpdator("imwj").setTeam("imwj").setAuditor("imwj")
-                .setDeduplicationTime(MessageCenterConstant.FALSE).setIsNightShield(MessageCenterConstant.FALSE)
                 .setCreated(Math.toIntExact(DateUtil.currentSeconds()))
                 .setIsDeleted(MessageCenterConstant.FALSE);
     }

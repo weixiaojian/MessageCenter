@@ -18,7 +18,7 @@ public class CronTaskHandler {
     /**
      * 简单任务
      */
-    @XxlJob("msgTestJobHandler")
+    @XxlJob("msgCenterJob")
     public void execute() {
         log.info("XXL-JOB, Hello World.");
         MessageTemplate messageTemplate = JSON.parseObject(XxlJobHelper.getJobParam(), MessageTemplate.class);
