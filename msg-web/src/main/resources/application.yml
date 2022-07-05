@@ -33,8 +33,8 @@ spring:
 
 ##################### mybatis-plus properties #####################
 mybatis-plus:
-  mapper-locations: classpath:/com/imwj/msg/dao/xml/*.xml
-  type-aliases-package: com.imwj.msg
+  mapper-locations: classpath:/com/imwj/msg/support/dao/xml/*.xml
+  type-aliases-package: com.imwj.msg.web
   global-config:
     banner: false
     db-config:
@@ -68,7 +68,7 @@ apollo:
 xxl:
   job:
     admin:
-      addresses: http://127.0.0.1:8899/xxl-job-admin # 调度中心部署跟地址 [选填]：如调度中心集群部署存在多个地址则用逗号分隔。执行器将会使用该地址进行"执行器心跳注册"和"任务结果回调"；为空则关闭自动注册；
+      addresses: http://192.168.156.128:8899/xxl-job-admin # 调度中心部署跟地址 [选填]：如调度中心集群部署存在多个地址则用逗号分隔。执行器将会使用该地址进行"执行器心跳注册"和"任务结果回调"；为空则关闭自动注册；
       username: admin # 后台用户名
       password: 123456 # 后台密码
     executor:

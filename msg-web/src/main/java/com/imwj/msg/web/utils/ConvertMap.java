@@ -1,4 +1,4 @@
-package com.imwj.msg.utils;
+package com.imwj.msg.web.utils;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ReflectUtil;

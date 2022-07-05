@@ -1,12 +1,12 @@
-package com.imwj.msg.controller;
+package com.imwj.msg.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ctrip.framework.apollo.Config;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
-import com.imwj.common.constant.MessageCenterConstant;
-import com.imwj.common.domain.RetResult;
+import com.imwj.msg.common.constant.MessageCenterConstant;
+import com.imwj.msg.common.domain.RetResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,9 +1,10 @@
-package com.imwj.msg.controller;
+package com.imwj.msg.web.controller;
 
-import com.imwj.common.domain.RetResult;
-import com.imwj.msg.domain.SendRequest;
-import com.imwj.msg.domain.SendResponse;
-import com.imwj.msg.service.SendService;
+
+import com.imwj.msg.api.domain.SendRequest;
+import com.imwj.msg.api.domain.SendResponse;
+import com.imwj.msg.api.service.SendService;
+import com.imwj.msg.common.domain.RetResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

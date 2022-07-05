@@ -1,4 +1,4 @@
-package com.imwj.msg.service.impl;
+package com.imwj.msg.web.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -6,21 +6,20 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.imwj.common.constant.MessageCenterConstant;
-import com.imwj.msg.dao.MessageTemplateDao;
-import com.imwj.msg.domain.MessageTemplate;
-import com.imwj.msg.entity.XxlJobInfo;
-import com.imwj.common.enums.AuditStatus;
-import com.imwj.common.enums.MessageStatus;
-import com.imwj.common.enums.RespStatusEnum;
-import com.imwj.common.enums.TemplateType;
-import com.imwj.common.page.PageVo;
-import com.imwj.common.page.RetPage;
-import com.imwj.msg.service.CronTaskService;
-import com.imwj.msg.service.messageTemplateService;
-import com.imwj.msg.utils.XxlJobUtils;
-import com.imwj.common.vo.BasicResultVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.imwj.msg.common.constant.MessageCenterConstant;
+import com.imwj.msg.common.enums.AuditStatus;
+import com.imwj.msg.common.enums.MessageStatus;
+import com.imwj.msg.common.enums.RespStatusEnum;
+import com.imwj.msg.common.enums.TemplateType;
+import com.imwj.msg.common.page.PageVo;
+import com.imwj.msg.common.page.RetPage;
+import com.imwj.msg.common.vo.BasicResultVO;
+import com.imwj.msg.cron.entity.XxlJobInfo;
+import com.imwj.msg.cron.service.CronTaskService;
+import com.imwj.msg.cron.utils.XxlJobUtils;
+import com.imwj.msg.support.dao.MessageTemplateDao;
+import com.imwj.msg.support.domain.MessageTemplate;
+import com.imwj.msg.web.service.messageTemplateService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,10 +35,10 @@ public class MessageTemplateServiceImpl implements messageTemplateService {
     @Resource
     private MessageTemplateDao messageTemplateDao;
 
-    @Autowired
+    @Resource
     private CronTaskService cronTaskService;
 
-    @Autowired
+    @Resource
     private XxlJobUtils xxlJobUtils;
 
     @Override

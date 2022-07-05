@@ -1,4 +1,4 @@
-package com.imwj.msg.config;
+package com.imwj.msg.web.config;
 
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
@@ -35,7 +35,7 @@ public class LogAspect {
     /**
      * 配置切入点表达式
      */
-    @Pointcut("execution(* com.imwj.msg.controller..*(..))")
+    @Pointcut("execution(* com.imwj.msg.web.controller..*(..))")
     public void webData() {
     }
 

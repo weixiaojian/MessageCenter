@@ -1,5 +1,6 @@
 package com.imwj.msg;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2021-12-28 10:48
  */
 @SpringBootApplication
+@MapperScan("com.imwj.msg.support.dao")
 public class MsgApplication {
 
 

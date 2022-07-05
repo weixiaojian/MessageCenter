@@ -6,7 +6,7 @@
 	</typeAliases>
 	<!-- 拦截器配置开始 -->
 	<plugins>
-		<plugin interceptor="com.imwj.msg.config.MybatisSqlOutInterceptor" />
+		<plugin interceptor="com.imwj.msg.web.api.impl.api.config.MybatisSqlOutInterceptor" />
 	</plugins>
 	<mappers>
 	</mappers>

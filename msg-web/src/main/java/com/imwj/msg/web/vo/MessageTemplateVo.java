@@ -1,4 +1,4 @@
-package com.imwj.msg.vo;
+package com.imwj.msg.web.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
