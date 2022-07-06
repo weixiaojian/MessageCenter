@@ -22,6 +22,10 @@ import java.util.Map;
 public class CrowdInfoVo implements Serializable {
 
     /**
+     * 消息模板Id
+     */
+    private Long messageTemplateId;
+    /**
      * 接收者id
      */
     private String receiver;

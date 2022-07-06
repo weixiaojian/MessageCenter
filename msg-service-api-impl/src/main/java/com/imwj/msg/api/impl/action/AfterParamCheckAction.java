@@ -55,8 +55,8 @@ public class AfterParamCheckAction implements BusinessProcess {
      * @param taskInfo
      */
     private void filterIllegalPhoneNum(List<TaskInfo> taskInfo) {
-        Integer idType = taskInfo.get(0).getIdType();
-        Integer sendChannel = taskInfo.get(0).getSendChannel();
+        Integer idType = CollUtil.getFirst(taskInfo.iterator()).getIdType();
+        Integer sendChannel = CollUtil.getFirst(taskInfo.iterator()).getSendChannel();
         if (IdType.PHONE.getCode().equals(idType) && ChannelType.SMS.getCode().equals(sendChannel)) {
             Iterator<TaskInfo> iterator = taskInfo.iterator();
             while (iterator.hasNext()){
@@ -66,7 +66,7 @@ public class AfterParamCheckAction implements BusinessProcess {
                 //将不合法的手机号清除
                 if(CollUtil.isNotEmpty(illegalPhone)){
                     task.getReceiver().remove(illegalPhone);
-                    log.error("{} find illegal phone!{}", task.getMessageTemplateId(), JSON.toJSONString(illegalPhone));
+                    log.error("messageTemplateId{} find illegal phone!{}", task.getMessageTemplateId(), JSON.toJSONString(illegalPhone));
                 }
                 //将手机号为空的清除（在删除元素时不破坏遍历）
                 if (CollUtil.isEmpty(task.getReceiver())) {

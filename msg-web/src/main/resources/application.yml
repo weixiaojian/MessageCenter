@@ -1,6 +1,6 @@
 ##################### server-port properties #####################
 server:
-  port: 80
+  port: 8080
 
 ##################### database properties ######################
 spring:

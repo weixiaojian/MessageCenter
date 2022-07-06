@@ -57,7 +57,7 @@ public class XxlJobUtils {
                 .misfireStrategy(MisfireStrategyEnum.DO_NOTHING.name())
                 .executorRouteStrategy(ExecutorRouteStrategyEnum.CONSISTENT_HASH.name())
                 .executorHandler(XxlJobConstant.JOB_HANDLER_NAME)
-                .executorParam(JSON.toJSONString(messageTemplate))
+                .executorParam(JSON.toJSONString(messageTemplate.getId()))
                 .executorBlockStrategy(ExecutorBlockStrategyEnum.SERIAL_EXECUTION.name())
                 .executorTimeout(XxlJobConstant.TIME_OUT)
                 .executorFailRetryCount(XxlJobConstant.RETRY_COUNT)

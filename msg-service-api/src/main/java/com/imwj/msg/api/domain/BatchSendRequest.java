@@ -1,6 +1,9 @@
 package com.imwj.msg.api.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -11,6 +14,9 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class BatchSendRequest {
 
     /**
@@ -27,5 +33,5 @@ public class BatchSendRequest {
     /**
      * 消息相关的参数
      */
-    private List<MessageParam> messageParams;
+    private List<MessageParam> messageParamList;
 }

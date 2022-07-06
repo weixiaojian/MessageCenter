@@ -1,25 +1,64 @@
 package com.imwj.msg.cron.utils;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.Console;
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.text.csv.CsvData;
-import cn.hutool.core.text.csv.CsvRow;
-import cn.hutool.core.text.csv.CsvUtil;
+import cn.hutool.core.text.csv.*;
+import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.json.JSONUtil;
 import com.google.common.base.Throwables;
 import com.imwj.msg.cron.domain.CrowdInfoVo;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
+ * 读取人群文件 工具类
  * @author wj
  * @create 2022-05-26 16:56
  */
 @Slf4j
 public class ReadFileUtils {
+
+    /**
+     * csv文件 存储 接收者 的列名
+     */
+    public static final String RECEIVER_KEY = "userId";
+
+    /**
+     * 读取csvwenjian，每读取一行都会嗲用csvRowHandler对应的方法
+     * @param path
+     * @param csvRowHandler
+     */
+    public static void getCsvRow(String path, CsvRowHandler csvRowHandler){
+        try{
+            //首行作为标题
+            CsvReader reader = CsvUtil.getReader(new FileReader(path), new CsvReadConfig().setContainsHeader(true));
+            reader.read(csvRowHandler);
+        }catch (Exception e){
+            log.error("ReadFileUtils#getCsvRow fail!{}", Throwables.getStackTraceAsString(e));
+        }
+    }
+
+    /**
+     * 从文件的每一行数据获取到params信息
+     * @param fieldMap
+     * @return
+     */
+    public static HashMap<String, String> getParamFromLine(Map<String, String> fieldMap){
+        HashMap<String, String> params = MapUtil.newHashMap();
+        for(Map.Entry<String, String> entry : fieldMap.entrySet()){
+            if(!ReadFileUtils.RECEIVER_KEY.equals(entry.getKey())){
+                params.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return params;
+    }
+
 
     /**
      * 读取csv文件
@@ -53,7 +92,9 @@ public class ReadFileUtils {
     }
 
     public static void main(String[] args) {
-        List<CrowdInfoVo> csvRowList = getCsvRowList("C:\\Users\\29168\\Desktop\\接收人列表.csv");
-        System.out.println(JSONUtil.toJsonStr(csvRowList));
+        ReadFileUtils.getCsvRow("E:/upload/2022-07-06/test.csv", row -> {
+            HashMap<String, String> params = ReadFileUtils.getParamFromLine(row.getFieldMap());
+            System.out.println(params);
+        });
     }
 }
