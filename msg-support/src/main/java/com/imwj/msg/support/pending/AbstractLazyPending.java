@@ -60,7 +60,7 @@ public abstract class AbstractLazyPending<T> {
                         pendingParam.getExecutorService().execute(() -> this.handle(taskRef));
                     }
                 }catch (Exception e){
-
+                    log.error("Pending#initConsumePending failed:{}", Throwables.getStackTraceAsString(e));
                 }
             }
         });

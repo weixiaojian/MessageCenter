@@ -19,7 +19,6 @@ import java.util.concurrent.ThreadPoolExecutor;
  * 处理定时任务的线程池配置信息，为@Async注解服务
  * @create 2022-07-04 15:55
  */
-
 @Slf4j
 @Configuration
 @EnableAsync

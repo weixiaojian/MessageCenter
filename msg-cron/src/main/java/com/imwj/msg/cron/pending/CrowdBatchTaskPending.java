@@ -55,7 +55,7 @@ public class CrowdBatchTaskPending extends AbstractLazyPending<CrowdInfoVo> {
                         .setMaxPoolSize(PendingConstant.MAX_POOL_SIZE)
                         .setWorkQueue(PendingConstant.BLOCKING_QUEUE)
                         .setHandler(new ThreadPoolExecutor.CallerRunsPolicy())
-                        .build());
+                .build());
         this.pendingParam = pendingParam;
     }
 

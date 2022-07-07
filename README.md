@@ -1,6 +1,6 @@
 # 消息发送中心
 ## 端口使用情况
-* 项目端口：80
+* 项目端口：8080
 * zookeeper：2181；kafka：9092；kafka-manager：9000
 * redis端口：6379；密码：123456
 * apollo服务请求端口：8080；后台地址：http://127.0.0.1:8070；账号/密码：apollo/admin
@@ -34,3 +34,13 @@
 * kafka监听类：MsgReceiver，多个kafka监听线程配置类：ReceiverStart，多个线程池配置类：TaskPendingHolder
 * MsgReceiver监听到数据后比对groupId是否和kafka中的一致，一致就封装好Task数据 然后准备推送
 * 此处并不是直接推送，根据groupId获取指定的线程池 然后线程执行Task任务，Task调用实际的实现类中的handler然后进行推送和记录发送日志
+
+## 定时任务批量发送消息
+* 通过前端页面新建一个定时任务模板，配置好cron表达式、人群文件路径，然后启动定时任务（比如配置凌晨或者指定时间执行）
+* CronTaskHandler程序进行启动，处理具体的逻辑
+* 异步执行TaskHandlerImpl.handle：  
+    1.查询模板数据中的文件相关信息    
+    2.初始化CrowdBatchTaskPending线程池   
+    3.读取文件得到每一行记录给到队列做batch处理，将数据添加进队列  
+* AbstractLazyPending在spring启动时执行initConsumePending方法，循环处理队列中的数据(没有就跳过，有就执行其实现类中的doHandle方法)
+* CrowdBatchTaskPending.doHandle调用封装参数 调用sendService.batchSend发送消息
