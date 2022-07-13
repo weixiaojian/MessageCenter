@@ -61,13 +61,14 @@ public class ReadFileUtils {
 
 
     /**
-     * 读取csv文件
+     * 一次性读取csv文件
      * 1. 获取第一行信息(id,paramsKey1,params2Key2)，第一列默认为接收者Id
      * 2. 把文件信息塞进对象内
      * 3. 把对象返回
      * @param path
      * @return
      */
+    @Deprecated
     public static List<CrowdInfoVo> getCsvRowList(String path) {
         List<CrowdInfoVo> result = new ArrayList<>();
         try {

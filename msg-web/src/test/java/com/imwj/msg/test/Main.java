@@ -1,8 +1,8 @@
 package com.imwj.msg.test;
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.crypto.SecureUtil;
-import com.imwj.msg.common.domain.LogParam;
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 
 /**
  * @author langao_q
@@ -11,18 +11,10 @@ import com.imwj.msg.common.domain.LogParam;
 public class Main {
 
     public static void main(String[] args) {
-        try {
-            LogParam logParam = new LogParam();
-            String s = SecureUtil.md5(logParam.getBizType());
-            System.out.println(s);
-
-            String str = null;
-            str.equals("");
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            String sub = StrUtil.sub(e.getMessage(), 0, 20);
-            System.out.println(sub);
-        }
+        String json = "{}";
+        JSONObject obj = JSONUtil.parseObj(json);
+        Object test = obj.get("test");
+        System.out.println(test instanceof JSONArray);
     }
 
 }

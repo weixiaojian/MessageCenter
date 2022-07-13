@@ -103,7 +103,7 @@ public class MessageTemplateServiceImpl implements messageTemplateService {
      * @param id
      */
     public BasicResultVO startCronTask(Long id) {
-        //1.修改模板状态
+        //1.获取模板详情数据
         MessageTemplate messageTemplate = messageTemplateDao.selectById(id);
 
         //2.动态创建定时任务并启动
