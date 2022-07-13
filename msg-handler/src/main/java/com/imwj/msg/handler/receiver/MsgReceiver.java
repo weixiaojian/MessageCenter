@@ -37,9 +37,10 @@ public class MsgReceiver {
 
     @Autowired
     private ApplicationContext context;
-
     @Autowired
     private TaskPendingHolder taskPendingHolder;
+    @Autowired
+    private LogUtils logUtils;
 
     @KafkaListener(topics = "#{'${msg.business.topic.name}'}")
     public void consumer(ConsumerRecord<?, String> consumerRecord, @Header(KafkaHeaders.GROUP_ID) String groupId) {
@@ -51,7 +52,7 @@ public class MsgReceiver {
             if(groupId.equals(messageGroupId)){
                 log.info("【"+groupId+"】消费开始：" + JSON.toJSONString(taskInfos));
                 for(TaskInfo taskInfo : taskInfos){
-                    LogUtils.print(LogParam.builder().bizType(LOG_BIZ_TYPE).object(taskInfo).build(), AnchorInfo.builder().ids(taskInfo.getReceiver()).businessId(taskInfo.getBusinessId()).state(AnchorState.RECEIVE.getCode()).build());
+                    logUtils.print(LogParam.builder().bizType(LOG_BIZ_TYPE).object(taskInfo).build(), AnchorInfo.builder().ids(taskInfo.getReceiver()).businessId(taskInfo.getBusinessId()).state(AnchorState.RECEIVE.getCode()).build());
                     Task task = context.getBean(Task.class).setTaskInfo(taskInfo);
                     taskPendingHolder.route(groupId).execute(task);
                 }

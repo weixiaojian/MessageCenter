@@ -19,9 +19,10 @@ public abstract class BaseHandler implements Handler {
      */
     protected Integer channelCode;
 
-
     @Autowired
     private HandlerHolder handlerHolder;
+    @Autowired
+    private LogUtils logUtils;
 
     /**
      * 初始化渠道与Handler的映射关系
@@ -34,10 +35,10 @@ public abstract class BaseHandler implements Handler {
     @Override
     public void doHandler(TaskInfo taskInfo) {
         if (handler(taskInfo)) {
-            LogUtils.print(AnchorInfo.builder().state(AnchorState.SEND_SUCCESS.getCode()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).build());
+            logUtils.print(AnchorInfo.builder().state(AnchorState.SEND_SUCCESS.getCode()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).build());
             return;
         }
-        LogUtils.print(AnchorInfo.builder().state(AnchorState.SEND_FAIL.getCode()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).build());
+        logUtils.print(AnchorInfo.builder().state(AnchorState.SEND_FAIL.getCode()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).build());
     }
 
     /**

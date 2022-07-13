@@ -9,7 +9,9 @@ import com.imwj.msg.common.enums.RespStatusEnum;
 import com.imwj.msg.common.vo.BasicResultVO;
 import com.imwj.msg.support.pipeline.BusinessProcess;
 import com.imwj.msg.support.pipeline.ProcessContext;
+import com.imwj.msg.support.utils.KafkaUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 
@@ -23,8 +25,8 @@ import javax.annotation.Resource;
 @Slf4j
 public class SendMqAction implements BusinessProcess {
 
-    @Resource
-    private KafkaTemplate kafkaTemplate;
+    @Autowired
+    private KafkaUtils kafkaUtils;
 
     @Value("${msg.business.topic.name}")
     private String topicName;
@@ -32,8 +34,10 @@ public class SendMqAction implements BusinessProcess {
     @Override
     public void process(ProcessContext context) {
         SendTaskModel sendTaskModel = (SendTaskModel) context.getProcessModel();
+        String message = JSON.toJSONString(sendTaskModel.getTaskInfo(), new SerializerFeature[]{SerializerFeature.WriteClassName});
+
         try {
-            kafkaTemplate.send(topicName, JSON.toJSONString(sendTaskModel.getTaskInfo(), new SerializerFeature[] {SerializerFeature.WriteClassName}));
+            kafkaUtils.send(topicName, message);
         }catch (Exception e){
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR));
             log.error("send kafka fail! e:{},params:{}", Throwables.getStackTraceAsString(e)

@@ -10,6 +10,7 @@ import com.imwj.msg.common.domain.AnchorInfo;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.enums.AnchorState;
 import com.imwj.msg.support.utils.LogUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,6 +20,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DiscardMessageService {
+
+    @Autowired
+    private LogUtils logUtils;
 
     /**
      * 配置样例：key=discard   value=[1,2,3]
@@ -38,7 +42,7 @@ public class DiscardMessageService {
                 MessageCenterConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY));
         //如果模板id在apollo的配置中配置了要丢弃  则丢弃该消息
         if (array.contains(String.valueOf(taskInfo.getMessageTemplateId()))) {
-            LogUtils.print(AnchorInfo.builder().businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).state(AnchorState.DISCARD.getCode()).build());
+            logUtils.print(AnchorInfo.builder().businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).state(AnchorState.DISCARD.getCode()).build());
             return true;
         }
         return false;
