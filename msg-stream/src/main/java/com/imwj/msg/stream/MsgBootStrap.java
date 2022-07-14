@@ -26,13 +26,11 @@ public class MsgBootStrap {
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-
         /**
          * 1.获取KafkaConsumer
          */
         KafkaSource<String> kafkaConsumer = MessageQueueUtils.getKafkaConsumer(MsgFlinkConstant.TOPIC_NAME, MsgFlinkConstant.GROUP_ID, MsgFlinkConstant.BROKER);
         DataStreamSource<String> kafkaSource = env.fromSource(kafkaConsumer, WatermarkStrategy.noWatermarks(), MsgFlinkConstant.SOURCE_NAME);
-
 
         /**
          * 2. 数据转换处理

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>austin-stream</artifactId>
+    <artifactId>msg-stream</artifactId>
 
     <dependencies>
         <dependency>
@@ -100,7 +100,7 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.java3y.austin.stream.AustinBootStrap</mainClass>
+                                    <mainClass>com.imwj.msg.stream.MsgBootStrap</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

@@ -1,8 +1,11 @@
 package com.imwj.msg.test;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+
+import java.util.Date;
 
 /**
  * @author langao_q
@@ -11,10 +14,7 @@ import cn.hutool.json.JSONUtil;
 public class Main {
 
     public static void main(String[] args) {
-        String json = "{}";
-        JSONObject obj = JSONUtil.parseObj(json);
-        Object test = obj.get("test");
-        System.out.println(test instanceof JSONArray);
+        System.out.println(DateUtil.offsetDay(new Date(), 30).getTime());
     }
 
 }

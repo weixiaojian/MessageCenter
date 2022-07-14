@@ -55,7 +55,6 @@ public class LogUtils extends CustomLogListener {
             log.error("LogUtils#print kafka fail! e:{},params:{}", Throwables.getStackTraceAsString(e)
                     , JSON.toJSONString(anchorInfo));
         }
-
     }
 
     /**
