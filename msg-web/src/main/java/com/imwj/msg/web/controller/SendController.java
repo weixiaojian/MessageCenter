@@ -35,7 +35,7 @@ public class SendController {
      * @return
      */
     @ApiOperation("/发送短信")
-    @GetMapping("/sendSmsTest")
+    @RequestMapping("/sendSmsTest")
     public RetResult sendSmsTest(@RequestBody SendRequest sendRequest) {
         SendResponse sendResponse = sendService.send(sendRequest);
         return RetResult.success(sendResponse);
@@ -47,8 +47,20 @@ public class SendController {
      * @return
      */
     @ApiOperation("/发送邮件")
-    @GetMapping("/sendEmailTest")
+    @RequestMapping("/sendEmailTest")
     public RetResult sendEmailTest(@RequestBody SendRequest sendRequest) {
+        SendResponse sendResponse = sendService.send(sendRequest);
+        return RetResult.success(sendResponse);
+    }
+
+    /**
+     * 发送公众号模板消息 {"code":"send","messageParam":{"receiver":"2916863213@qq.com","variables":{"title":"EmailTest","content":"6666"}},"messageTemplateId":2}
+     * @param sendRequest
+     * @return
+     */
+    @ApiOperation("/发送公众号模板消息")
+    @RequestMapping("/sendWechatTest")
+    public RetResult sendWechatTest(@RequestBody SendRequest sendRequest) {
         SendResponse sendResponse = sendService.send(sendRequest);
         return RetResult.success(sendResponse);
     }

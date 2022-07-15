@@ -3,6 +3,7 @@ package com.imwj.msg.common.dto;
 import lombok.*;
 
 /**
+ * 邮箱内容Model
  * @author langao_q
  * @since 2021-12-29 19:05
  */

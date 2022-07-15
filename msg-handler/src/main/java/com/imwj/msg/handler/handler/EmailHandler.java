@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * 邮箱处理Handler
  * @author langao_q
  * @since 2022-01-11 10:32
  */

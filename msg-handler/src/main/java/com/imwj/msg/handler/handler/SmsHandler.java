@@ -20,6 +20,7 @@ import java.util.List;
 
 
 /**
+ * 短信处理Handler
  * @author langao_q
  * @since 2021-12-30 15:48
  */

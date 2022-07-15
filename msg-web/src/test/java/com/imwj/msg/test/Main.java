@@ -6,6 +6,8 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author langao_q
@@ -14,7 +16,13 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(DateUtil.offsetDay(new Date(), 30).getTime());
+        HashMap<String, String> map = new HashMap<>();
+        map.put("orderNumber","100001");
+        map.put("status","已签收");
+        System.out.println(JSONUtil.toJsonStr(map));
+
+        Map map1 = JSONUtil.toBean(JSONUtil.toJsonStr(map), Map.class);
+        System.out.println(map1);
     }
 
 }

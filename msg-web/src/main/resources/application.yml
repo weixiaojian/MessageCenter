@@ -94,6 +94,16 @@ management:
       prometheus:
         enabled: true
 
+##################### wechat properties #####################
+wx:
+  mp:
+    account:
+      appid: wx6447c1fe6b20697b
+      secret: 4b912ad95576639faa948011bfce311f
+      token: langao
+      aesKey: 2
+      openId: o5HmTt3gF7lFFAStoLT5Ij4HE1ow
+
 ##################### msgCenter properties #####################
 msg:
   business:
