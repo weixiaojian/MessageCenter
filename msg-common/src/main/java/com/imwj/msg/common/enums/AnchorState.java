@@ -33,8 +33,22 @@ public enum AnchorState {
     CLICK(0100, "消息被点击"),
     ;
 
-
     private Integer code;
     private String description;
+
+    /**
+     * 通过code获取描述
+     *
+     * @param code
+     * @return
+     */
+    public static String getDescriptionByCode(Integer code) {
+        for (AnchorState anchorState : AnchorState.values()) {
+            if (anchorState.getCode().equals(code)) {
+                return anchorState.getDescription();
+            }
+        }
+        return "未知点位";
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.imwj.msg.handler.script;
 
+import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.IdUtil;
@@ -69,7 +70,7 @@ public class TencentSmsScript implements SmsScript {
             String phone = new StringBuilder(new StringBuilder(sendStatus.getPhoneNumber())
                     .reverse().substring(0, PHONE_NUM)).reverse().toString();
             SmsRecord smsRecord = SmsRecord.builder()
-                    .sendDate(Integer.valueOf(DateUtil.format(new Date(), MessageCenterConstant.YYYY_MM_DD)))
+                    .sendDate(Integer.valueOf(DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN)))
                     .messageTemplateId(smsParam.getMessageTemplateId())
                     .phone(Long.valueOf(phone))
                     .supplierId(tencentSmsParam.getSupplierId())

@@ -38,7 +38,7 @@ public class RedisUtils {
                 }
             }
         } catch (Exception e) {
-            log.error("redis mGet fail! e:{}", Throwables.getStackTraceAsString(e));
+            log.error("RedisUtils#mGet fail! e:{}", Throwables.getStackTraceAsString(e));
         }
         return result;
     }
@@ -56,7 +56,7 @@ public class RedisUtils {
                 return null;
             });
         } catch (Exception e) {
-            log.error("redis pipelineSetEX fail! e:{}", Throwables.getStackTraceAsString(e));
+            log.error("RedisUtils#pipelineSetEX fail! e:{}", Throwables.getStackTraceAsString(e));
         }
     }
 
@@ -76,7 +76,36 @@ public class RedisUtils {
                 return null;
             });
         } catch (Exception e) {
-            log.error("redis pipelineSetEX fail! e:{}", Throwables.getStackTraceAsString(e));
+            log.error("RedisUtils#pipelineSetEX fail! e:{}", Throwables.getStackTraceAsString(e));
         }
+    }
+
+    /**
+     * hGetAll
+     *
+     * @param key
+     */
+    public Map<Object, Object> hGetAll(String key) {
+        try {
+            Map<Object, Object> entries = redisTemplate.opsForHash().entries(key);
+            return entries;
+        } catch (Exception e) {
+            log.error("RedisUtils#hGetAll fail! e:{}", Throwables.getStackTraceAsString(e));
+        }
+        return null;
+    }
+
+    /**
+     * lRange
+     *
+     * @param key
+     */
+    public List<String> lRange(String key, long start, long end) {
+        try {
+            return redisTemplate.opsForList().range(key, start, end);
+        } catch (Exception e) {
+            log.error("RedisUtils#lRange fail! e:{}", Throwables.getStackTraceAsString(e));
+        }
+        return null;
     }
 }

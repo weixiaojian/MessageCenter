@@ -1,4 +1,4 @@
-package com.imwj.msg.stream.domain;
+package com.imwj.msg.common.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

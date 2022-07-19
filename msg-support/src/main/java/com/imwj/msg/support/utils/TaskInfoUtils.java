@@ -1,5 +1,6 @@
 package com.imwj.msg.support.utils;
 
+import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import com.imwj.msg.common.constant.MessageCenterConstant;
 
@@ -20,7 +21,7 @@ public class TaskInfoUtils {
      * (固定16位)
      */
     public static Long generateBusinessId(Long templateId, Integer templateType) {
-        Integer today = Integer.valueOf(DateUtil.format(new Date(), MessageCenterConstant.YYYY_MM_DD));
+        Integer today = Integer.valueOf(DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN));
         return Long.valueOf(String.format("%d%s", templateType * TYPE_FLAG + templateId, today));
     }
 
@@ -35,5 +36,18 @@ public class TaskInfoUtils {
         } else {
             return url + "&track_code_bid=" + businessId;
         }
+    }
+
+    /**
+     * 第二到8位为MessageTemplateId 切割出模板ID
+     */
+    public static Long getMessageTemplateIdFromBusinessId(Long businessId) {
+        return Long.valueOf(String.valueOf(businessId).substring(1, 8));
+    }
+    /**
+     * 从businessId切割出日期
+     */
+    public static Long getDateFromBusinessId(Long businessId) {
+        return Long.valueOf(String.valueOf(businessId).substring(8));
     }
 }
