@@ -1,5 +1,6 @@
 package com.imwj.msg.web.vo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,28 +21,34 @@ public class EchartsVo {
     /**
      * title 标题
      */
+    @JsonProperty
     private TitleVO title;
     /**
      * tooltip 提示
      */
+    @JsonProperty
     private TooltipVO tooltip;
     /**
      * legend 图例
      */
+    @JsonProperty
     private LegendVO legend;
     /**
      * xAxis x轴
      */
+    @JsonProperty
     private XAxisVO xAxis;
     /**
      * yAxis y轴
      */
+    @JsonProperty
     private YAxisVO yAxis;
     /**
      * series 系列列表
      * <p>
      * 每个系列通过 type 决定自己的图表类型
      */
+    @JsonProperty
     private List<SeriesVO> series;
 
     /**
@@ -62,6 +69,7 @@ public class EchartsVo {
     @Data
     @Builder
     public static class TooltipVO {
+        private String color;
     }
 
     /**
@@ -81,6 +89,7 @@ public class EchartsVo {
      */
     @Data
     @Builder
+
     public static class XAxisVO {
         /**
          * data
@@ -94,6 +103,7 @@ public class EchartsVo {
     @Data
     @Builder
     public static class YAxisVO {
+        private String type;
     }
 
     /**

@@ -2,12 +2,14 @@ package com.imwj.msg.web.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
+import com.imwj.msg.common.enums.RespStatusEnum;
 import com.imwj.msg.common.vo.BasicResultVO;
 import com.imwj.msg.support.domain.MessageTemplate;
 import com.imwj.msg.support.utils.RedisUtils;
 import com.imwj.msg.web.service.DataService;
 import com.imwj.msg.web.vo.DataParam;
 import com.imwj.msg.web.vo.EchartsVo;
+import com.imwj.msg.web.vo.UserTimeLineVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -37,21 +39,21 @@ public class DataController {
     /**
      * 获取数据Flink存到redis中的清洗数据
      */
-    @GetMapping("/user")
+    @PostMapping("/user")
     @ApiOperation("/获取【当天】用户接收消息的全链路数据")
-    public BasicResultVO getData(String receiver) {
-        List<String> list = redisUtils.lRange(receiver, 0, -1);
-        return BasicResultVO.success(list);
+    public BasicResultVO getData(@RequestBody DataParam dataParam) {
+        UserTimeLineVo traceUserInfo = dataService.getTraceUserInfo(dataParam.getReceiver());
+        return BasicResultVO.success(traceUserInfo);
     }
 
-    @GetMapping("/messageTemplate")
+    @PostMapping("/messageTemplate")
     @ApiOperation("/获取消息模板全链路数据")
-    public BasicResultVO getMessageTemplateData(String businessId) {
+    public BasicResultVO getMessageTemplateData(@RequestBody DataParam dataParam) {
         EchartsVo echartsVo = EchartsVo.builder().build();
-        if (StrUtil.isNotBlank(businessId)) {
-            echartsVo = dataService.getTraceMessageTemplateInfo(businessId);
+        if (StrUtil.isNotBlank(dataParam.getBusinessId())) {
+            echartsVo = dataService.getTraceMessageTemplateInfo(dataParam.getBusinessId());
         }
-        return BasicResultVO.success(echartsVo);
+        return new BasicResultVO<>(RespStatusEnum.SUCCESS, echartsVo);
     }
 
 }
