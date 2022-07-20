@@ -44,3 +44,10 @@
     3.读取文件得到每一行记录给到队列做batch处理，将数据添加进队列  
 * AbstractLazyPending在spring启动时执行initConsumePending方法，循环处理队列中的数据(没有就跳过，有就执行其实现类中的doHandle方法)
 * CrowdBatchTaskPending.doHandle调用封装参数 调用sendService.batchSend发送消息
+
+
+## 线程池
+* 目前系统中有三种线程池：
+* 1.消费mq数据使用了线程池(ThreadPoolConfig.java)
+* 2.定时任务中处理文件使用了线程池(AsyncConfiguration.java)
+* 3.Flink将数据清洗发送到redis使用了线程池(CrowdBatchTaskPending.java)

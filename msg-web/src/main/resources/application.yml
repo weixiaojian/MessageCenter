@@ -1,6 +1,8 @@
 ##################### server-port properties #####################
 server:
   port: 8080
+  # 优雅停机
+  shutdown: graceful
 
 ##################### database properties ######################
 spring:
@@ -117,7 +119,7 @@ msg:
         name: MESSAGE_LOG
   async:
     task:
-      thread-name-prefix: "fun-task-" # task前缀名
+      thread-name-prefix: "async-task-" # task前缀名
       max-size: 8 #最大线程数
       core-size: 4 #核心线程数
       queue-capacity: 100

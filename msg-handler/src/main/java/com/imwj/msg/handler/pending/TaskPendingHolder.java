@@ -2,6 +2,8 @@ package com.imwj.msg.handler.pending;
 
 import com.imwj.msg.handler.config.ThreadPoolConfig;
 import com.imwj.msg.handler.utils.GroupIdMappingUtils;
+import com.imwj.msg.support.config.ThreadPoolExecutorShutdownDefinition;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +19,10 @@ import java.util.concurrent.ExecutorService;
  */
 @Component
 public class TaskPendingHolder {
+
+    @Autowired
+    private ThreadPoolExecutorShutdownDefinition threadPoolExecutorShutdownDefinition;
+
     /**
      * 线程池的参数
      */
@@ -37,7 +43,12 @@ public class TaskPendingHolder {
     @PostConstruct
     public void init() {
         for (String groupId : groupIds) {
-            taskPendingHolder.put(groupId, ThreadPoolConfig.getThreadPool(coreSize, maxSize, queueSize));
+            // 得到一个线程池
+            ExecutorService threadPool = ThreadPoolConfig.getThreadPool(coreSize, maxSize, queueSize);
+            // 注册线程池（方便优雅的关闭线程池）
+            threadPoolExecutorShutdownDefinition.registryExecutor(threadPool);
+            // 将线程池存储
+            taskPendingHolder.put(groupId, threadPool);
         }
     }
 

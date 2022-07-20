@@ -25,9 +25,9 @@ public class AsyncExecutionProperties {
      */
     int maxSize;
     /**
-     * 线程名前缀 eg: "austinAsyncExecutor-"
+     * 线程名前缀 eg: "async-task-"
      */
-    private String threadNamePrefix = "austinAsyncExecutor-";
+    private String threadNamePrefix;
 
     /**
      * queue capacity
@@ -82,7 +82,7 @@ public class AsyncExecutionProperties {
          */
         ABORTPOLICY(new ThreadPoolExecutor.AbortPolicy()),
         /**
-         * 交个当前run_thread 运行
+         * 交给当前run_thread 运行
          */
         CALLRUNSPOLICY(new ThreadPoolExecutor.CallerRunsPolicy()),
         /***
