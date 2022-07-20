@@ -72,7 +72,7 @@ public class CronTaskServiceImpl implements CronTaskService {
     public BasicResultVO deleteCronTask(Integer taskId) {
         String path = xxlAddresses + XxlJobConstant.DELETE_URL;
 
-        HashMap<String, Object> params = new HashMap<>();
+        HashMap<String, Object> params = MapUtil.newHashMap();
         params.put("id", taskId);
         HttpResponse response;
         ReturnT returnT = null;
@@ -167,7 +167,7 @@ public class CronTaskServiceImpl implements CronTaskService {
     public BasicResultVO getGroupId(String appName, String title) {
         String path = xxlAddresses + XxlJobConstant.JOB_GROUP_PAGE_LIST;
 
-        HashMap<String, Object> params = new HashMap<>();
+        HashMap<String, Object> params = MapUtil.newHashMap();
         params.put("appname", appName);
         params.put("title", title);
 

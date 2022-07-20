@@ -4,6 +4,7 @@ import com.imwj.msg.handler.handler.HandlerHolder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * @author langao_q
@@ -13,13 +14,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 class MsgApplicationTest {
 
     @Autowired
-    private HandlerHolder handlerHolder;
+    private StringRedisTemplate redisTemplate;
 
     @Test
     public void test(){
-        System.out.println(handlerHolder.handlers);
-        System.out.println(handlerHolder.route(30));
-        System.out.println(handlerHolder.route(40));
+        redisTemplate.opsForValue().set("test1.a","1");
+        redisTemplate.opsForValue().set("test1.b","1");
+
+        System.out.println(redisTemplate.opsForValue().get("test:*"));
+        System.out.println(redisTemplate.keys("test:*"));
+
     }
 
 }

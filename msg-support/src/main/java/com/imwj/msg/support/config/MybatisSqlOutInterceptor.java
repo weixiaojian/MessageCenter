@@ -57,10 +57,7 @@ public class MybatisSqlOutInterceptor implements Interceptor {
             time = (end - start);
             log.info("====sql耗时【"+time+"】毫秒===" + sql);
 		} catch (Exception e) {
-			if(!(e.getMessage()+e.getCause().getMessage()+"").contains("ORA-00001"))
-			{
-				log.error("错误====sql===" + sql,e);
-			}
+            log.error("错误====sql===" + sql,e);
 			throw e;
 		}
         sql = null;

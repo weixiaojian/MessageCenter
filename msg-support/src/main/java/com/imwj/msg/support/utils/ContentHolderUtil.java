@@ -1,5 +1,6 @@
 package com.imwj.msg.support.utils;
 
+import cn.hutool.core.map.MapUtil;
 import org.springframework.context.expression.MapAccessor;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.util.PropertyPlaceholderHelper;
@@ -64,7 +65,7 @@ public class ContentHolderUtil {
 	}
 
 	public static void main(String[] args) {
-		Map<String, String> params = new HashMap<>();
+		Map<String, String> params = MapUtil.newHashMap();
 		params.put("content", "test");
         params.put("url", "123");
 		String content = ContentHolderUtil.replacePlaceHolder("{\"content\":\"{$content}\",\"url\":\"{$url}\",\"title\":\"\"}", params);
