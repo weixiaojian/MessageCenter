@@ -22,10 +22,13 @@ public class ThreadPoolTest {
         DtpExecutor dtpExecutor2 = DtpRegistry.getExecutor("execute-xxl-thread-pool");
         DtpExecutor dtpExecutor1 = DtpRegistry.getExecutor("imwj.im.notice");
 
-        log.info("dtpExecutor1：{}   {}",dtpExecutor1.getCorePoolSize(), dtpExecutor1.getMaximumPoolSize());
-        log.info("dtpExecutor2：{}   {}",dtpExecutor2.getCorePoolSize(), dtpExecutor2.getMaximumPoolSize());
+        for(int i=0; i<10; i++){
+            log.info("dtpExecutor1：{}   {}",dtpExecutor1.getCorePoolSize(), dtpExecutor1.getMaximumPoolSize());
+            log.info("dtpExecutor2：{}   {}",dtpExecutor2.getCorePoolSize(), dtpExecutor2.getMaximumPoolSize());
 
-        dtpExecutor1.execute(() -> log.info("test1"));
-        dtpExecutor2.execute(() -> log.info("test2"));
+            dtpExecutor1.execute(() -> log.info("test1"));
+            dtpExecutor2.execute(() -> log.info("test2"));
+            ThreadUtil.sleep(1000 * 10);
+        }
     }
 }

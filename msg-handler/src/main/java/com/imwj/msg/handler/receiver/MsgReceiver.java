@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
 
 /**
  * kafka消费者（发送消息监听器）
@@ -53,7 +54,9 @@ public class MsgReceiver {
                 log.info("【"+groupId+"】消费开始：" + JSON.toJSONString(taskInfos));
                 for(TaskInfo taskInfo : taskInfos){
                     logUtils.print(LogParam.builder().bizType(LOG_BIZ_TYPE).object(taskInfo).build(), AnchorInfo.builder().ids(taskInfo.getReceiver()).businessId(taskInfo.getBusinessId()).state(AnchorState.RECEIVE.getCode()).build());
+                    //得到参数实体
                     Task task = context.getBean(Task.class).setTaskInfo(taskInfo);
+                    //线程池执行
                     taskPendingHolder.route(groupId).execute(task);
                 }
             }

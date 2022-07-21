@@ -36,26 +36,10 @@ public class ThreadPoolExecutorShutdownDefinition implements ApplicationListener
 
     /**
      * 注册线程池
-     * @param threadPoolTaskExecutor
+     * @param executorService
      */
-    public void registryExecutor(ThreadPoolTaskExecutor threadPoolTaskExecutor) {
-        POOLS.add(threadPoolTaskExecutor.getThreadPoolExecutor());
-    }
-
-    /**
-     * 注册线程池
-     * @param threadPoolTaskExecutor
-     */
-    public void registryExecutor(ThreadPoolTaskScheduler threadPoolTaskExecutor) {
-        POOLS.add(threadPoolTaskExecutor.getScheduledThreadPoolExecutor());
-    }
-
-    /**
-     * 注册线程池
-     * @param executor
-     */
-    public void registryExecutor(ExecutorService executor) {
-        POOLS.add(executor);
+    public void registryExecutor(ExecutorService executorService) {
+        POOLS.add(executorService);
     }
 
     /**

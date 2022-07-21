@@ -12,24 +12,24 @@ spring:
       platforms:
         - platform: wechat
           urlKey: 38aa7eff500-1287
-          receivers: apollo
+          receivers: \u9B4F\u5065
         - platform: ding
           urlKey: f80dad441fcd65bac48473d4a88dcd6a
           secret: SECb544445a6a34f0315d08b17de41
-          receivers: 18888888888
+          receivers: 15200985202
       executors:
-        - threadPoolName: imwj.im.notice
-          corePoolSize: 10
-          maximumPoolSize: 10
+        - threadPoolName: imwj.email.notice
+          corePoolSize: 3
+          maximumPoolSize: 5
           queueCapacity: 200
           queueType: VariableLinkedBlockingQueue   # \u4EFB\u52A1\u961F\u5217\uFF0C\u67E5\u770B\u6E90\u7801QueueTypeEnum\u679A\u4E3E\u7C7B
           rejectedHandlerType: CallerRunsPolicy    # \u62D2\u7EDD\u7B56\u7565\uFF0C\u67E5\u770BRejectedTypeEnum\u679A\u4E3E\u7C7B
           keepAliveTime: 50
           allowCoreThreadTimeOut: false
-          threadNamePrefix: imwj1-           # \u7EBF\u7A0B\u540D\u524D\u7F00
+          threadNamePrefix: imwj-email-           # \u7EBF\u7A0B\u540D\u524D\u7F00
         - threadPoolName: execute-xxl-thread-pool
-          corePoolSize: 3
-          maximumPoolSize: 3
+          corePoolSize: 20
+          maximumPoolSize: 20
           queueCapacity: 200
           queueType: VariableLinkedBlockingQueue   # \u4EFB\u52A1\u961F\u5217\uFF0C\u67E5\u770B\u6E90\u7801QueueTypeEnum\u679A\u4E3E\u7C7B
           rejectedHandlerType: CallerRunsPolicy    # \u62D2\u7EDD\u7B56\u7565\uFF0C\u67E5\u770BRejectedTypeEnum\u679A\u4E3E\u7C7B
