@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.handler;
+package com.imwj.msg.handler.handler.impl;
 
 import cn.hutool.extra.mail.MailAccount;
 import cn.hutool.extra.mail.MailUtil;
@@ -7,6 +7,8 @@ import com.google.common.base.Throwables;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.dto.EmailContentModel;
 import com.imwj.msg.common.enums.ChannelType;
+import com.imwj.msg.handler.handler.BaseHandler;
+import com.imwj.msg.handler.handler.Handler;
 import com.imwj.msg.support.utils.AccountUtils;
 import com.sun.mail.util.MailSSLSocketFactory;
 import lombok.extern.slf4j.Slf4j;

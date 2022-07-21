@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.script;
+package com.imwj.msg.handler.script.impl;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;

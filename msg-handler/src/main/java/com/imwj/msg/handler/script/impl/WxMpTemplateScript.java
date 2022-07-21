@@ -1,5 +1,6 @@
-package com.imwj.msg.handler.script;
+package com.imwj.msg.handler.script.impl;
 
+import com.imwj.msg.handler.script.OfficialAccountScript;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;

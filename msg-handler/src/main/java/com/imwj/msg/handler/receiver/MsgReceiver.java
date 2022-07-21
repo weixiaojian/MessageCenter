@@ -1,5 +1,6 @@
 package com.imwj.msg.handler.receiver;
 
+import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.imwj.msg.common.domain.AnchorInfo;
 import com.imwj.msg.common.domain.LogParam;
@@ -22,7 +23,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.ExecutorService;
 
 /**
  * kafka消费者（发送消息监听器）
@@ -48,7 +48,7 @@ public class MsgReceiver {
         Optional<String> kafkaMessage = Optional.ofNullable(consumerRecord.value());
         if(kafkaMessage.isPresent()){
             List<TaskInfo> taskInfos = JSON.parseArray(kafkaMessage.get(), TaskInfo.class);
-            String messageGroupId = GroupIdMappingUtils.getGroupIdByTaskInfo(taskInfos.get(0));
+            String messageGroupId = GroupIdMappingUtils.getGroupIdByTaskInfo(CollUtil.getFirst(taskInfos.iterator()));
             //只有消息中的groupId 与 当前消费者的groupId相等才去发送短信
             if(groupId.equals(messageGroupId)){
                 log.info("【"+groupId+"】消费开始：" + JSON.toJSONString(taskInfos));

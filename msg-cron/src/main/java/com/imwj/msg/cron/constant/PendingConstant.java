@@ -25,12 +25,4 @@ public class PendingConstant {
      */
     public static final Long TIME_THRESHOLD = 1000L;
 
-    /**
-     * 真正消费线程池配置的信息
-     */
-    public static final Integer CORE_POOL_SIZE = 2;
-    public static final Integer MAX_POOL_SIZE = 2;
-    public static final Integer KEEP_LIVE_TIME = 20;
-    public static final BlockingQueue BLOCKING_QUEUE = new LinkedBlockingQueue<>(5);
-
 }

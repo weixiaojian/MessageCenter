@@ -1,12 +1,11 @@
 package com.imwj.msg.cron.utils;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.lang.Console;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.text.csv.*;
-import cn.hutool.core.util.CharsetUtil;
-import cn.hutool.json.JSONUtil;
 import com.google.common.base.Throwables;
+import com.imwj.msg.cron.csv.CountFileRowHandler;
 import com.imwj.msg.cron.domain.CrowdInfoVo;
 import lombok.extern.slf4j.Slf4j;
 
@@ -59,6 +58,23 @@ public class ReadFileUtils {
         return params;
     }
 
+    /**
+     * 读取csv文件，获取文件里的行数
+     *
+     * @param path
+     * @param countFileRowHandler
+     */
+    public static long countCsvRow(String path, CountFileRowHandler countFileRowHandler) {
+        try {
+            // 把首行当做是标题，获取reader
+            CsvReader reader = CsvUtil.getReader(new FileReader(path),
+                    new CsvReadConfig().setContainsHeader(true));
+            reader.read(countFileRowHandler);
+        } catch (Exception e) {
+            log.error("ReadFileUtils#getCsvRow fail!{}", Throwables.getStackTraceAsString(e));
+        }
+        return countFileRowHandler.getRowSize();
+    }
 
     /**
      * 一次性读取csv文件
@@ -84,7 +100,7 @@ public class ReadFileUtils {
                 for(int j=1; j<headInfo.size(); j++){
                     param.put(headInfo.get(j), row.get(j));
                 }
-                result.add(CrowdInfoVo.builder().receiver(row.get(0)).params(param).build());
+                result.add(CrowdInfoVo.builder().receiver(CollUtil.getFirst(row.iterator())).params(param).build());
             }
         }catch (Exception e){
             log.error("TaskHandler#getCsvRowList fail!{}", Throwables.getStackTraceAsString(e));

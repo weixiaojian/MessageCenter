@@ -15,10 +15,20 @@ public class HandlerHolder {
 
     public Map<Integer, Handler> handlers = new HashMap<Integer, Handler>(32);
 
+    /**
+     * 根据渠道code存储对应的Handler
+     * @param channelCode
+     * @param handler
+     */
     public void putHandler(Integer channelCode, Handler handler) {
         handlers.put(channelCode, handler);
     }
 
+    /**
+     * 根据渠道code获取对应的Handler
+     * @param channelCode
+     * @return
+     */
     public Handler route(Integer channelCode) {
         return handlers.get(channelCode);
     }

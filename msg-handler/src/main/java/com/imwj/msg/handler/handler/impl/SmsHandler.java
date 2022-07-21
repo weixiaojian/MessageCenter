@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.handler;
+package com.imwj.msg.handler.handler.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
@@ -8,11 +8,12 @@ import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.dto.SmsContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.handler.domain.SmsParam;
+import com.imwj.msg.handler.handler.BaseHandler;
+import com.imwj.msg.handler.handler.Handler;
 import com.imwj.msg.handler.script.SmsScript;
 import com.imwj.msg.support.dao.SmsRecordDao;
 import com.imwj.msg.support.domain.SmsRecord;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -35,7 +36,7 @@ public class SmsHandler extends BaseHandler implements Handler {
     @Resource
     private SmsRecordDao smsRecordDao;
 
-    @Autowired
+    @Resource
     private SmsScript tencentSmsScript;
 
     @Override

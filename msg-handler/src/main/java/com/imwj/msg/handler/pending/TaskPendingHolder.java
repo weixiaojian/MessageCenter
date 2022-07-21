@@ -1,12 +1,9 @@
 package com.imwj.msg.handler.pending;
 
-import com.dtp.common.em.QueueTypeEnum;
-import com.dtp.common.em.RejectedTypeEnum;
-import com.dtp.core.DtpRegistry;
 import com.dtp.core.thread.DtpExecutor;
-import com.dtp.core.thread.ThreadPoolBuilder;
+import com.imwj.msg.handler.config.HandlerThreadPoolConfig;
 import com.imwj.msg.handler.utils.GroupIdMappingUtils;
-import com.imwj.msg.support.config.ThreadPoolExecutorShutdownDefinition;
+import com.imwj.msg.support.utils.ThreadPoolUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,14 +22,11 @@ import java.util.concurrent.ExecutorService;
 public class TaskPendingHolder {
 
     @Autowired
-    private ThreadPoolExecutorShutdownDefinition threadPoolExecutorShutdownDefinition;
+    private ThreadPoolUtils threadPoolUtils;
 
     /**
-     * 线程池的参数
+     * 任务线程池管理器（存储消费kafka的所有线程池）
      */
-    private Integer coreSize = 3;
-    private Integer maxSize = 5;
-    private Integer queueSize = 100;
     private Map<String, ExecutorService> taskPendingHolder = new HashMap<>(32);
 
     /**
@@ -49,17 +43,12 @@ public class TaskPendingHolder {
     @PostConstruct
     public void init() {
         for (String groupId : groupIds) {
-            DtpExecutor dtpExecutor = ThreadPoolBuilder.newBuilder()
-                    .threadPoolName("imwj." + groupId)
-                    .corePoolSize(coreSize)
-                    .maximumPoolSize(maxSize)
-                    .workQueue(QueueTypeEnum.LINKED_BLOCKING_QUEUE.getName(), queueSize, false)
-                    .rejectedExecutionHandler(RejectedTypeEnum.CALLER_RUNS_POLICY.getName())
-                    .buildDynamic();
-
-            DtpRegistry.register(dtpExecutor, "beanPostProcessor");
-            threadPoolExecutorShutdownDefinition.registryExecutor(dtpExecutor);
-            taskPendingHolder.put(groupId, dtpExecutor);
+            //获取线程池
+            DtpExecutor executor = HandlerThreadPoolConfig.getExecutor(groupId);
+            //注册线程池（注册为动态线程池 + 优雅关闭）
+            threadPoolUtils.register(executor);
+            //添加到任务管理器
+            taskPendingHolder.put(groupId, executor);
         }
     }
 
