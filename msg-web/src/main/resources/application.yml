@@ -64,7 +64,7 @@ app:
 apollo:
   bootstrap:
     enabled: true
-    namespaces: message.center,dynamic-tp-apollo-dtp
+    namespaces: message.center,dynamic-tp-apollo-dtp.yml
 
 ##################### xxl-job properties #####################
 xxl:

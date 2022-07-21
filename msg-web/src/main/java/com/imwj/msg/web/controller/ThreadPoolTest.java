@@ -1,5 +1,6 @@
 package com.imwj.msg.web.controller;
 
+import cn.hutool.core.thread.ThreadUtil;
 import com.dtp.core.DtpRegistry;
 import com.dtp.core.thread.DtpExecutor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,15 +18,14 @@ public class ThreadPoolTest {
 
 
     @GetMapping("/tp")
-    public void send() {
-        DtpExecutor dtpExecutor1 = DtpRegistry.getExecutor("dynamic-tp-test-1");
-        DtpExecutor dtpExecutor2 = DtpRegistry.getExecutor("dynamic-tp-test-2");
+    public void tp() {
+        DtpExecutor dtpExecutor2 = DtpRegistry.getExecutor("execute-xxl-thread-pool");
+        DtpExecutor dtpExecutor1 = DtpRegistry.getExecutor("imwj.im.notice");
 
         log.info("dtpExecutor1：{}   {}",dtpExecutor1.getCorePoolSize(), dtpExecutor1.getMaximumPoolSize());
         log.info("dtpExecutor2：{}   {}",dtpExecutor2.getCorePoolSize(), dtpExecutor2.getMaximumPoolSize());
 
         dtpExecutor1.execute(() -> log.info("test1"));
         dtpExecutor2.execute(() -> log.info("test2"));
-
     }
 }

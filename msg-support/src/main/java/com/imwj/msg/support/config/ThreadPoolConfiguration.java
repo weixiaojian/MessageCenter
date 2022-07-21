@@ -3,7 +3,6 @@ package com.imwj.msg.support.config;
 import com.dtp.common.em.QueueTypeEnum;
 import com.dtp.core.support.ThreadPoolCreator;
 import com.dtp.core.thread.DtpExecutor;
-import com.dtp.core.thread.ThreadPoolBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class ThreadPoolConfiguration {
 
-    @Bean
+    /*@Bean
     public DtpExecutor dtpExecutor() {
         return ThreadPoolCreator.createDynamicFast("dynamic-tp-test-1");
     }
@@ -32,5 +31,5 @@ public class ThreadPoolConfiguration {
                 .timeUnit(TimeUnit.MILLISECONDS)
                 .workQueue(QueueTypeEnum.SYNCHRONOUS_QUEUE.getName(), null, false)
                 .buildDynamic();
-    }
+    }*/
 }
