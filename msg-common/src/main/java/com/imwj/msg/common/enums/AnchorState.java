@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * 打点信息枚举
+ * 埋点信息枚举
  * @author langao_q
  * @since 2021-12-31 11:39
  */

@@ -151,6 +151,12 @@
                 <artifactId>dynamic-tp-spring-boot-starter-apollo</artifactId>
                 <version>1.0.2</version>
             </dependency>
+            <!--企业微信第三方SDK-->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-cp</artifactId>
+                <version>${weixin-java-mp}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

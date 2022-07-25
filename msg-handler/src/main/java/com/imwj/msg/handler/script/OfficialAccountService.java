@@ -8,7 +8,7 @@ import java.util.List;
  * @author wj
  * @create 2022-07-15 11:12
  */
-public interface OfficialAccountScript {
+public interface OfficialAccountService {
 
     /**
      * 发送模板消息

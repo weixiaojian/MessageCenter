@@ -8,7 +8,7 @@ import com.imwj.msg.common.dto.OfficialAccountsContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
-import com.imwj.msg.handler.script.OfficialAccountScript;
+import com.imwj.msg.handler.script.OfficialAccountService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
@@ -30,7 +30,7 @@ import java.util.Set;
 public class OfficialAccountHandler extends BaseHandler implements Handler {
 
     @Autowired
-    private OfficialAccountScript officialAccountScript;
+    private OfficialAccountService officialAccountService;
 
     public OfficialAccountHandler() {
         channelCode = ChannelType.OFFICIAL_ACCOUNT.getCode();
@@ -41,7 +41,7 @@ public class OfficialAccountHandler extends BaseHandler implements Handler {
         List<WxMpTemplateMessage> mpTemplateMessages = buildTemplateMsg(taskInfo);
         // 微信模板消息需要记录相应结果
         try {
-            List<String> messageIds = officialAccountScript.send(mpTemplateMessages);
+            List<String> messageIds = officialAccountService.send(mpTemplateMessages);
             log.info("OfficialAccountHandler#handler successfully messageIds:{}", messageIds);
             return true;
         }catch (Exception e){

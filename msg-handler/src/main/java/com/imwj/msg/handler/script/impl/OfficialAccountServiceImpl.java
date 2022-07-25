@@ -1,6 +1,6 @@
 package com.imwj.msg.handler.script.impl;
 
-import com.imwj.msg.handler.script.OfficialAccountScript;
+import com.imwj.msg.handler.script.OfficialAccountService;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class WxMpTemplateScript implements OfficialAccountScript {
+public class OfficialAccountServiceImpl implements OfficialAccountService {
 
     @Value("${wx.mp.account.appid}")
     private String appId;
