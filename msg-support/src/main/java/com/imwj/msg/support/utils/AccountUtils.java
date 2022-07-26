@@ -23,7 +23,7 @@ public class AccountUtils {
      * 获取apollo配置账号信息
      * 腾讯云：smsAccount：[{"sms_66":{"url":"sms.tencentcloudapi.com","region":"ap-guangzhou","secretId":"","secretKey":"","smsSdkAppId":"","templateId":"","signName":"","supplierId":10,"supplierName":"腾讯云"}}]
      * qq邮箱：emailAccount：[{"email_66":{"host":"smtp.qq.com","port":465,"user":"langao_q@qq.com","pass":"","from":"langao_q@qq.com"}}]
-     * (key:enterpriseWechatAccount)企业微信参数示例：[{"enterprise_wechat_10":{"corpId":"wwf87603333e00069c","corpSecret":"-IFWxS2222QxzPIorNVUQn144444D915DM","agentId":10044442,"token":"rXROB3333Kf6i","aesKey":"MKZtoFxHIM44444M7ieag3r9ZPUsl"}}]
+     * 企业微信参数示例：enterpriseWechatAccount：[{"enterprise_wechat_66":{"corpId":"wwf87603333e00069c","corpSecret":"-IFWxS2222QxzPIorNVUQn144444D915DM","agentId":10044442,"token":"rXROB3333Kf6i","aesKey":"MKZtoFxHIM44444M7ieag3r9ZPUsl"}}]
      * @param sendAccount 发送账户
      * @param apolloKey apollo中的key
      * @param prefix    前缀

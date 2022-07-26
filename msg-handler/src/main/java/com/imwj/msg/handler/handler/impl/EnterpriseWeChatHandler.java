@@ -1,15 +1,22 @@
 package com.imwj.msg.handler.handler.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
 import com.imwj.msg.common.domain.TaskInfo;
+import com.imwj.msg.common.dto.EnterpriseWeChatContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
 import com.imwj.msg.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.cp.api.WxCpService;
+import me.chanjar.weixin.cp.api.impl.WxCpMessageServiceImpl;
+import me.chanjar.weixin.cp.api.impl.WxCpServiceImpl;
 import me.chanjar.weixin.cp.bean.message.WxCpMessage;
+import me.chanjar.weixin.cp.bean.message.WxCpMessageSendResult;
 import me.chanjar.weixin.cp.config.impl.WxCpDefaultConfigImpl;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +34,7 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
      */
     private static final String ALL = "@all";
     private static final String DELIMITER = "|";
+    private static final String TEXT_MESSAGE = "10";
 
     /**
      * 账号信息
@@ -42,24 +50,75 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
     }
 
     /**
-     * 发送企业微信消息 TODO 待实现
+     * 发送企业微信消息
      * @param taskInfo
      * @return
      */
     @Override
     public boolean handler(TaskInfo taskInfo) {
-        // 1.获取企业微信账号信息
-        accountUtils.getAccount(taskInfo.getSendAccount(), ENTERPRISE_WECHAT_ACCOUNT_KEY, PREFIX, new WxCpDefaultConfigImpl());
-
-        WxCpMessage wxCpMessage = new WxCpMessage();
         try {
-
-
+            // 1.获取企业微信账号信息
+            WxCpDefaultConfigImpl accountConfig = accountUtils.getAccount(taskInfo.getSendAccount(), ENTERPRISE_WECHAT_ACCOUNT_KEY, PREFIX, new WxCpDefaultConfigImpl());
+            // 2.构建WxCpServiceImpl 服务接口
+            WxCpMessageServiceImpl messageService = new WxCpMessageServiceImpl(initService(accountConfig));
+            // 3.发送消息
+            WxCpMessageSendResult result = messageService.send(buildWxCpMessage(taskInfo, accountConfig.getAgentId()));
+            // 3.1数据埋点
+            buildAnchorState(result);
             return true;
         } catch (Exception e) {
             log.error("EnterpriseWeChatHandler#handler fail:{},params:{}",
                     Throwables.getStackTraceAsString(e), JSON.toJSONString(taskInfo));
         }
         return false;
+    }
+
+    /**
+     * 打点相关的信息记录
+     *
+     * @param result
+     */
+    private void buildAnchorState(WxCpMessageSendResult result) {
+
+    }
+
+    /**
+     * 初始化 WxCpServiceImpl 服务接口
+     * @param config
+     * @return
+     */
+    private WxCpService initService(WxCpDefaultConfigImpl config){
+        WxCpServiceImpl wxCpService = new WxCpServiceImpl();
+        wxCpService.setWxCpConfigStorage(config);
+        return wxCpService;
+    }
+
+    /**
+     * 构建企业微信下发消息的对象
+     * @param taskInfo
+     * @param agentId
+     * @return
+     */
+    private WxCpMessage buildWxCpMessage(TaskInfo taskInfo, Integer agentId){
+        WxCpMessage message = null;
+        // 判断是否是发送所有成员
+        String userId;
+        if(ALL.equals(CollUtil.getFirst(taskInfo.getReceiver()))){
+            userId = CollUtil.getFirst(taskInfo.getReceiver());
+        }else{
+            userId = StringUtils.join(taskInfo.getReceiver(), DELIMITER);
+        }
+        // 根据消息model来组转消息发送数据实体
+        EnterpriseWeChatContentModel model = (EnterpriseWeChatContentModel) taskInfo.getContentModel();
+        // TODO 不同类型组装不同实体,此处只组装了文本类消息
+        if(TEXT_MESSAGE.equals(model.getMessageType())){
+            message = WxCpMessage
+                    .TEXT()
+                    .agentId(agentId)
+                    .toUser(userId)
+                    .content(model.getContent())
+                    .build();
+        }
+        return message;
     }
 }
