@@ -36,7 +36,7 @@
         <maven.compiler.source>${target.java.version}</maven.compiler.source>
         <maven.compiler.target>${target.java.version}</maven.compiler.target>
         <log4j.version>2.17.1</log4j.version>
-        <weixin-java-mp>4.1.0</weixin-java-mp>
+        <weixin-java>4.1.0</weixin-java>
     </properties>
 
     <dependencyManagement>
@@ -143,7 +143,7 @@
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-mp</artifactId>
-                <version>${weixin-java-mp}</version>
+                <version>${weixin-java}</version>
             </dependency>
             <!--动态线程池引入-->
             <dependency>
@@ -155,7 +155,7 @@
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-cp</artifactId>
-                <version>${weixin-java-mp}</version>
+                <version>${weixin-java}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

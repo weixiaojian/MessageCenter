@@ -54,7 +54,10 @@ public class TaskInfo {
      * 消息类型
      */
     private Integer msgType;
-
+    /**
+     * 屏蔽类型 10.夜间不屏蔽 20.夜间屏蔽 30.夜间屏蔽(次日早上9点发送)
+     */
+    private Integer shieldType;
     /**
      * 发送文案模型
      * message_template表存储的content是JSON(所有内容都会塞进去)

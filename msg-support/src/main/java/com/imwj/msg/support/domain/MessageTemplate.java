@@ -76,7 +76,10 @@ public class MessageTemplate implements Serializable {
      * 10.通知类消息 20.营销类消息 30.验证码类消息
      */
     private Integer msgType;
-
+    /**
+     * 屏蔽类型 10.夜间不屏蔽 20.夜间屏蔽 30.夜间屏蔽(次日早上9点发送)
+     */
+    private Integer shieldType;
     /**
      * 期望发送时间：立即发送.10 定时任务以及周期任务.cron表达式
      */

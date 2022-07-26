@@ -108,4 +108,45 @@ public class RedisUtils {
         }
         return null;
     }
+    /**
+     * lpush 方法 并指定 过期时间
+     *
+     */
+    public void lPush(String key, String value, Long seconds) {
+        try {
+            redisTemplate.executePipelined((RedisCallback<String>) connection -> {
+                connection.lPush(key.getBytes(), value.getBytes());
+                connection.expire(key.getBytes(), seconds);
+                return null;
+            });
+        } catch (Exception e) {
+            log.error("RedisUtils#pipelineSetEx fail! e:{}", Throwables.getStackTraceAsString(e));
+        }
+    }
+
+    /**
+     * lLen 方法
+     *
+     */
+    public Long lLen(String key) {
+        try {
+            return redisTemplate.opsForList().size(key);
+        } catch (Exception e) {
+            log.error("RedisUtils#pipelineSetEx fail! e:{}", Throwables.getStackTraceAsString(e));
+        }
+        return 0L;
+    }
+    /**
+     * lPop 方法
+     *
+     */
+    public String lPop(String key) {
+        try {
+            return redisTemplate.opsForList().leftPop(key);
+        } catch (Exception e) {
+            log.error("RedisUtils#pipelineSetEx fail! e:{}", Throwables.getStackTraceAsString(e));
+        }
+        return "";
+    }
+
 }

@@ -6,6 +6,7 @@ import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.handler.handler.HandlerHolder;
 import com.imwj.msg.handler.service.deduplication.DeduplicationRuleService;
 import com.imwj.msg.handler.service.discard.DiscardMessageService;
+import com.imwj.msg.handler.shield.ShieldService;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,8 @@ public class Task implements Runnable {
     private DeduplicationRuleService deduplicationRuleService;
     @Autowired
     private DiscardMessageService discardMessageService;
+    @Autowired
+    private ShieldService shieldService;
 
     private TaskInfo taskInfo;
 
@@ -46,8 +49,13 @@ public class Task implements Runnable {
             log.info("消息丢弃 {}", JSON.toJSONString(taskInfo));
             return;
         }
-        // 1.平台通用去重
-        deduplicationRuleService.duplication(taskInfo);
+        // 1.1消息夜间屏蔽
+        shieldService.shield(taskInfo);
+
+        // 1.2平台通用去重
+        if(CollUtil.isNotEmpty(taskInfo.getReceiver())){
+            deduplicationRuleService.duplication(taskInfo);
+        }
 
         // 2. 真正发送消息
         if (CollUtil.isNotEmpty(taskInfo.getReceiver())) {

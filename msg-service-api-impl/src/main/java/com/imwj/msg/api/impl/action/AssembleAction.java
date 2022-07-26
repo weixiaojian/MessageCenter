@@ -72,6 +72,7 @@ public class AssembleAction implements BusinessProcess {
                     .receiver(new HashSet<>(Arrays.asList(messageParam.getReceiver().split(String.valueOf(StrUtil.C_COMMA)))))
                     .idType(messageTemplate.getIdType())
                     .sendChannel(messageTemplate.getSendChannel())
+                    .shieldType(messageTemplate.getShieldType())
                     .msgType(messageTemplate.getMsgType())
                     .sendAccount(messageTemplate.getSendAccount())
                     .contentModel(getContentModelValue(messageTemplate, messageParam))
