@@ -1,8 +1,9 @@
 package com.imwj.msg.test;
 
-import cn.hutool.core.date.DateUtil;
-
-import java.util.Date;
+import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSON;
+import com.imwj.msg.common.domain.TaskInfo;
+import com.imwj.msg.common.dto.EnterpriseWeChatContentModel;
 
 /**
  * @author langao_q
@@ -11,7 +12,17 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println((DateUtil.offsetDay(new Date(), 1).getTime()) / 1000);
+        EnterpriseWeChatContentModel text = EnterpriseWeChatContentModel.builder().messageType("10").content("text").build();
+        TaskInfo taskInfo = TaskInfo.builder().contentModel(text).build();
+        String s1 = JSONUtil.toJsonStr(taskInfo);
+        System.out.println(s1);
+
+        TaskInfo s2 = JSONUtil.toBean(s1, TaskInfo.class);
+        System.out.println(s2);
+
+        TaskInfo s3 = JSON.parseObject(s1, TaskInfo.class);
+        System.out.println(s3);
+
     }
 
 }

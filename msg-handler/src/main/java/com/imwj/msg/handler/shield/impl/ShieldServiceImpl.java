@@ -2,9 +2,13 @@ package com.imwj.msg.handler.shield.impl;
 
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.imwj.msg.common.domain.AnchorInfo;
 import com.imwj.msg.common.domain.TaskInfo;
+import com.imwj.msg.common.enums.AnchorState;
 import com.imwj.msg.common.enums.ShieldType;
 import com.imwj.msg.handler.shield.ShieldService;
+import com.imwj.msg.support.utils.LogUtils;
 import com.imwj.msg.support.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -27,6 +31,8 @@ public class ShieldServiceImpl implements ShieldService {
 
     @Autowired
     private RedisUtils redisUtils;
+    @Autowired
+    private LogUtils logUtils;
 
     @Override
     public void shield(TaskInfo taskInfo) {
@@ -35,25 +41,19 @@ public class ShieldServiceImpl implements ShieldService {
          * 1.当前时间小于8点
          * 2.模板消息设置了消息夜间屏蔽
          */
-        if(isNight() && isNightShieldType(taskInfo.getShieldType())){
-            if (ShieldType.NIGHT_SHIELD_BUT_NEXT_DAY_SEND.getCode().equals(taskInfo.getShieldType())) {
-                // 将数据存入到redis中 过期时间设置为一天后
-                redisUtils.lPush(NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY, JSON.toJSONString(taskInfo), (DateUtil.offsetDay(new Date(), 1).getTime()) / 1000);
+        if(isNight()){
+            // 夜间屏蔽埋点
+            if (ShieldType.NIGHT_SHIELD.getCode().equals(taskInfo.getShieldType())) {
+                logUtils.print(AnchorInfo.builder().state(AnchorState.NIGHT_SHIELD.getCode()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).build());
             }
-            // 收件人设置为空将消息过滤调
+            // 夜间屏蔽(次日发送)：数据存到redis + 埋点
+            if (ShieldType.NIGHT_SHIELD_BUT_NEXT_DAY_SEND.getCode().equals(taskInfo.getShieldType())) {
+                redisUtils.lPush(NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY, JSON.toJSONString(taskInfo, new SerializerFeature[]{SerializerFeature.WriteClassName}),
+                        (DateUtil.offsetDay(new Date(), 1).getTime() / 1000) - DateUtil.currentSeconds());
+                logUtils.print(AnchorInfo.builder().state(AnchorState.NIGHT_SHIELD_NEXT_SEND.getCode()).businessId(taskInfo.getBusinessId()).ids(taskInfo.getReceiver()).build());
+            }
             taskInfo.setReceiver(new HashSet<>());
         }
-    }
-
-    /**
-     * 根据code判断是否为夜间屏蔽类型
-     */
-    private boolean isNightShieldType(Integer code) {
-        if (ShieldType.NIGHT_SHIELD.getCode().equals(code)
-                || ShieldType.NIGHT_SHIELD_BUT_NEXT_DAY_SEND.getCode().equals(code)) {
-            return true;
-        }
-        return false;
     }
 
     /**

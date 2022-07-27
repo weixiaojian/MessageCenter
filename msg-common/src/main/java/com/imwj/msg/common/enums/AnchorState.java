@@ -19,6 +19,8 @@ public enum AnchorState {
     RECEIVE(10, "成功消费Kafka"),
     //消费被丢弃
     DISCARD(20, "消费被丢弃"),
+    NIGHT_SHIELD(22, "夜间屏蔽"),
+    NIGHT_SHIELD_NEXT_SEND(24, "夜间屏蔽(次日早上9点发送)"),
     //消息被内容去重
     CONTENT_DEDUPLICATION(30, "消息被内容去重"),
     //消息被频次去重
