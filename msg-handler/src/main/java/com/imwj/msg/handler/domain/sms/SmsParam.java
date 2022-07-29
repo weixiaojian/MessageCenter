@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.domain;
+package com.imwj.msg.handler.domain.sms;
 
 import lombok.Builder;
 import lombok.Data;

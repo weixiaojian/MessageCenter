@@ -35,6 +35,12 @@
 * MsgReceiver监听到数据后比对groupId是否和kafka中的一致，一致就封装好Task数据 然后准备推送
 * 此处并不是直接推送，根据groupId获取指定的线程池 然后线程执行Task任务，Task调用实际的实现类中的handler然后进行推送和记录发送日志
 
+## 接入新的消息第三方步骤
+* 1.MessageCenter主pom中引入相关依赖，msg-support的pom中引入依赖支持
+* 2.msg-common添加ContentMode实体定义消息需要的相关参数，ChannelType渠道和IdType接收人类型添加相关枚举值
+* 3.msg-handler中添加发送消息所需要的实体，同时书写发送消息的handler实现消息发送逻辑（1.参数及url拼接；2.请求相关接口；3.解析请求结果并返回）
+
+
 ## 定时任务批量发送消息
 * 通过前端页面新建一个定时任务模板，配置好cron表达式、人群文件路径，然后启动定时任务（比如配置凌晨或者指定时间执行）
 * CronTaskHandler程序进行启动，处理具体的逻辑

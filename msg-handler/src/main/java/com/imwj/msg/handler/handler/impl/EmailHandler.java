@@ -30,6 +30,9 @@ public class EmailHandler extends BaseHandler implements Handler {
     @Autowired
     private AccountUtils accountUtils;
 
+    /**
+     * 初始化渠道和handler关系
+     */
     public EmailHandler() {
         channelCode = ChannelType.EMAIL.getCode();
     }

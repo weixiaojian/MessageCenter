@@ -6,6 +6,7 @@ import com.google.common.base.Throwables;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.dto.EnterpriseWeChatContentModel;
 import com.imwj.msg.common.enums.ChannelType;
+import com.imwj.msg.common.enums.SendMessageType;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
 import com.imwj.msg.support.utils.AccountUtils;
@@ -34,7 +35,6 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
      */
     private static final String ALL = "@all";
     private static final String DELIMITER = "|";
-    private static final String TEXT_MESSAGE = "10";
 
     /**
      * 账号信息
@@ -45,6 +45,9 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
     @Autowired
     private AccountUtils accountUtils;
 
+    /**
+     * 初始化渠道和handler关系
+     */
     public EnterpriseWeChatHandler() {
         channelCode = ChannelType.ENTERPRISE_WE_CHAT.getCode();
     }
@@ -111,7 +114,7 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
         // 根据消息model来组转消息发送数据实体
         EnterpriseWeChatContentModel model = (EnterpriseWeChatContentModel) taskInfo.getContentModel();
         // TODO 不同类型组装不同实体,此处只组装了文本类消息
-        if(TEXT_MESSAGE.equals(model.getMessageType())){
+        if(SendMessageType.TEST.getCode().equals(model.getMessageType())){
             message = WxCpMessage
                     .TEXT()
                     .agentId(agentId)

@@ -80,6 +80,7 @@
         </encoder>
     </appender>
 
+    <!--Graylog日志配置-->
     <appender name="GELF" class="de.siegmar.logbackgelf.GelfUdpAppender">
         <!-- Graylog服务的地址 -->
         <graylogHost>${grayLogIp}</graylogHost>

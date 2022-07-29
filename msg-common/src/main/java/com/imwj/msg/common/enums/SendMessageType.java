@@ -6,13 +6,14 @@ import lombok.ToString;
 
 /**
  * 微信下发消息类型枚举
+ * 微信应用消息/钉钉/服务号均有多种的消息类型下发
  * @author wj
  * @create 2022-07-25 15:41
  */
 @Getter
 @ToString
 @AllArgsConstructor
-public enum WechatMessageType {
+public enum SendMessageType {
 
     /**
      * 企业微信消息类型

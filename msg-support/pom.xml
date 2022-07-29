@@ -104,6 +104,11 @@
             <groupId>io.github.lyh200</groupId>
             <artifactId>dynamic-tp-spring-boot-starter-apollo</artifactId>
         </dependency>
+        <!--钉钉机器人-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>alibaba-dingtalk-service-sdk</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

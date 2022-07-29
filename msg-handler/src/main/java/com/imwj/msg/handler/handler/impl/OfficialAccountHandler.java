@@ -32,6 +32,9 @@ public class OfficialAccountHandler extends BaseHandler implements Handler {
     @Autowired
     private OfficialAccountService officialAccountService;
 
+    /**
+     * 初始化渠道和handler关系
+     */
     public OfficialAccountHandler() {
         channelCode = ChannelType.OFFICIAL_ACCOUNT.getCode();
     }

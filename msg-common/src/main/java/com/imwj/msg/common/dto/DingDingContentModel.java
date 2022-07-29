@@ -6,30 +6,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 企业微信
- *  https://developer.work.weixin.qq.com/document/path/90372#%E6%96%87%E6%9C%AC%E6%B6%88%E6%81%AF
+ * 钉钉 自定义机器人
+ * https://open.dingtalk.com/document/group/custom-robot-access
  * @author wj
- * @create 2022-07-25 10:35
+ * @create 2022-07-29 11:02
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EnterpriseWeChatContentModel extends ContentModel {
+public class DingDingContentModel extends ContentModel {
 
     /**
      * 下发企业微信消息的类型 参考：SendMessageType.java
      */
     private String messageType;
-
     /**
      * 文本消息 - 文案
      */
     private String content;
-
-    /**
-     * 图片媒体文件id
-     */
-    private String mediaId;
-
 }

@@ -1,7 +1,7 @@
 package com.imwj.msg.handler.script;
 
 
-import com.imwj.msg.handler.domain.SmsParam;
+import com.imwj.msg.handler.domain.sms.SmsParam;
 import com.imwj.msg.support.domain.SmsRecord;
 
 import java.util.List;

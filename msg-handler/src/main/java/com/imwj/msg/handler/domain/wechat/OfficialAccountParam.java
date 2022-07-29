@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.domain;
+package com.imwj.msg.handler.domain.wechat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,9 +1,10 @@
 package com.imwj.msg.test;
 
-import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson.JSON;
-import com.imwj.msg.common.domain.TaskInfo;
-import com.imwj.msg.common.dto.EnterpriseWeChatContentModel;
+import com.dingtalk.api.DefaultDingTalkClient;
+import com.dingtalk.api.DingTalkClient;
+import com.dingtalk.api.request.OapiRobotSendRequest;
+
+import java.util.Arrays;
 
 /**
  * @author langao_q
@@ -12,17 +13,18 @@ import com.imwj.msg.common.dto.EnterpriseWeChatContentModel;
 public class Main {
 
     public static void main(String[] args) {
-        EnterpriseWeChatContentModel text = EnterpriseWeChatContentModel.builder().messageType("10").content("text").build();
-        TaskInfo taskInfo = TaskInfo.builder().contentModel(text).build();
-        String s1 = JSONUtil.toJsonStr(taskInfo);
-        System.out.println(s1);
-
-        TaskInfo s2 = JSONUtil.toBean(s1, TaskInfo.class);
-        System.out.println(s2);
-
-        TaskInfo s3 = JSON.parseObject(s1, TaskInfo.class);
-        System.out.println(s3);
-
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/robot/send?access_token=566cc69da782ec******");
+        OapiRobotSendRequest request = new OapiRobotSendRequest();
+        request.setMsgtype("text");
+        OapiRobotSendRequest.Text text = new OapiRobotSendRequest.Text();
+        text.setContent("测试文本消息");
+        request.setText(text);
+        OapiRobotSendRequest.At at = new OapiRobotSendRequest.At();
+        at.setAtMobiles(Arrays.asList("132xxxxxxxx"));
+        // isAtAll类型如果不为Boolean，请升级至最新SDK
+        at.setIsAtAll(false);
+        at.setAtUserIds(Arrays.asList("109929","32099"));
+        request.setAt(at);
     }
 
 }

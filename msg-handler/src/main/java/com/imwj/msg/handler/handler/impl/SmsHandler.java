@@ -7,7 +7,7 @@ import com.google.common.base.Throwables;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.dto.SmsContentModel;
 import com.imwj.msg.common.enums.ChannelType;
-import com.imwj.msg.handler.domain.SmsParam;
+import com.imwj.msg.handler.domain.sms.SmsParam;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
 import com.imwj.msg.handler.script.SmsScript;
@@ -29,6 +29,9 @@ import java.util.List;
 @Component
 public class SmsHandler extends BaseHandler implements Handler {
 
+    /**
+     * 初始化渠道和handler关系
+     */
     public SmsHandler() {
         channelCode = ChannelType.SMS.getCode();
     }
