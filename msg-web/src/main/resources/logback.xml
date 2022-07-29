@@ -110,6 +110,9 @@
         </encoder>
     </appender>
 
+    <!--关闭kafka日志输出-->
+    <logger name="org.apache.kafka" level="off" />
+
     <root level="info">
         <appender-ref ref="stdout"/>
         <appender-ref ref="debuglog"/>

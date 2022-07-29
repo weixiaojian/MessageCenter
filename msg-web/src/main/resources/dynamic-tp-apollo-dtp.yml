@@ -2,17 +2,17 @@ spring:
   dynamic:
     tp:
       enabled: true
-      enabledBanner: true           # \u662F\u5426\u5F00\u542Fbanner\u6253\u5370\uFF0C\u9ED8\u8BA4true
-      enabledCollect: true          # \u662F\u5426\u5F00\u542F\u76D1\u63A7\u6307\u6807\u91C7\u96C6\uFF0C\u9ED8\u8BA4false
-      collectorType: micrometer     # \u76D1\u63A7\u6570\u636E\u91C7\u96C6\u5668\u7C7B\u578B\uFF08JsonLog | MicroMeter\uFF09\uFF0C\u9ED8\u8BA4logging
-      monitorInterval: 5            # \u76D1\u63A7\u65F6\u95F4\u95F4\u9694\uFF08\u62A5\u8B66\u5224\u65AD\u3001\u6307\u6807\u91C7\u96C6\uFF09\uFF0C\u9ED8\u8BA45s
-      apollo:                       # apollo\u914D\u7F6E\uFF0C\u4E0D\u914D\u7F6E\u9ED8\u8BA4\u62FFapollo\u914D\u7F6E\u7B2C\u4E00\u4E2Anamespace
+      enabledBanner: true           # 是否开启banner打印，默认true
+      enabledCollect: true          # 是否开启监控指标采集，默认false
+      collectorType: micrometer     # 监控数据采集器类型（JsonLog | MicroMeter），默认logging
+      monitorInterval: 5            # 监控时间间隔（报警判断、指标采集），默认5s
+      apollo:                       # apollo配置，不配置默认拿apollo配置第一个namespace
         namespace: dynamic-tp-apollo-dtp.yml
       configType: yml
       platforms:
         - platform: wechat
           urlKey: 38aa7eff500-1287
-          receivers: \u9B4F\u5065
+          receivers: 魏健
         - platform: ding
           urlKey: f80dad441fcd65bac48473d4a88dcd6a
           secret: SECb544445a6a34f0315d08b17de41
@@ -22,26 +22,26 @@ spring:
           corePoolSize: 3
           maximumPoolSize: 5
           queueCapacity: 200
-          queueType: VariableLinkedBlockingQueue   # \u4EFB\u52A1\u961F\u5217\uFF0C\u67E5\u770B\u6E90\u7801QueueTypeEnum\u679A\u4E3E\u7C7B
-          rejectedHandlerType: CallerRunsPolicy    # \u62D2\u7EDD\u7B56\u7565\uFF0C\u67E5\u770BRejectedTypeEnum\u679A\u4E3E\u7C7B
+          queueType: VariableLinkedBlockingQueue   # 任务队列，查看源码QueueTypeEnum枚举类
+          rejectedHandlerType: CallerRunsPolicy    # 拒绝策略，查看RejectedTypeEnum枚举类
           keepAliveTime: 50
           allowCoreThreadTimeOut: false
-          threadNamePrefix: imwj-email-           # \u7EBF\u7A0B\u540D\u524D\u7F00
+          threadNamePrefix: imwj-email-           # 线程名前缀
         - threadPoolName: execute-xxl-thread-pool
           corePoolSize: 20
           maximumPoolSize: 20
           queueCapacity: 200
-          queueType: VariableLinkedBlockingQueue   # \u4EFB\u52A1\u961F\u5217\uFF0C\u67E5\u770B\u6E90\u7801QueueTypeEnum\u679A\u4E3E\u7C7B
-          rejectedHandlerType: CallerRunsPolicy    # \u62D2\u7EDD\u7B56\u7565\uFF0C\u67E5\u770BRejectedTypeEnum\u679A\u4E3E\u7C7B
+          queueType: VariableLinkedBlockingQueue   # 任务队列，查看源码QueueTypeEnum枚举类
+          rejectedHandlerType: CallerRunsPolicy    # 拒绝策略，查看RejectedTypeEnum枚举类
           keepAliveTime: 50
           allowCoreThreadTimeOut: false
-          threadNamePrefix: imwj2-           # \u7EBF\u7A0B\u540D\u524D\u7F00
-          notifyItems: # \u62A5\u8B66\u9879\uFF0C\u4E0D\u914D\u7F6E\u81EA\u52A8\u4F1A\u914D\u7F6E\uFF08\u53D8\u66F4\u901A\u77E5\u3001\u5BB9\u91CF\u62A5\u8B66\u3001\u6D3B\u6027\u62A5\u8B66\u3001\u62D2\u7EDD\u62A5\u8B66\uFF09
-            - type: capacity               # \u62A5\u8B66\u9879\u7C7B\u578B\uFF0C\u67E5\u770B\u6E90\u7801 NotifyTypeEnum\u679A\u4E3E\u7C7B
+          threadNamePrefix: imwj2-           # 线程名前缀
+          notifyItems: # 报警项，不配置自动会配置（变更通知、容量报警、活性报警、拒绝报警）
+            - type: capacity               # 报警项类型，查看源码 NotifyTypeEnum枚举类
               enabled: true
-              threshold: 80                # \u62A5\u8B66\u9608\u503C
-              platforms: [ding,wechat]     # \u53EF\u9009\u914D\u7F6E\uFF0C\u4E0D\u914D\u7F6E\u9ED8\u8BA4\u62FF\u4E0A\u5C42platforms\u914D\u7F6E\u7684\u6240\u4EE5\u5E73\u53F0
-              interval: 120                # \u62A5\u8B66\u95F4\u9694\uFF08\u5355\u4F4D\uFF1As\uFF09
+              threshold: 80                # 报警阈值
+              platforms: [ding,wechat]     # 可选配置，不配置默认拿上层platforms配置的所以平台
+              interval: 120                # 报警间隔（单位：s）
             - type: change
               enabled: true
             - type: liveness

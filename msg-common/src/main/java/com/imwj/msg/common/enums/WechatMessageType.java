@@ -14,6 +14,9 @@ import lombok.ToString;
 @AllArgsConstructor
 public enum WechatMessageType {
 
+    /**
+     * 企业微信消息类型
+     */
     TEST(10, "文本"),
     VOICE(20, "语音"),
     VIDEO(30, "视频"),
