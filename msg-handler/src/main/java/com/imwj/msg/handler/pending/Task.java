@@ -18,7 +18,8 @@ import org.springframework.stereotype.Component;
 /**
  * Task 执行器
  * 0.丢弃消息
- * 1.通用去重功能
+ * 1.1消息夜间屏蔽
+ * 1.2通用去重功能
  * 2.发送消息
  * @author langao_q
  * @since 2021-12-30 10:52

@@ -20,6 +20,7 @@ import com.imwj.msg.support.pipeline.ProcessContext;
 import com.imwj.msg.support.utils.ContentHolderUtil;
 import com.imwj.msg.support.utils.TaskInfoUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
@@ -32,6 +33,7 @@ import java.util.*;
  * @since 2021-12-29 17:46
  */
 @Slf4j
+@Service
 public class AssembleAction implements BusinessProcess<SendTaskModel> {
 
     @Resource

@@ -8,10 +8,12 @@ import com.imwj.msg.api.impl.action.SendMqAction;
 import com.imwj.msg.support.pipeline.BusinessProcess;
 import com.imwj.msg.support.pipeline.ProcessController;
 import com.imwj.msg.support.pipeline.ProcessTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +24,15 @@ import java.util.List;
  */
 @Configuration
 public class PipelineConfig {
+
+    @Autowired
+    private PreParamCheckAction preParamCheckAction;
+    @Autowired
+    private AssembleAction assembleAction;
+    @Autowired
+    private AfterParamCheckAction afterParamCheckAction;
+    @Autowired
+    private SendMqAction sendMqAction;
 
     /**
      * 普通发送执行程
@@ -34,12 +45,8 @@ public class PipelineConfig {
     @Bean("commonSendTemplate")
     public ProcessTemplate commonSendTemplate() {
         ProcessTemplate processTemplate = new ProcessTemplate();
-        List<BusinessProcess> processList = new ArrayList<>();
-        processList.add(preParamCheckAction());
-        processList.add(assembleAction());
-        processList.add(afterParamCheckAction());
-        processList.add(sendMqAction());
-        processTemplate.setProcessList(processList);
+        processTemplate.setProcessList(Arrays.asList(preParamCheckAction, assembleAction,
+                afterParamCheckAction, sendMqAction));
         return processTemplate;
     }
     /**
@@ -51,10 +58,7 @@ public class PipelineConfig {
     @Bean("commonRecallTemplate")
     public ProcessTemplate commonRecallTemplate() {
         ProcessTemplate processTemplate = new ProcessTemplate();
-        List<BusinessProcess> processList = new ArrayList<>();
-        processList.add(assembleAction());
-        processList.add(sendMqAction());
-        processTemplate.setProcessList(processList);
+        processTemplate.setProcessList(Arrays.asList(assembleAction, sendMqAction));
         return processTemplate;
     }
 
@@ -76,39 +80,4 @@ public class PipelineConfig {
         return processController;
     }
 
-    /**
-     * 责任链-前置参数校验
-     * @return
-     */
-    @Bean
-    public PreParamCheckAction preParamCheckAction(){
-        return new PreParamCheckAction();
-    }
-
-    /**
-     * 责任链-参数拼接
-     * @return
-     */
-    @Bean
-    public AssembleAction assembleAction(){
-        return new AssembleAction();
-    }
-
-    /**
-     * 责任链-后置参数校验
-     * @return
-     */
-    @Bean
-    public AfterParamCheckAction afterParamCheckAction(){
-        return new AfterParamCheckAction();
-    }
-
-    /**
-     * 责任链-发送消息到MQ
-     * @return
-     */
-    @Bean
-    public SendMqAction sendMqAction(){
-        return new SendMqAction();
-    }
 }

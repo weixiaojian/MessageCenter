@@ -9,6 +9,7 @@ import com.imwj.msg.common.vo.BasicResultVO;
 import com.imwj.msg.support.pipeline.BusinessProcess;
 import com.imwj.msg.support.pipeline.ProcessContext;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
  * @since 2021-12-29 17:44
  */
 @Slf4j
+@Service
 public class PreParamCheckAction implements BusinessProcess<SendTaskModel> {
     @Override
     public void process(ProcessContext<SendTaskModel> context) {

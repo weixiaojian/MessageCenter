@@ -13,6 +13,7 @@ import com.imwj.msg.support.utils.KafkaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 /**
  * 责任链-发送消息到MQ
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @since 2021-12-29 17:46
  */
 @Slf4j
+@Service
 public class SendMqAction implements BusinessProcess<SendTaskModel> {
 
     @Autowired
