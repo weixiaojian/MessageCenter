@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.service.deduplication;
+package com.imwj.msg.handler.deduplication;
 
 
 import com.imwj.msg.handler.service.deduplication.build.Builder;

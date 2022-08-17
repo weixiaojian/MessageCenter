@@ -2,7 +2,7 @@ package com.imwj.msg.handler.service.deduplication.build;
 
 
 import com.imwj.msg.common.domain.TaskInfo;
-import com.imwj.msg.handler.domain.DeduplicationParam;
+import com.imwj.msg.handler.deduplication.DeduplicationParam;
 
 /**
  * @author langao_q

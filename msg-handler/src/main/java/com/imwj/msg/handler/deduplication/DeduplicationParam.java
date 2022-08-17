@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.domain;
+package com.imwj.msg.handler.deduplication;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.imwj.msg.common.domain.TaskInfo;

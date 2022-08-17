@@ -4,10 +4,13 @@ import cn.hutool.extra.mail.MailAccount;
 import cn.hutool.extra.mail.MailUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
+import com.google.common.util.concurrent.RateLimiter;
 import com.imwj.msg.common.constant.SendAccountConstant;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.dto.model.EmailContentModel;
 import com.imwj.msg.common.enums.ChannelType;
+import com.imwj.msg.handler.eunms.RateLimitStrategy;
+import com.imwj.msg.handler.flowcontrol.FlowControlParam;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
 import com.imwj.msg.support.utils.AccountUtils;
@@ -33,6 +36,13 @@ public class EmailHandler extends BaseHandler implements Handler {
      */
     public EmailHandler() {
         channelCode = ChannelType.EMAIL.getCode();
+
+        // 按照请求限流，默认单机 3 qps （具体数值配置在apollo动态调整)
+        Double rateInitValue = Double.valueOf(3);
+        flowControlParam = FlowControlParam.builder().rateInitValue(rateInitValue)
+                .rateLimitStrategy(RateLimitStrategy.REQUEST_RATE_LIMIT)
+                .rateLimiter(RateLimiter.create(rateInitValue)).build();
+
     }
 
     @Override

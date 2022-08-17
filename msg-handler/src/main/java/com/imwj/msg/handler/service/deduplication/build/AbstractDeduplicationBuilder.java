@@ -2,8 +2,8 @@ package com.imwj.msg.handler.service.deduplication.build;
 
 import com.alibaba.fastjson.JSONObject;
 import com.imwj.msg.common.domain.TaskInfo;
-import com.imwj.msg.handler.domain.DeduplicationParam;
-import com.imwj.msg.handler.service.deduplication.DeduplicationHolder;
+import com.imwj.msg.handler.deduplication.DeduplicationParam;
+import com.imwj.msg.handler.deduplication.DeduplicationHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;

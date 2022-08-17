@@ -1,7 +1,7 @@
 package com.imwj.msg.handler.service.deduplication.service;
 
 
-import com.imwj.msg.handler.domain.DeduplicationParam;
+import com.imwj.msg.handler.deduplication.DeduplicationParam;
 
 /**
  * @author langao_q

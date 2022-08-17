@@ -55,7 +55,7 @@ public class DingDingWorkNoticeHandler extends BaseHandler implements Handler {
             if (response.getErrcode() == 0) {
                 return true;
             }
-            // 常见的错误 应当 关联至 AnchorState,由austin后台统一透出失败原因
+            // 常见的错误 应当 关联至 AnchorState,由后台统一透出失败原因
             log.error("DingDingWorkNoticeHandler#handler fail!result:{},params:{}", JSON.toJSONString(response), JSON.toJSONString(taskInfo));
         } catch (Exception e) {
             log.error("DingDingWorkNoticeHandler#handler fail!{},params:{}", Throwables.getStackTraceAsString(e), taskInfo);

@@ -4,7 +4,7 @@ package com.imwj.msg.handler.service.deduplication.build;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.enums.AnchorState;
 import com.imwj.msg.common.enums.DeduplicationType;
-import com.imwj.msg.handler.domain.DeduplicationParam;
+import com.imwj.msg.handler.deduplication.DeduplicationParam;
 import org.springframework.stereotype.Service;
 
 /**

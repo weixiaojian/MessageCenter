@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.imwj.msg.common.constant.MessageCenterConstant;
 import com.imwj.msg.common.domain.AnchorInfo;
 import com.imwj.msg.common.domain.TaskInfo;
-import com.imwj.msg.handler.domain.DeduplicationParam;
+import com.imwj.msg.handler.deduplication.DeduplicationParam;
 import com.imwj.msg.support.utils.LogUtils;
 import com.imwj.msg.support.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
