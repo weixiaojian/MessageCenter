@@ -8,6 +8,7 @@ import com.imwj.msg.handler.domain.DeduplicationParam;
 import org.springframework.stereotype.Service;
 
 /**
+ * 内容去重
  * @author langao_q
  * @since 2022-01-26 16:40
  */
@@ -21,7 +22,7 @@ public class ContentDeduplicationBuilder  extends AbstractDeduplicationBuilder i
     @Override
     public DeduplicationParam build(String deduplication, TaskInfo taskInfo) {
         DeduplicationParam deduplicationParam = getParamsFromConfig(deduplicationType, deduplication, taskInfo);
-        if (deduplication == null) {
+        if (deduplicationParam == null) {
             return null;
         }
         deduplicationParam.setAnchorState(AnchorState.CONTENT_DEDUPLICATION);

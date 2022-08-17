@@ -13,9 +13,6 @@ import com.imwj.msg.support.utils.KafkaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.core.KafkaTemplate;
-
-import javax.annotation.Resource;
 
 /**
  * 责任链-发送消息到MQ
@@ -23,7 +20,7 @@ import javax.annotation.Resource;
  * @since 2021-12-29 17:46
  */
 @Slf4j
-public class SendMqAction implements BusinessProcess {
+public class SendMqAction implements BusinessProcess<SendTaskModel> {
 
     @Autowired
     private KafkaUtils kafkaUtils;
@@ -32,8 +29,8 @@ public class SendMqAction implements BusinessProcess {
     private String topicName;
 
     @Override
-    public void process(ProcessContext context) {
-        SendTaskModel sendTaskModel = (SendTaskModel) context.getProcessModel();
+    public void process(ProcessContext<SendTaskModel> context) {
+        SendTaskModel sendTaskModel = context.getProcessModel();
         String message = JSON.toJSONString(sendTaskModel.getTaskInfo(), new SerializerFeature[]{SerializerFeature.WriteClassName});
 
         try {

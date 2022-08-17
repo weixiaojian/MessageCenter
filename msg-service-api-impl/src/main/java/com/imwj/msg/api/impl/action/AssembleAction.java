@@ -32,14 +32,14 @@ import java.util.*;
  * @since 2021-12-29 17:46
  */
 @Slf4j
-public class AssembleAction implements BusinessProcess {
+public class AssembleAction implements BusinessProcess<SendTaskModel> {
 
     @Resource
     private MessageTemplateDao messageTemplateDao;
 
     @Override
-    public void process(ProcessContext context) {
-        SendTaskModel sendTaskModel = (SendTaskModel) context.getProcessModel();
+    public void process(ProcessContext<SendTaskModel> context) {
+        SendTaskModel sendTaskModel = context.getProcessModel();
         Long messageTemplateId = sendTaskModel.getMessageTemplateId();
         try {
             MessageTemplate messageTemplate = messageTemplateDao.selectById(messageTemplateId);

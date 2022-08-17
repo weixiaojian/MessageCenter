@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * @since 2021-12-29 17:45
  */
 @Slf4j
-public class AfterParamCheckAction implements BusinessProcess {
+public class AfterParamCheckAction implements BusinessProcess<SendTaskModel> {
 
     /**
      * 手机号正则校验
@@ -33,8 +33,8 @@ public class AfterParamCheckAction implements BusinessProcess {
     public static final String PHONE_REGEX_EXP = "^((13[0-9])|(14[5,7,9])|(15[0-3,5-9])|(166)|(17[0-9])|(18[0-9])|(19[1,8,9]))\\d{8}$";
 
     @Override
-    public void process(ProcessContext context) {
-        SendTaskModel sendTaskModel = (SendTaskModel) context.getProcessModel();
+    public void process(ProcessContext<SendTaskModel> context) {
+        SendTaskModel sendTaskModel = context.getProcessModel();
         List<TaskInfo> taskInfo = sendTaskModel.getTaskInfo();
 
         //1.过滤掉不合法的手机号
