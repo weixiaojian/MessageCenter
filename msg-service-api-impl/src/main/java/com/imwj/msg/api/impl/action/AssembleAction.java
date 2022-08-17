@@ -9,7 +9,7 @@ import com.imwj.msg.api.domain.MessageParam;
 import com.imwj.msg.api.impl.domain.SendTaskModel;
 import com.imwj.msg.common.constant.MessageCenterConstant;
 import com.imwj.msg.common.domain.TaskInfo;
-import com.imwj.msg.common.dto.ContentModel;
+import com.imwj.msg.common.dto.model.ContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.common.enums.RespStatusEnum;
 import com.imwj.msg.common.vo.BasicResultVO;

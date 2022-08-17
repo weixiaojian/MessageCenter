@@ -1,4 +1,4 @@
-package com.imwj.msg.common.dto;
+package com.imwj.msg.common.dto.model;
 
 
 /**

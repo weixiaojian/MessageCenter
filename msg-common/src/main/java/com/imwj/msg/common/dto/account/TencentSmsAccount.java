@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.domain.sms;
+package com.imwj.msg.common.dto.account;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TencentSmsParam {
+public class TencentSmsAccount {
 
     /**
      * api相关

@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 public class HandlerHolder {
 
-    public Map<Integer, Handler> handlers = new HashMap<Integer, Handler>(32);
+    public Map<Integer, Handler> handlers = new HashMap<Integer, Handler>(128);
 
     /**
      * 根据渠道code存储对应的Handler

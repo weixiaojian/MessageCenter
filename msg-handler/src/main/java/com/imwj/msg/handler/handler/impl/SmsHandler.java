@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
 import com.imwj.msg.common.domain.TaskInfo;
-import com.imwj.msg.common.dto.SmsContentModel;
+import com.imwj.msg.common.dto.model.SmsContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.handler.domain.sms.SmsParam;
 import com.imwj.msg.handler.handler.BaseHandler;

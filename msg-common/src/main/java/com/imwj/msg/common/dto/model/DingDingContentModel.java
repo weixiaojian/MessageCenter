@@ -1,4 +1,4 @@
-package com.imwj.msg.common.dto;
+package com.imwj.msg.common.dto.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,11 +18,16 @@ import lombok.NoArgsConstructor;
 public class DingDingContentModel extends ContentModel {
 
     /**
-     * 下发企业微信消息的类型 参考：SendMessageType.java
+     * 下发钉钉消息的类型 参考：SendMessageType.java
      */
-    private String messageType;
+    private String sendType;
     /**
      * 文本消息 - 文案
      */
     private String content;
+    /**
+     * 图片、文件、语音消息 需要发送使用的素材ID字段
+     */
+    private String mediaId;
+
 }

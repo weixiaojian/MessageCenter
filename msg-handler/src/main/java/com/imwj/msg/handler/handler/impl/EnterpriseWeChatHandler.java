@@ -3,8 +3,10 @@ package com.imwj.msg.handler.handler.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
+import com.imwj.msg.common.constant.MessageCenterConstant;
+import com.imwj.msg.common.constant.SendAccountConstant;
 import com.imwj.msg.common.domain.TaskInfo;
-import com.imwj.msg.common.dto.EnterpriseWeChatContentModel;
+import com.imwj.msg.common.dto.model.EnterpriseWeChatContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.common.enums.SendMessageType;
 import com.imwj.msg.handler.handler.BaseHandler;
@@ -33,14 +35,8 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
     /**
      * 构建WxCpMessage时需要用的常量
      */
-    private static final String ALL = "@all";
     private static final String DELIMITER = "|";
 
-    /**
-     * 账号信息
-     */
-    private static final String ENTERPRISE_WECHAT_ACCOUNT_KEY = "enterpriseWechatAccount";
-    private static final String PREFIX = "enterprise_wechat_";
 
     @Autowired
     private AccountUtils accountUtils;
@@ -61,7 +57,7 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
     public boolean handler(TaskInfo taskInfo) {
         try {
             // 1.获取企业微信账号信息
-            WxCpDefaultConfigImpl accountConfig = accountUtils.getAccount(taskInfo.getSendAccount(), ENTERPRISE_WECHAT_ACCOUNT_KEY, PREFIX, new WxCpDefaultConfigImpl());
+            WxCpDefaultConfigImpl accountConfig = accountUtils.getAccount(taskInfo.getSendAccount(), SendAccountConstant.ENTERPRISE_WECHAT_ACCOUNT_KEY, SendAccountConstant.ENTERPRISE_WECHAT_PREFIX, new WxCpDefaultConfigImpl());
             // 2.构建WxCpServiceImpl 服务接口
             WxCpMessageServiceImpl messageService = new WxCpMessageServiceImpl(initService(accountConfig));
             // 3.发送消息
@@ -106,7 +102,7 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
         WxCpMessage message = null;
         // 判断是否是发送所有成员
         String userId;
-        if(ALL.equals(CollUtil.getFirst(taskInfo.getReceiver()))){
+        if(MessageCenterConstant.SEND_ALL.equals(CollUtil.getFirst(taskInfo.getReceiver()))){
             userId = CollUtil.getFirst(taskInfo.getReceiver());
         }else{
             userId = StringUtils.join(taskInfo.getReceiver(), DELIMITER);
@@ -114,7 +110,7 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
         // 根据消息model来组转消息发送数据实体
         EnterpriseWeChatContentModel model = (EnterpriseWeChatContentModel) taskInfo.getContentModel();
         // TODO 不同类型组装不同实体,此处只组装了文本类消息
-        if(SendMessageType.TEST.getCode().equals(model.getMessageType())){
+        if(SendMessageType.TEXT.getCode().toString().equals(model.getSendType())){
             message = WxCpMessage
                     .TEXT()
                     .agentId(agentId)

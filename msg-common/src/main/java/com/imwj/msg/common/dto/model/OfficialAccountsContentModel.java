@@ -1,11 +1,9 @@
-package com.imwj.msg.common.dto;
+package com.imwj.msg.common.dto.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Map;
 
 /**
  * 公众号内容model

@@ -1,6 +1,6 @@
 package com.imwj.msg.common.domain;
 
-import com.imwj.msg.common.dto.ContentModel;
+import com.imwj.msg.common.dto.model.ContentModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

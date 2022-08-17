@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.domain.wechat;
+package com.imwj.msg.common.dto.account;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,7 @@ import java.util.Map;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OfficialAccountParam {
+public class WechatOfficialAccount {
 
     /**
      * 服务号关注者的openId

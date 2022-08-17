@@ -7,11 +7,12 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
 import com.imwj.msg.common.constant.MessageCenterConstant;
+import com.imwj.msg.common.constant.SendAccountConstant;
 import com.imwj.msg.common.domain.TaskInfo;
-import com.imwj.msg.common.dto.DingDingContentModel;
+import com.imwj.msg.common.dto.account.DingDingRobotAccount;
+import com.imwj.msg.common.dto.model.DingDingContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.common.enums.SendMessageType;
-import com.imwj.msg.handler.domain.dingding.DingDingRobotAccount;
 import com.imwj.msg.handler.domain.dingding.DingDingRobotParam;
 import com.imwj.msg.handler.domain.dingding.DingDingRobotResult;
 import com.imwj.msg.handler.handler.BaseHandler;
@@ -36,9 +37,6 @@ import java.util.ArrayList;
 @Service
 public class DingDingRobotHandler extends BaseHandler implements Handler {
 
-    private static final String DING_DING_ROBOT_ACCOUNT_KEY = "dingDingRobotAccount";
-    private static final String PREFIX = "ding_ding_robot_";
-
     @Autowired
     private AccountUtils accountUtils;
 
@@ -52,7 +50,7 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
     @Override
     public boolean handler(TaskInfo taskInfo) {
         try {
-            DingDingRobotAccount account = accountUtils.getAccount(taskInfo.getSendAccount(), DING_DING_ROBOT_ACCOUNT_KEY, PREFIX, new DingDingRobotAccount());
+            DingDingRobotAccount account = accountUtils.getAccount(taskInfo.getSendAccount(), SendAccountConstant.DING_DING_ROBOT_ACCOUNT_KEY, SendAccountConstant.DING_DING_ROBOT_PREFIX, new DingDingRobotAccount());
             DingDingRobotParam dingRobotParam = assemBleParam(taskInfo);
             String httpResult = HttpUtil.post(assembleParamUrl(account), JSONUtil.toJsonStr(dingRobotParam));
             DingDingRobotResult dingRobotResult = JSONUtil.toBean(httpResult, DingDingRobotResult.class);
@@ -82,7 +80,7 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
         // 消息类型及内容相关
         DingDingContentModel contentModel = (DingDingContentModel) taskInfo.getContentModel();
         // TODO 不同类型组装不同实体,此处只组装了文本类消息
-        if(SendMessageType.TEST.getCode().equals(contentModel.getMessageType())){
+        if(SendMessageType.TEXT.getCode().equals(contentModel.getSendType())){
             DingDingRobotParam.TextVO textVO = DingDingRobotParam.TextVO.builder().content(contentModel.getContent()).build();
             return DingDingRobotParam.builder()
                     .at(atVo)

@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.domain.dingding;
+package com.imwj.msg.common.dto.account;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

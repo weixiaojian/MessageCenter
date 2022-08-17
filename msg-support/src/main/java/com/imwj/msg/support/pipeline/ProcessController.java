@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.imwj.msg.common.enums.RespStatusEnum;
 import com.imwj.msg.common.vo.BasicResultVO;
+import com.imwj.msg.support.exception.ProcessException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,9 +34,16 @@ public class ProcessController {
         /**
          * 前置检查
          */
-        if (!preCheck(context)) {
+        try {
+            preCheck(context);
+        } catch(ProcessException e) {
+            context = e.getProcessContext();
             return context;
         }
+
+        /**
+         * 遍历流程节点
+         */
         List<BusinessProcess> processList = templateConfig.get(context.getCode()).getProcessList();
         for (BusinessProcess businessProcess : processList){
             businessProcess.process(context);
@@ -51,31 +59,30 @@ public class ProcessController {
      * @param context
      * @return
      */
-    private Boolean preCheck(ProcessContext context) {
+    private void preCheck(ProcessContext context) throws ProcessException {
         //校验上下文不为空
         if(context == null){
             context = new ProcessContext();
             context.setResponse(BasicResultVO.fail(RespStatusEnum.CONTEXT_IS_NULL));
-            return false;
+            throw new ProcessException(context);
         }
         //校验业务数据编码是否为空
         String businessCode = context.getCode();
         if (StrUtil.isBlank(businessCode)) {
             context.setResponse(BasicResultVO.fail(RespStatusEnum.BUSINESS_CODE_IS_NULL));
-            return false;
+            throw new ProcessException(context);
         }
         //校验执行模板是否为空
         ProcessTemplate processTemplate = templateConfig.get(businessCode);
         if(processTemplate == null){
             context.setResponse(BasicResultVO.fail(RespStatusEnum.PROCESS_TEMPLATE_IS_NULL));
-            return false;
+            throw new ProcessException(context);
         }
         //校验执行模板列表是否为空
         List<BusinessProcess> processList = processTemplate.getProcessList();
         if(CollectionUtil.isEmpty(processList)){
             context.setResponse(BasicResultVO.fail(RespStatusEnum.PROCESS_LIST_IS_NULL));
-            return false;
+            throw new ProcessException(context);
         }
-        return true;
     }
 }

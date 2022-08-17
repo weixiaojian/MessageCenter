@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ThreadPoolTest {
 
+    private final int  forSize = 10;
 
     @GetMapping("/tp")
     public void tp() {
         DtpExecutor dtpExecutor2 = DtpRegistry.getExecutor("execute-xxl-thread-pool");
         DtpExecutor dtpExecutor1 = DtpRegistry.getExecutor("imwj.im.notice");
 
-        for(int i=0; i<10; i++){
+        for(int i=0; i<forSize; i++){
             log.info("dtpExecutor1：{}   {}",dtpExecutor1.getCorePoolSize(), dtpExecutor1.getMaximumPoolSize());
             log.info("dtpExecutor2：{}   {}",dtpExecutor2.getCorePoolSize(), dtpExecutor2.getMaximumPoolSize());
 

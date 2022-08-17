@@ -4,8 +4,9 @@ import cn.hutool.extra.mail.MailAccount;
 import cn.hutool.extra.mail.MailUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
+import com.imwj.msg.common.constant.SendAccountConstant;
 import com.imwj.msg.common.domain.TaskInfo;
-import com.imwj.msg.common.dto.EmailContentModel;
+import com.imwj.msg.common.dto.model.EmailContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
@@ -23,9 +24,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class EmailHandler extends BaseHandler implements Handler {
-
-    private static final String SMS_ACCOUNT_KEY = "emailAccount";
-    private static final String PREFIX = "email_";
 
     @Autowired
     private AccountUtils accountUtils;
@@ -60,7 +58,7 @@ public class EmailHandler extends BaseHandler implements Handler {
      */
     private MailAccount getAccount(Integer sendAccount) {
         //获取apollo中的qq邮箱账号配置
-        MailAccount account = accountUtils.getAccount(sendAccount, SMS_ACCOUNT_KEY, PREFIX, new MailAccount());
+        MailAccount account = accountUtils.getAccount(sendAccount, SendAccountConstant.EMAIL_ACCOUNT_KEY, SendAccountConstant.EMAIL_ACCOUNT_PREFIX, new MailAccount());
         try {
             MailSSLSocketFactory sf = new MailSSLSocketFactory();
             sf.setTrustAllHosts(true);
