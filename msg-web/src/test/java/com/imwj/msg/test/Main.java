@@ -1,6 +1,6 @@
 package com.imwj.msg.test;
 
-import com.imwj.msg.common.enums.SendMessageType;
+import com.google.common.util.concurrent.RateLimiter;
 
 /**
  * @author langao_q
@@ -9,8 +9,20 @@ import com.imwj.msg.common.enums.SendMessageType;
 public class Main {
 
     public static void main(String[] args) {
-        Integer code = SendMessageType.TEXT.getCode();
-        System.out.println(SendMessageType.TEXT.getCode().toString().equals("10"));
+        RateLimiter rateLimiter = RateLimiter.create(2);
+        for (int i = 1; i <= 6; i++) {
+            new Thread(() -> {
+                fun1(rateLimiter);
+            }, String.valueOf(i)).start();
+        }
     }
 
+
+    public static void fun1(RateLimiter rateLimiter){
+        System.out.println("线程名：" + Thread.currentThread().getName());
+        Double costTime = rateLimiter.acquire(2);
+        if(costTime > 0){
+            System.out.println(Thread.currentThread().getName() + "--限流中...");
+        }
+    }
 }
