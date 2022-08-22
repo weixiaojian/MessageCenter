@@ -3,8 +3,10 @@ package com.imwj.msg.handler.deduplication;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.enums.AnchorState;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 去重服务所需要的参数
@@ -13,6 +15,8 @@ import lombok.Data;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class DeduplicationParam {
 
 
@@ -31,7 +35,7 @@ public class DeduplicationParam {
     /**
      * 需达到的次数去重
      */
-    @JSONField(name = "time")
+    @JSONField(name = "num")
     private Integer countNum;
 
     /**

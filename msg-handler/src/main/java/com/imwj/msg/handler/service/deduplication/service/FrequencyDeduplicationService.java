@@ -3,6 +3,10 @@ package com.imwj.msg.handler.service.deduplication.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.imwj.msg.common.domain.TaskInfo;
+import com.imwj.msg.common.enums.DeduplicationType;
+import com.imwj.msg.handler.limit.LimitService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +17,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class FrequencyDeduplicationService extends AbstractDeduplicationService{
 
+    @Autowired
+    public FrequencyDeduplicationService(@Qualifier("SimpleLimitService") LimitService limitService) {
+        this.limitService = limitService;
+        deduplicationType = DeduplicationType.FREQUENCY.getCode();
+    }
+
     private static final String PREFIX = "FRE";
 
     /**
@@ -22,7 +32,7 @@ public class FrequencyDeduplicationService extends AbstractDeduplicationService{
      * @return
      */
     @Override
-    protected String deduplicationSingleKey(TaskInfo taskInfo, String receiver) {
+    public String deduplicationSingleKey(TaskInfo taskInfo, String receiver) {
         return PREFIX + StrUtil.C_UNDERLINE
                 + receiver  + StrUtil.C_UNDERLINE
                 + taskInfo.getMessageTemplateId() + StrUtil.C_UNDERLINE
