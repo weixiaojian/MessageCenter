@@ -71,6 +71,4 @@ public abstract class BaseHandler implements Handler {
             flowControlService.flowControl(taskInfo, flowControlParam);
         }
     }
-
-
 }
