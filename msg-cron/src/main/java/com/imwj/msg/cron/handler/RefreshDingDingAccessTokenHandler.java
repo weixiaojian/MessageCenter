@@ -46,7 +46,7 @@ public class RefreshDingDingAccessTokenHandler {
         log.info("refreshAccessTokenJob#execute!");
         SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
             for (int index = 10; index < 1000; index = index + 10) {
-                DingDingWorkNoticeAccount account = accountUtils.getAccount(10, DING_DING_ROBOT_ACCOUNT_KEY, PREFIX, new DingDingWorkNoticeAccount());
+                DingDingWorkNoticeAccount account = accountUtils.getAccount(10, DING_DING_ROBOT_ACCOUNT_KEY, PREFIX, DingDingWorkNoticeAccount.class);
                 if (account == null) {
                     break;
                 }

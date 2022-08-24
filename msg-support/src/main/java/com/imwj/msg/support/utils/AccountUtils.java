@@ -29,17 +29,17 @@ public class AccountUtils {
      * @param sendAccount 发送账户
      * @param apolloKey apollo中的key
      * @param prefix    前缀
-     * @param t         返回实体类型
+     * @param clazz         返回实体类型
      * @return
      */
-    public <T> T getAccount(Integer sendAccount, String apolloKey, String prefix, T t) {
+    public <T> T getAccount(Integer sendAccount, String apolloKey, String prefix, Class<T> clazz) {
         String accountValues = config.getProperty(apolloKey, MessageCenterConstant.APOLLO_DEFAULT_VALUE_JSON_ARRAY);
         JSONArray jsonArray = JSON.parseArray(accountValues);
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            Object object = jsonObject.getObject(prefix + sendAccount, t.getClass());
+            T object = jsonObject.getObject(prefix + sendAccount, clazz);
             if (object != null) {
-                return (T) object;
+                return object;
             }
         }
         return null;

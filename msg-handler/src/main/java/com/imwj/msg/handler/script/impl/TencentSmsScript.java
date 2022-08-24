@@ -46,7 +46,7 @@ public class TencentSmsScript implements SmsScript {
     @Override
     public List<SmsRecord> send(SmsParam smsParam) throws Exception {
         //获取apollo中的腾讯账号配置
-        TencentSmsAccount tencentSmsAccount = accountUtils.getAccount(smsParam.getSendAccount(), SendAccountConstant.SMS_ACCOUNT_KEY, SendAccountConstant.SMS_PREFIX, TencentSmsAccount.builder().build());
+        TencentSmsAccount tencentSmsAccount = accountUtils.getAccount(smsParam.getSendAccount(), SendAccountConstant.SMS_ACCOUNT_KEY, SendAccountConstant.SMS_PREFIX, TencentSmsAccount.class);
         SmsClient client = init(tencentSmsAccount);
         SendSmsRequest request = assembleReq(tencentSmsAccount, smsParam);
         log.info("发送短信开始：{}", JSON.toJSONString(request));

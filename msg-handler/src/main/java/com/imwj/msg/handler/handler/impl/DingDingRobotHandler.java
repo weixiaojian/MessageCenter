@@ -50,7 +50,7 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
     @Override
     public boolean handler(TaskInfo taskInfo) {
         try {
-            DingDingRobotAccount account = accountUtils.getAccount(taskInfo.getSendAccount(), SendAccountConstant.DING_DING_ROBOT_ACCOUNT_KEY, SendAccountConstant.DING_DING_ROBOT_PREFIX, new DingDingRobotAccount());
+            DingDingRobotAccount account = accountUtils.getAccount(taskInfo.getSendAccount(), SendAccountConstant.DING_DING_ROBOT_ACCOUNT_KEY, SendAccountConstant.DING_DING_ROBOT_PREFIX, DingDingRobotAccount.class);
             DingDingRobotParam dingRobotParam = assemBleParam(taskInfo);
             String httpResult = HttpUtil.post(assembleParamUrl(account), JSONUtil.toJsonStr(dingRobotParam));
             DingDingRobotResult dingRobotResult = JSONUtil.toBean(httpResult, DingDingRobotResult.class);
