@@ -13,6 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * 简单去重器（目前承载着 N分钟相同内容去重）
  * @author wj
  * @create 2022-08-22 11:07
  */

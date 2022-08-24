@@ -13,6 +13,7 @@ import java.util.Set;
 public interface LimitService {
 
     /**
+     * 去重限制
      * @param service 去重器对象
      * @param taskInfo
      * @param param 去重参数
