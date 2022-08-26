@@ -8,7 +8,6 @@ import com.imwj.msg.common.domain.RetResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +30,7 @@ public class SendController {
 
     /**
      * 发送短信 {"code":"send","messageParam":{"receiver":"15200985202","variables":{"content":"6666"}},"messageTemplateId":1}
+     *
      * @param sendRequest
      * @return
      */
@@ -43,6 +43,7 @@ public class SendController {
 
     /**
      * 发送邮件 {"code":"send","messageParam":{"receiver":"2916863213@qq.com","variables":{"title":"EmailTest","content":"6666"}},"messageTemplateId":2}
+     *
      * @param sendRequest
      * @return
      */
@@ -54,7 +55,9 @@ public class SendController {
     }
 
     /**
-     * 发送公众号模板消息 {"code":"send","messageParam":{"receiver":"2916863213@qq.com","variables":{"title":"EmailTest","content":"6666"}},"messageTemplateId":2}
+     * 发送公众号模板消息：{"code":"send","messageParam":{"receiver":"o5HmTt3gF7lFFAStoLT5Ij4HE1ow","variables":{"content":"{orderNumber:'1', status:'2'}","url":"http://blog.imwj.club/"}},"messageTemplateId":6}
+     * 发送企业微信消息：{"code":"send","messageParam":{"receiver":"15200985202","variables":{"content":"测试"}},"messageTemplateId":7}
+     * 发送小程序订阅消息：{"code":"send","messageParam":{"receiver":"o5HmTt3gF7lFFAStoLT5Ij4HE1ow","variables":{"content":"{thing1:'1', thing3:'2'}","page":"http://blog.imwj.club/"}},"messageTemplateId":8}
      * @param sendRequest
      * @return
      */
@@ -64,4 +67,5 @@ public class SendController {
         SendResponse sendResponse = sendService.send(sendRequest);
         return RetResult.success(sendResponse);
     }
+
 }
