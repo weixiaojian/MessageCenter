@@ -97,18 +97,18 @@ management:
         enabled: true
 
 ##################### wechat properties #####################
-wx:
-  mp:
-    account:
-      appid: wx6447c1fe6b20697b
-      secret: 4b912ad95576639faa948011bfce311f
-      token: langao
-      aesKey: 2
-      openId: o5HmTt3gF7lFFAStoLT5Ij4HE1ow
-  ma:
-    account:
-      appid: wxacdb39ee66e9f4dc
-      secret: a1399286f82fe0f2608edfe8d313ac1d
+#wx:
+#  mp:
+#    account:
+#      appid: wx6447c1fe6b20697b
+#      secret: 4b912ad95576639faa948011bfce311f
+#      token: langao
+#      aesKey: 2
+#      openId: o5HmTt3gF7lFFAStoLT5Ij4HE1ow
+#  ma:
+#    account:
+#      appid: wxacdb39ee66e9f4dc
+#      secret: a1399286f82fe0f2608edfe8d313ac1d
 ##################### msgCenter properties #####################
 msg:
   business:

@@ -43,6 +43,18 @@ public class SendAccountConstant {
     public static final String SMS_PREFIX = "sms_";
 
     /**
+     * 微信服务号 应用消息 账号
+     */
+    public static final String WECHAT_OFFICIAL_ACCOUNT_KEY = "officialAccount";
+    public static final String WECHAT_OFFICIAL_PREFIX = "official_";
+
+    /**
+     * 微信小程序 应用消息 账号
+     */
+    public static final String WECHAT_MINI_PROGRAM_ACCOUNT_KEY = "miniProgramAccount";
+    public static final String WECHAT_MINI_PROGRAM_PREFIX = "mini_program_";
+
+    /**
      * 账号约定：所有的账号都从10开始，步长为10
      */
     public static final Integer START = 66;

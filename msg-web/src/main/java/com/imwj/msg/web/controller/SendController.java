@@ -58,6 +58,7 @@ public class SendController {
      * 发送公众号模板消息：{"code":"send","messageParam":{"receiver":"o5HmTt3gF7lFFAStoLT5Ij4HE1ow","variables":{"content":"{orderNumber:'1', status:'2'}","url":"http://blog.imwj.club/"}},"messageTemplateId":6}
      * 发送企业微信消息：{"code":"send","messageParam":{"receiver":"15200985202","variables":{"content":"测试"}},"messageTemplateId":7}
      * 发送小程序订阅消息：{"code":"send","messageParam":{"receiver":"o5HmTt3gF7lFFAStoLT5Ij4HE1ow","variables":{"content":"{thing1:'1', thing3:'2'}","page":"http://blog.imwj.club/"}},"messageTemplateId":8}
+     *
      * @param sendRequest
      * @return
      */

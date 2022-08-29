@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
-
 /**
  * 公众号模板消息参数
  * https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html
@@ -20,32 +18,19 @@ import java.util.Map;
 public class WechatOfficialAccount {
 
     /**
-     * 服务号关注者的openId
+     * appId
      */
-    private String openId;
-
+    private String appId;
     /**
-     * 需要使用的模板信息Id
+     * secret
      */
-    private String templateId;
-
+    private String secret;
     /**
-     * 模板消息跳转的url
+     * token
      */
-    private String url;
-
+    private String token;
     /**
-     * 模板消息跳转小程序的appid
+     * aesKey
      */
-    private String miniProgramId;
-
-    /**
-     * 模板消息跳转小程序的页面路径
-     */
-    private String path;
-
-    /**
-     * 模板消息的信息载体
-     */
-    private Map<String, String> map;
+    private String aesKey;
 }

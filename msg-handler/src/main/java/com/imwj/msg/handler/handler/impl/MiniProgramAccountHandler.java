@@ -1,15 +1,22 @@
 package com.imwj.msg.handler.handler.impl;
 
+import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.api.WxMaSubscribeService;
+import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
+import cn.binarywang.wx.miniapp.api.impl.WxMaSubscribeServiceImpl;
 import cn.binarywang.wx.miniapp.bean.WxMaSubscribeMessage;
+import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
+import com.imwj.msg.common.constant.SendAccountConstant;
 import com.imwj.msg.common.domain.TaskInfo;
+import com.imwj.msg.common.dto.account.WeChatMiniProgramAccount;
 import com.imwj.msg.common.dto.model.MiniProgramContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
-import com.imwj.msg.handler.script.MiniProgramAccountService;
+import com.imwj.msg.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,7 +36,7 @@ import java.util.Set;
 public class MiniProgramAccountHandler extends BaseHandler implements Handler {
 
     @Autowired
-    private MiniProgramAccountService miniProgramAccountService;
+    private AccountUtils accountUtils;
 
     /**
      * 初始化渠道和handler关系
@@ -43,7 +50,14 @@ public class MiniProgramAccountHandler extends BaseHandler implements Handler {
         List<WxMaSubscribeMessage> wxMaSubscribeMessages = buildTemplateMsg(taskInfo);
         // 微信模板消息需要记录相应结果
         try {
-            miniProgramAccountService.send(wxMaSubscribeMessages);
+            WeChatMiniProgramAccount miniProgramAccount = accountUtils.getAccount(taskInfo.getSendAccount(),
+                    SendAccountConstant.WECHAT_MINI_PROGRAM_ACCOUNT_KEY,
+                    SendAccountConstant.WECHAT_MINI_PROGRAM_PREFIX,
+                    WeChatMiniProgramAccount.class);
+            WxMaSubscribeService wxMaSubscribeService = initService(miniProgramAccount);
+            for(WxMaSubscribeMessage wxMaSubscribeMessage : wxMaSubscribeMessages){
+                wxMaSubscribeService.sendSubscribeMsg(wxMaSubscribeMessage);
+            }
             log.info("MiniProgramAccountHandler#handler successfully");
             return true;
         }catch (Exception e){
@@ -62,7 +76,7 @@ public class MiniProgramAccountHandler extends BaseHandler implements Handler {
         // 需要是关注公众号用户的openId
         Set<String> receiver = taskInfo.getReceiver();
         Long messageTemplateId = taskInfo.getMessageTemplateId();
-        // 微信模板消息可以关联到系统业务 通过接口查询
+        // 微信小程序订阅消息可以关联到系统业务 通过接口查询
         String templateId = getRealWxMpTemplateId(messageTemplateId);
         ArrayList<WxMaSubscribeMessage> wxMaSubscribeMessages = new ArrayList<>(receiver.size());
         MiniProgramContentModel contentModel = (MiniProgramContentModel) taskInfo.getContentModel();
@@ -90,5 +104,17 @@ public class MiniProgramAccountHandler extends BaseHandler implements Handler {
      */
     private String getRealWxMpTemplateId(Long messageTemplateId){
         return "k5vj8jo4AJXGzlzycz_Z8_pHxqdpQGqo6oKB4B3nP2Y";
+    }
+
+    /**
+     * 初始化小程序账号信息
+     */
+    public WxMaSubscribeService initService(WeChatMiniProgramAccount weChatMiniProgramAccount){
+        WxMaService wxMaService = new WxMaServiceImpl();
+        WxMaDefaultConfigImpl config = new WxMaDefaultConfigImpl();
+        config.setAppid(weChatMiniProgramAccount.getAppId());
+        config.setSecret(weChatMiniProgramAccount.getAppSecret());
+        wxMaService.setWxMaConfig(config);
+        return new WxMaSubscribeServiceImpl(wxMaService);
     }
 }
