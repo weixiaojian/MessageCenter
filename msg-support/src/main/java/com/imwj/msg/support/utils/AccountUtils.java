@@ -28,6 +28,7 @@ public class AccountUtils {
      * 钉钉工作消息参数示例：dingDingWorkNoticeAccount：[{"ding_ding_work_notice_10":{"appKey":"dingh6yyyyyyycrlbx","appSecret":"tQpvmkR863333yyyyyHP3QHyyyymy9Ao1yoL1oQX5NsdfsWHvWKbTu","agentId":"1523123123183622"}}]
      * 微信公众号模板消息：officialAccount：[{"official_66":{"appId":"wx6447c1fe6b20697b","secret":"4b912ad95576639faa948011bfce311f","token":"langao","aesKey":"2"}}]
      * 微信小程序订阅消息：miniProgramAccount：[{"mini_program_66":{"appId":"wxacdb39ee66e9f4dc","appSecret":"a1399286f82fe0f2608edfe8d313ac1d"}}]
+     * app个推：geTuiAccount：[{"ge_tui_account_66":{"appId":"7ytre3Mc5k9ePdz8InAwG8","appKey":"l7y3zWkP4pAI0rky5IHUg3","masterSecret":"sXRFC1QNgJA5OYfPqGMAD3"}}]
      * @param sendAccount 发送账户
      * @param apolloKey apollo中的key
      * @param prefix    前缀
