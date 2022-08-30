@@ -4,6 +4,7 @@ import com.imwj.msg.common.enums.RespStatusEnum;
 import com.imwj.msg.support.pipeline.ProcessContext;
 
 /**
+ * 流程异常
  * @author wj
  * @create 2022-08-17 11:17
  */

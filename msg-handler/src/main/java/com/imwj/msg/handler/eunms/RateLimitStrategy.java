@@ -15,6 +15,9 @@ import lombok.ToString;
 public enum RateLimitStrategy {
 
 
+    /**
+     * 限流枚举
+     */
     REQUEST_RATE_LIMIT(10, "根据真实请求数限流"),
     SEND_USER_NUM_RATE_LIMIT(20, "根据发送用户数请求数限流"),
     ;

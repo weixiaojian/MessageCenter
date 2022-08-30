@@ -15,9 +15,12 @@ public class SnowFlakeIdUtils {
     /**
      * 每一部分占用的位数
      */
-    private final static long SEQUENCE_BIT = 12;   //***占用的位数
-    private final static long MACHINE_BIT = 5;     //机器标识占用的位数
-    private final static long DATA_CENTER_BIT = 5; //数据中心占用的位数
+    //***占用的位数
+    private final static long SEQUENCE_BIT = 12;
+    //机器标识占用的位数
+    private final static long MACHINE_BIT = 5;
+    //数据中心占用的位数
+    private final static long DATA_CENTER_BIT = 5;
 
     /**
      * 每一部分的最大值
@@ -33,10 +36,22 @@ public class SnowFlakeIdUtils {
     private final static long DATA_CENTER_LEFT = SEQUENCE_BIT + MACHINE_BIT;
     private final static long TIMESTAMP_LEFT = DATA_CENTER_LEFT + DATA_CENTER_BIT;
 
-    private long dataCenterId;  //数据中心
-    private long machineId;     //机器标识
-    private long sequence = 0L; //***
-    private long lastTimeStamp = -1L;  //上一次时间戳
+    /**
+     * 数据中心
+     */
+    private long dataCenterId;
+    /**
+     * 机器标识
+     */
+    private long machineId;
+    /**
+     * ***
+     */
+    private long sequence = 0L;
+    /**
+     * 上一次时间戳
+     */
+    private long lastTimeStamp = -1L;
 
 
     /**
