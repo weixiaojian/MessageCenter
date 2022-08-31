@@ -186,8 +186,8 @@ public class DataServiceImpl implements DataService {
                     itemsVO.setReceiveContent(smsRecord.getReportContent());
                     itemsVO.setReceiveTime(DateUtil.format(new Date(Long.valueOf(smsRecord.getUpdated()*1000L)), DatePattern.NORM_DATETIME_PATTERN));
                 }
+                itemsVOS.add(itemsVO);
             }
-            itemsVOS.add(itemsVO);
         }
 
         return smsTimeLineVo;

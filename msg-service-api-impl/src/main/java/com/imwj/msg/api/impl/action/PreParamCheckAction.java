@@ -22,19 +22,25 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class PreParamCheckAction implements BusinessProcess<SendTaskModel> {
+
+    /**
+     * 最大的收件人数
+     */
+    private static final Integer BATCH_RECEIVER_SIZE = 100;
+
     @Override
     public void process(ProcessContext<SendTaskModel> context) {
         SendTaskModel sendTaskModel = context.getProcessModel();
 
         Long messageTemplateId = sendTaskModel.getMessageTemplateId();
         List<MessageParam> messageParamList = sendTaskModel.getMessageParamList();
-        //校验模板id和请求参数集合是否为空
+        // 1.校验模板id和请求参数集合是否为空
         if(messageTemplateId == null || messageParamList == null){
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
             return;
         }
 
-        //校验手机号是否为空
+        // 2.校验手机号是否为空
         List<MessageParam> resultCollect = messageParamList.stream()
                 .filter(messageParam -> StrUtil.isNotBlank(messageParam.getReceiver()))
                 .collect(Collectors.toList());
@@ -42,7 +48,14 @@ public class PreParamCheckAction implements BusinessProcess<SendTaskModel> {
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.CLIENT_BAD_PARAMETERS));
             return;
         }
-        //将正确结果的手机号集合带到下个处理类
+
+        // 3.过滤receiver大于100的请求
+        if (messageParamList.stream().anyMatch(messageParam -> messageParam.getReceiver().split(StrUtil.COMMA).length > BATCH_RECEIVER_SIZE)) {
+            context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.TOO_MANY_RECEIVER));
+            return;
+        }
+
+        // 将正确结果的手机号集合带到下个处理类
         sendTaskModel.setMessageParamList(resultCollect);
     }
 }

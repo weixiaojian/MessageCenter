@@ -23,6 +23,7 @@ public class MessageParam {
      * @Description: 接收者
      * 多个用,逗号号分隔开
      * 必传
+     * 【不能大于100个】
      */
     private String receiver;
 
