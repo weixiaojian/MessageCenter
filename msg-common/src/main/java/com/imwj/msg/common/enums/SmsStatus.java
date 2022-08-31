@@ -24,5 +24,17 @@ public enum SmsStatus {
     private Integer code;
     private String description;
 
-
+    /**
+     * 根据状态获取描述信息
+     * @param code
+     * @return
+     */
+    public static String getDescriptionByStatus(Integer code) {
+        for (SmsStatus value : SmsStatus.values()) {
+            if (value.getCode().equals(code)) {
+                return value.getDescription();
+            }
+        }
+        return "";
+    }
 }

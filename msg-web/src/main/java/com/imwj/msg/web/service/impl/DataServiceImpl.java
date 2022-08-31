@@ -7,17 +7,23 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.text.StrPool;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.imwj.msg.common.constant.MessageCenterConstant;
 import com.imwj.msg.common.domain.SimpleAnchorInfo;
 import com.imwj.msg.common.enums.AnchorState;
 import com.imwj.msg.common.enums.ChannelType;
+import com.imwj.msg.common.enums.SmsStatus;
 import com.imwj.msg.support.dao.MessageTemplateDao;
+import com.imwj.msg.support.dao.SmsRecordDao;
 import com.imwj.msg.support.domain.MessageTemplate;
+import com.imwj.msg.support.domain.SmsRecord;
 import com.imwj.msg.support.utils.RedisUtils;
 import com.imwj.msg.support.utils.TaskInfoUtils;
 import com.imwj.msg.web.constants.AmisVoConstant;
 import com.imwj.msg.web.service.DataService;
+import com.imwj.msg.web.vo.DataParam;
 import com.imwj.msg.web.vo.EchartsVo;
+import com.imwj.msg.web.vo.SmsTimeLineVo;
 import com.imwj.msg.web.vo.UserTimeLineVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +43,10 @@ public class DataServiceImpl implements DataService {
 
     @Resource
     private MessageTemplateDao messageTemplateDao;
+
+
+    @Autowired
+    private SmsRecordDao smsRecordDao;
 
     @Override
     public UserTimeLineVo getTraceUserInfo(String receiver) {
@@ -142,4 +152,44 @@ public class DataServiceImpl implements DataService {
         return businessId;
     }
 
+    @Override
+    public SmsTimeLineVo getTraceSmsInfo(DataParam dataParam) {
+
+        ArrayList<SmsTimeLineVo.ItemsVO> itemsVOS = new ArrayList<>();
+        SmsTimeLineVo smsTimeLineVo = SmsTimeLineVo.builder().items(itemsVOS).build();
+
+        Integer sendDate = Integer.valueOf(DateUtil.format(new Date(dataParam.getDateTime() * 1000L)
+                , DatePattern.PURE_DATE_PATTERN));
+        QueryWrapper<SmsRecord> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("phone", dataParam.getReceiver())
+                .eq("send_date", sendDate);
+        List<SmsRecord> smsRecordList = smsRecordDao.selectList(queryWrapper);
+
+        if (CollUtil.isEmpty(smsRecordList)) {
+            return smsTimeLineVo;
+        }
+
+        Map<String, List<SmsRecord>> maps = smsRecordList.stream().collect(Collectors.groupingBy((o) -> o.getPhone() + o.getSeriesId()));
+
+        for (Map.Entry<String, List<SmsRecord>> entry : maps.entrySet()) {
+            SmsTimeLineVo.ItemsVO itemsVO = SmsTimeLineVo.ItemsVO.builder().build();
+            for (SmsRecord smsRecord : entry.getValue()) {
+                // 发送记录 messageTemplateId >0 ,回执记录 messageTemplateId =0
+                if (smsRecord.getMessageTemplateId() > 0) {
+                    itemsVO.setBusinessId(String.valueOf(smsRecord.getMessageTemplateId()));
+                    itemsVO.setContent(smsRecord.getMsgContent());
+                    itemsVO.setSendType(SmsStatus.getDescriptionByStatus(smsRecord.getStatus()));
+                    itemsVO.setSendTime(DateUtil.format(new Date(Long.valueOf(smsRecord.getCreated()*1000L)), DatePattern.NORM_DATETIME_PATTERN));
+
+                } else {
+                    itemsVO.setReceiveType(SmsStatus.getDescriptionByStatus(smsRecord.getStatus()));
+                    itemsVO.setReceiveContent(smsRecord.getReportContent());
+                    itemsVO.setReceiveTime(DateUtil.format(new Date(Long.valueOf(smsRecord.getUpdated()*1000L)), DatePattern.NORM_DATETIME_PATTERN));
+                }
+            }
+            itemsVOS.add(itemsVO);
+        }
+
+        return smsTimeLineVo;
+    }
 }

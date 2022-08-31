@@ -1,6 +1,8 @@
 package com.imwj.msg.web.service;
 
+import com.imwj.msg.web.vo.DataParam;
 import com.imwj.msg.web.vo.EchartsVo;
+import com.imwj.msg.web.vo.SmsTimeLineVo;
 import com.imwj.msg.web.vo.UserTimeLineVo;
 
 /**
@@ -25,4 +27,10 @@ public interface DataService {
      */
     EchartsVo getTraceMessageTemplateInfo(String businessId);
 
+    /**
+     * 获取短信下发记录
+     * @param dataParam
+     * @return
+     */
+    SmsTimeLineVo getTraceSmsInfo(DataParam dataParam);
 }

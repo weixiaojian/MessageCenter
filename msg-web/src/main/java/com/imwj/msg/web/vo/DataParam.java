@@ -27,4 +27,9 @@ public class DataParam {
      * 如果传入的是模板ID，则生成当天的业务ID
      */
     private String businessId;
+
+    /**
+     * 日期时间(检索短信的条件使用)
+     */
+    private Long dateTime;
 }
