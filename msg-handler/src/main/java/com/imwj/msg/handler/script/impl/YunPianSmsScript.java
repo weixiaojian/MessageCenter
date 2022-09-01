@@ -15,6 +15,7 @@ import com.imwj.msg.common.dto.account.YunPianSmsAccount;
 import com.imwj.msg.common.enums.SmsStatus;
 import com.imwj.msg.handler.domain.sms.SmsParam;
 import com.imwj.msg.handler.domain.sms.YunPianSendResult;
+import com.imwj.msg.handler.script.BaseSmsScript;
 import com.imwj.msg.handler.script.SmsScript;
 import com.imwj.msg.handler.script.SmsScriptHandler;
 import com.imwj.msg.support.domain.SmsRecord;
@@ -33,7 +34,7 @@ import java.util.*;
  */
 @Slf4j
 @SmsScriptHandler("YunPianSmsScript")
-public class YunPianSmsScript implements SmsScript {
+public class YunPianSmsScript extends BaseSmsScript implements SmsScript {
 
     @Autowired
     private AccountUtils accountUtils;
@@ -42,7 +43,7 @@ public class YunPianSmsScript implements SmsScript {
     public List<SmsRecord> send(SmsParam smsParam) {
         try {
             // 获取云片账号
-            YunPianSmsAccount account = accountUtils.getAccount(smsParam.getSendAccount(), SendAccountConstant.SMS_ACCOUNT_KEY,
+            YunPianSmsAccount account = accountUtils.getAccount(SendAccountConstant.YUN_PIAN_SMS_CODE, SendAccountConstant.SMS_ACCOUNT_KEY,
                     SendAccountConstant.SMS_PREFIX, YunPianSmsAccount.class);
             // 封装请求参数
             Map<String, String> params = assembleParam(smsParam, account);

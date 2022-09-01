@@ -10,6 +10,7 @@ import com.imwj.msg.common.constant.SendAccountConstant;
 import com.imwj.msg.common.dto.account.TencentSmsAccount;
 import com.imwj.msg.common.enums.SmsStatus;
 import com.imwj.msg.handler.domain.sms.SmsParam;
+import com.imwj.msg.handler.script.BaseSmsScript;
 import com.imwj.msg.handler.script.SmsScript;
 import com.imwj.msg.handler.script.SmsScriptHandler;
 import com.imwj.msg.support.domain.SmsRecord;
@@ -37,7 +38,7 @@ import java.util.List;
  */
 @Slf4j
 @SmsScriptHandler("TencentSmsScript")
-public class TencentSmsScript implements SmsScript {
+public class TencentSmsScript extends BaseSmsScript implements SmsScript {
 
     private static final Integer PHONE_NUM = 11;
 
@@ -48,7 +49,7 @@ public class TencentSmsScript implements SmsScript {
     public List<SmsRecord> send(SmsParam smsParam) {
         try {
             //获取apollo中的腾讯账号配置
-            TencentSmsAccount tencentSmsAccount = accountUtils.getAccount(smsParam.getSendAccount(), SendAccountConstant.SMS_ACCOUNT_KEY, SendAccountConstant.SMS_PREFIX, TencentSmsAccount.class);
+            TencentSmsAccount tencentSmsAccount = accountUtils.getAccount(SendAccountConstant.TENCENT_SMS_CODE, SendAccountConstant.SMS_ACCOUNT_KEY, SendAccountConstant.SMS_PREFIX, TencentSmsAccount.class);
             SmsClient client = init(tencentSmsAccount);
             SendSmsRequest request = assembleReq(tencentSmsAccount, smsParam);
             log.info("发送短信开始：{}", JSON.toJSONString(request));
