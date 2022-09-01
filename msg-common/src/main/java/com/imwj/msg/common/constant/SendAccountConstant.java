@@ -67,5 +67,10 @@ public class SendAccountConstant {
     public static final String GE_TUI_ACCOUNT_PREFIX = "ge_tui_account_";
     public static final String GE_TUI_ACCESS_TOKEN_PREFIX = "ge_tui_access_token_";
 
+    /**
+     * 短信账号code
+     */
+    public static final Integer TENCENT_SMS_CODE = 66;
+    public static final Integer YUN_PIAN_SMS_CODE = 76;
 
 }

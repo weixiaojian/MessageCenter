@@ -81,6 +81,6 @@ public class YunPianSendResult {
          * sid
          */
         @JSONField(name = "sid")
-        private String sid;
+        private Integer sid;
     }
 }

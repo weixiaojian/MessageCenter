@@ -5,11 +5,13 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson.JSON;
+import com.google.common.base.Throwables;
 import com.imwj.msg.common.constant.SendAccountConstant;
+import com.imwj.msg.common.dto.account.TencentSmsAccount;
 import com.imwj.msg.common.enums.SmsStatus;
 import com.imwj.msg.handler.domain.sms.SmsParam;
-import com.imwj.msg.common.dto.account.TencentSmsAccount;
 import com.imwj.msg.handler.script.SmsScript;
+import com.imwj.msg.handler.script.SmsScriptHandler;
 import com.imwj.msg.support.domain.SmsRecord;
 import com.imwj.msg.support.utils.AccountUtils;
 import com.tencentcloudapi.common.Credential;
@@ -21,7 +23,6 @@ import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
 import com.tencentcloudapi.sms.v20210111.models.SendStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +36,7 @@ import java.util.List;
  * @since 2021-12-30 16:01
  */
 @Slf4j
-@Service
+@SmsScriptHandler("TencentSmsScript")
 public class TencentSmsScript implements SmsScript {
 
     private static final Integer PHONE_NUM = 11;
@@ -44,16 +45,21 @@ public class TencentSmsScript implements SmsScript {
     private AccountUtils accountUtils;
 
     @Override
-    public List<SmsRecord> send(SmsParam smsParam) throws Exception {
-        //获取apollo中的腾讯账号配置
-        TencentSmsAccount tencentSmsAccount = accountUtils.getAccount(smsParam.getSendAccount(), SendAccountConstant.SMS_ACCOUNT_KEY, SendAccountConstant.SMS_PREFIX, TencentSmsAccount.class);
-        SmsClient client = init(tencentSmsAccount);
-        SendSmsRequest request = assembleReq(tencentSmsAccount, smsParam);
-        log.info("发送短信开始：{}", JSON.toJSONString(request));
-        SendSmsResponse response = client.SendSms(request);
-        log.info("发送短信结束：{}", JSON.toJSONString(response));
+    public List<SmsRecord> send(SmsParam smsParam) {
+        try {
+            //获取apollo中的腾讯账号配置
+            TencentSmsAccount tencentSmsAccount = accountUtils.getAccount(smsParam.getSendAccount(), SendAccountConstant.SMS_ACCOUNT_KEY, SendAccountConstant.SMS_PREFIX, TencentSmsAccount.class);
+            SmsClient client = init(tencentSmsAccount);
+            SendSmsRequest request = assembleReq(tencentSmsAccount, smsParam);
+            log.info("发送短信开始：{}", JSON.toJSONString(request));
+            SendSmsResponse response = client.SendSms(request);
+            log.info("发送短信结束：{}", JSON.toJSONString(response));
 
-        return assembleSmsRecord(smsParam, response, tencentSmsAccount);
+            return assembleSmsRecord(smsParam, response, tencentSmsAccount);
+        } catch (Exception e) {
+            log.error("TencentSmsScript#send fail:{},params:{}", Throwables.getStackTraceAsString(e), JSON.toJSONString(smsParam));
+            return null;
+        }
     }
 
     /**

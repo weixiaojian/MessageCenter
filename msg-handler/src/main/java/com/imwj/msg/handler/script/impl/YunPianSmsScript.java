@@ -9,18 +9,19 @@ import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
+import com.google.common.base.Throwables;
 import com.imwj.msg.common.constant.SendAccountConstant;
 import com.imwj.msg.common.dto.account.YunPianSmsAccount;
 import com.imwj.msg.common.enums.SmsStatus;
 import com.imwj.msg.handler.domain.sms.SmsParam;
 import com.imwj.msg.handler.domain.sms.YunPianSendResult;
 import com.imwj.msg.handler.script.SmsScript;
+import com.imwj.msg.handler.script.SmsScriptHandler;
 import com.imwj.msg.support.domain.SmsRecord;
 import com.imwj.msg.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -31,27 +32,32 @@ import java.util.*;
  * @create 2022-08-31 15:25
  */
 @Slf4j
-@Service
+@SmsScriptHandler("YunPianSmsScript")
 public class YunPianSmsScript implements SmsScript {
 
     @Autowired
     private AccountUtils accountUtils;
 
     @Override
-    public List<SmsRecord> send(SmsParam smsParam) throws Exception {
-        // 获取云片账号
-        YunPianSmsAccount account = accountUtils.getAccount(smsParam.getSendAccount(), SendAccountConstant.SMS_ACCOUNT_KEY,
-                SendAccountConstant.SMS_PREFIX, YunPianSmsAccount.class);
-        // 封装请求参数
-        Map<String, String> params = assembleParam(smsParam, account);
-        String result = HttpRequest.post(account.getUrl())
-                .header(Header.CONTENT_TYPE.getValue(), ContentType.FORM_URLENCODED.getValue())
-                .header(Header.ACCEPT.getValue(), ContentType.JSON.getValue())
-                .body(JSON.toJSONString(params))
-                .timeout(2000)
-                .execute().body();
-        YunPianSendResult yunPianSendResult = JSONUtil.toBean(result, YunPianSendResult.class);
-        return assembleSmsRecord(smsParam, yunPianSendResult, account);
+    public List<SmsRecord> send(SmsParam smsParam) {
+        try {
+            // 获取云片账号
+            YunPianSmsAccount account = accountUtils.getAccount(smsParam.getSendAccount(), SendAccountConstant.SMS_ACCOUNT_KEY,
+                    SendAccountConstant.SMS_PREFIX, YunPianSmsAccount.class);
+            // 封装请求参数
+            Map<String, String> params = assembleParam(smsParam, account);
+            String result = HttpRequest.post(account.getUrl())
+                    .header(Header.CONTENT_TYPE.getValue(), ContentType.FORM_URLENCODED.getValue())
+                    .header(Header.ACCEPT.getValue(), ContentType.JSON.getValue())
+                    .body(JSON.toJSONString(params))
+                    .timeout(2000)
+                    .execute().body();
+            YunPianSendResult yunPianSendResult = JSONUtil.toBean(result, YunPianSendResult.class);
+            return assembleSmsRecord(smsParam, yunPianSendResult, account);
+        } catch (Exception e) {
+            log.error("YunPianSmsScript#send fail:{},params:{}", Throwables.getStackTraceAsString(e), JSON.toJSONString(smsParam));
+            return null;
+        }
     }
 
     /**

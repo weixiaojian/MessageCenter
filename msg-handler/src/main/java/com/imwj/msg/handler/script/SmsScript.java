@@ -19,6 +19,6 @@ public interface SmsScript {
      * @return
      * @throws Exception
      */
-    List<SmsRecord> send(SmsParam smsParam) throws Exception;
+    List<SmsRecord> send(SmsParam smsParam);
 
 }
