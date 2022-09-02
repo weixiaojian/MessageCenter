@@ -10,7 +10,7 @@ import com.imwj.msg.common.constant.MessageCenterConstant;
 import com.imwj.msg.common.constant.SendAccountConstant;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.dto.account.DingDingRobotAccount;
-import com.imwj.msg.common.dto.model.DingDingContentModel;
+import com.imwj.msg.common.dto.model.DingDingRobotContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.common.enums.SendMessageType;
 import com.imwj.msg.handler.domain.dingding.DingDingRobotParam;
@@ -79,7 +79,7 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
             atVo.setAtUserIds(new ArrayList<>(taskInfo.getReceiver()));
         }
         // 消息类型及内容相关
-        DingDingContentModel contentModel = (DingDingContentModel) taskInfo.getContentModel();
+        DingDingRobotContentModel contentModel = (DingDingRobotContentModel) taskInfo.getContentModel();
         DingDingRobotParam param = DingDingRobotParam.builder().at(atVo)
                 .msgtype(SendMessageType.getDingDingRobotTypeByCode(contentModel.getSendType()))
                 .build();

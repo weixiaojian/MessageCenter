@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DingDingContentModel extends ContentModel {
+public class DingDingRobotContentModel extends ContentModel {
 
     /**
      * 发送类型 参考SendMessageType.java
@@ -60,13 +60,5 @@ public class DingDingContentModel extends ContentModel {
      * "[{\"picUrl\":\"https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png\",\"title\":\"{$title1}\",\"url\":\"https://www.dingtalk.com/\"},{\"picUrl\":\"https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png\\t\",\"title\":\"时代的火车向前开2\",\"url\":\"https://www.dingtalk.com/\"}]"}
      */
     private String feedCards;
-
-
-    /**
-     * 图片、文件、语音消息 需要发送使用的素材ID字段
-     */
-    private String mediaId;
-
-    // ...
 
 }
