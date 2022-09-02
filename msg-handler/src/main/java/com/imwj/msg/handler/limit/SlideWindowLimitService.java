@@ -1,10 +1,10 @@
 package com.imwj.msg.handler.limit;
 
+import cn.hutool.core.util.IdUtil;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.handler.deduplication.DeduplicationParam;
 import com.imwj.msg.handler.service.deduplication.service.AbstractDeduplicationService;
 import com.imwj.msg.support.utils.RedisUtils;
-import com.imwj.msg.support.utils.SnowFlakeIdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -28,8 +28,6 @@ public class SlideWindowLimitService extends AbstractLimitService {
 
     @Autowired
     private RedisUtils redisUtils;
-
-    private SnowFlakeIdUtils snowFlakeIdUtils = new SnowFlakeIdUtils(1, 1);
 
     private DefaultRedisScript<Long> redisScript;
 
@@ -55,7 +53,7 @@ public class SlideWindowLimitService extends AbstractLimitService {
         long nowTime = System.currentTimeMillis();
         for (String receiver : taskInfo.getReceiver()) {
             String key = LIMIT_TAG + deduplicationSingleKey(service, taskInfo, receiver);
-            String scoreValue = String.valueOf(snowFlakeIdUtils.nextId());
+            String scoreValue = String.valueOf(IdUtil.getSnowflake().nextId());
             String score = String.valueOf(nowTime);
             if (redisUtils.execLimitLua(redisScript, Arrays.asList(key), String.valueOf(param.getDeduplicationTime() * 1000), score, String.valueOf(param.getCountNum()), scoreValue)) {
                 filterReceiver.add(receiver);

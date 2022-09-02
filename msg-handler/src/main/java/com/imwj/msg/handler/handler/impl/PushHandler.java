@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
 import java.util.Set;
 
 /**
+ * 个推handler
  * @author wj
  * @create 2022-08-30 10:43
  */

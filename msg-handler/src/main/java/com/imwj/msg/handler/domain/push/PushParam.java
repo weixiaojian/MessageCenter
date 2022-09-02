@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * 个推push参数
  * @author wj
  * @create 2022-08-30 11:01
  */
