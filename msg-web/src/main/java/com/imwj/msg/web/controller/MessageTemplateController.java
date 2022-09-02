@@ -46,8 +46,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/messageTemplate")
 public class MessageTemplateController {
 
-    private static final List<String> FLAT_FIEL_NAME = Arrays.asList("msgContent");
-
     @Resource
     private MessageTemplateDao messageTemplateDao;
     @Resource
@@ -131,7 +129,7 @@ public class MessageTemplateController {
     @ApiOperation("/查询所有的模板数据")
     @GetMapping("/list")
     public BasicResultVO query(PageVo pageVo) {
-        List<Map<String, Object>> result = ConvertMap.flatList(messageTemplateService.queryList(pageVo), FLAT_FIEL_NAME);
+        List<Map<String, Object>> result = ConvertMap.flatList(messageTemplateService.queryList(pageVo));
         long count = messageTemplateService.count();
         MessageTemplateVo messageTemplateVo = MessageTemplateVo.builder().count(count).rows(result).build();
         return BasicResultVO.success(messageTemplateVo);
@@ -154,7 +152,7 @@ public class MessageTemplateController {
     @GetMapping("query/{id}")
     @ApiOperation("/根据Id查找")
     public BasicResultVO queryById(@PathVariable("id") Long id) {
-        Map<String, Object> result = ConvertMap.flatSingle(messageTemplateService.queryById(id), FLAT_FIEL_NAME);
+        Map<String, Object> result = ConvertMap.flatSingle(messageTemplateService.queryById(id));
         return BasicResultVO.success(result);
     }
 
