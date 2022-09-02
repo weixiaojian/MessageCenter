@@ -89,6 +89,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
+    @Builder
     public static class LinkVO {
         /**
          * text
@@ -114,6 +115,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
+    @Builder
     public static class MarkdownVO {
         /**
          * title
@@ -131,6 +133,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
+    @Builder
     public static class ActionCardVO {
         /**
          * title
@@ -155,6 +158,7 @@ public class DingDingRobotParam {
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
+        @Builder
         public static class BtnsVO {
             /**
              * title
@@ -173,6 +177,7 @@ public class DingDingRobotParam {
     @NoArgsConstructor
     @Data
     @AllArgsConstructor
+    @Builder
     public static class FeedCardVO {
         /**
          * links
@@ -185,6 +190,7 @@ public class DingDingRobotParam {
         @NoArgsConstructor
         @Data
         @AllArgsConstructor
+        @Builder
         public static class LinksVO {
             /**
              * title

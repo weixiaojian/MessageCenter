@@ -18,16 +18,55 @@ import lombok.NoArgsConstructor;
 public class DingDingContentModel extends ContentModel {
 
     /**
-     * 下发钉钉消息的类型 参考：SendMessageType.java
+     * 发送类型 参考SendMessageType.java
      */
     private String sendType;
+
     /**
-     * 文本消息 - 文案
+     * 钉钉机器人：【文本消息】内容，【markdown消息】内容，【ActionCard消息】内容
      */
     private String content;
+
+    /**
+     * 钉钉机器人：【markdown消息】标题，【FeedCard消息】标题，【ActionCard消息】标题
+     */
+    private String title;
+
+    /**
+     * 钉钉机器人：【ActionCard消息】按钮布局
+     */
+    private String btnOrientation;
+
+    /**
+     * 钉钉机器人：【ActionCard消息】按钮的文案和跳转链接的json
+     * [{\"title\":\"别点我\",\"actionURL\":\"https://www.baidu.com/\"},{\"title\":\"没关系，还是点我把\",\"actionURL\":\"https://www.baidu.com/\\t\"}]
+     */
+    private String btns;
+
+
+    /**
+     * 钉钉机器人：【链接消息】点击消息跳转的URL，【FeedCard消息】点击消息跳转的URL
+     */
+    private String url;
+
+    /**
+     * 钉钉机器人：【链接消息】图片URL，【FeedCard消息】图片URL
+     */
+    private String picUrl;
+
+
+    /**
+     * 钉钉机器人：【FeedCard类型】 消息体
+     * "[{\"picUrl\":\"https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png\",\"title\":\"{$title1}\",\"url\":\"https://www.dingtalk.com/\"},{\"picUrl\":\"https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png\\t\",\"title\":\"时代的火车向前开2\",\"url\":\"https://www.dingtalk.com/\"}]"}
+     */
+    private String feedCards;
+
+
     /**
      * 图片、文件、语音消息 需要发送使用的素材ID字段
      */
     private String mediaId;
+
+    // ...
 
 }

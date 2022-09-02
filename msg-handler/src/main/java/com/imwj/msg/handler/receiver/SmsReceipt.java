@@ -26,8 +26,9 @@ public class SmsReceipt {
     private void init() {
         SupportThreadPoolConfig.getPendingSingleThreadPool().execute(() -> {
             while (true) {
-                tencentSmsReceipt.pull();
-                yunPianSmsReceipt.pull();
+                // TODO回执拉取暂时关闭 需要时打开即可
+                // tencentSmsReceipt.pull();
+                // yunPianSmsReceipt.pull();
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {
