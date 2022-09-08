@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.receiver;
+package com.imwj.msg.handler.receipt;
 
 import com.imwj.msg.support.config.SupportThreadPoolConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
  */
 @Component
 @Slf4j
-public class SmsReceipt {
+public class MessageReceipt {
 
     @Autowired
     private TencentSmsReceipt tencentSmsReceipt;

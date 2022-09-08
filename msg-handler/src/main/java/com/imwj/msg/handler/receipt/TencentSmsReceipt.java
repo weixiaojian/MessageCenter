@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.receiver;
+package com.imwj.msg.handler.receipt;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;

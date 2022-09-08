@@ -1,4 +1,4 @@
-package com.imwj.msg.handler.receiver;
+package com.imwj.msg.handler.receipt;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

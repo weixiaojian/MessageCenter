@@ -1,6 +1,7 @@
 package com.imwj.msg.handler.handler.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.dingtalk.api.DefaultDingTalkClient;
@@ -23,6 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 /**
  * 钉钉消息自定义机器人 消息处理器
  * https://open.dingtalk.com/document/group/custom-robot-access
@@ -42,6 +46,8 @@ public class DingDingWorkNoticeHandler extends BaseHandler implements Handler {
 
     private static final String URL = "https://oapi.dingtalk.com/topapi/message/corpconversation/asyncsend_v2";
 
+    private static final String DING_DING_RECALL_KEY_PREFIX = "RECALL_";
+
     public DingDingWorkNoticeHandler() {
         channelCode = ChannelType.DING_DING_WORK_NOTICE.getCode();
     }
@@ -54,6 +60,9 @@ public class DingDingWorkNoticeHandler extends BaseHandler implements Handler {
             String accessToken = redisTemplate.opsForValue().get(SendAccountConstant.DING_DING_ACCESS_TOKEN_PREFIX + taskInfo.getSendAccount());
             OapiMessageCorpconversationAsyncsendV2Response response = new DefaultDingTalkClient(URL).execute(request, accessToken);
             if (response.getErrcode() == 0) {
+                // 用于消息撤回(支持当天的)
+                redisTemplate.opsForList().leftPush(DING_DING_RECALL_KEY_PREFIX + taskInfo.getMessageTemplateId(), String.valueOf(response.getTaskId()));
+                redisTemplate.expire(DING_DING_RECALL_KEY_PREFIX + taskInfo.getMessageTemplateId(), (DateUtil.endOfDay(new Date()).getTime() - DateUtil.current()) / 1000, TimeUnit.SECONDS);
                 return true;
             }
             // 常见的错误 应当 关联至 AnchorState,由后台统一透出失败原因
