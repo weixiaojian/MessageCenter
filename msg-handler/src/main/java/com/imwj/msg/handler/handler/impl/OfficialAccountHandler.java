@@ -10,6 +10,7 @@ import com.imwj.msg.common.dto.model.OfficialAccountsContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
+import com.imwj.msg.support.domain.MessageTemplate;
 import com.imwj.msg.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -119,5 +120,10 @@ public class OfficialAccountHandler extends BaseHandler implements Handler {
         config.setAesKey(wechatOfficialAccount.getAesKey());
         wxMpService.setWxMpConfigStorage(config);
         return wxMpService;
+    }
+
+    @Override
+    public void recall(MessageTemplate messageTemplate) {
+
     }
 }

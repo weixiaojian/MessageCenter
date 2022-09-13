@@ -11,12 +11,12 @@ import com.imwj.msg.api.domain.MessageParam;
 import com.imwj.msg.api.domain.SendRequest;
 import com.imwj.msg.api.domain.SendResponse;
 import com.imwj.msg.api.enums.BusinessCode;
+import com.imwj.msg.api.service.RecallService;
 import com.imwj.msg.api.service.SendService;
 import com.imwj.msg.common.domain.RetResult;
 import com.imwj.msg.common.enums.RespStatusEnum;
 import com.imwj.msg.common.page.PageVo;
 import com.imwj.msg.common.vo.BasicResultVO;
-import com.imwj.msg.support.dao.MessageTemplateDao;
 import com.imwj.msg.support.domain.MessageTemplate;
 import com.imwj.msg.web.service.impl.MessageTemplateServiceImpl;
 import com.imwj.msg.web.utils.ConvertMap;
@@ -24,6 +24,7 @@ import com.imwj.msg.web.vo.MessageTemplateVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,11 +48,12 @@ import java.util.stream.Collectors;
 public class MessageTemplateController {
 
     @Resource
-    private MessageTemplateDao messageTemplateDao;
-    @Resource
     private MessageTemplateServiceImpl messageTemplateService;
     @Resource
     private SendService sendService;
+
+    @Autowired
+    private RecallService recallService;
 
     @Value("${msg.business.upload.path}")
     private String uploadPath;
@@ -238,6 +240,21 @@ public class MessageTemplateController {
             return BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR);
         }
         return BasicResultVO.success(MapUtil.of(new String[][]{{"value", filePath}}));
+    }
+
+    /**
+     * 撤回消息接口
+     */
+    @PostMapping("recall/{id}")
+    @ApiOperation("/撤回消息接口")
+    public BasicResultVO recall(@PathVariable("id") Long id) {
+        SendRequest sendRequest = SendRequest.builder().code(BusinessCode.RECALL.getCode()).
+                messageTemplateId(id).build();
+        SendResponse response = recallService.recall(sendRequest);
+        if (response.getCode() != RespStatusEnum.SUCCESS.getCode()) {
+            return BasicResultVO.fail(response.getMsg());
+        }
+        return BasicResultVO.success(response);
     }
 
 }

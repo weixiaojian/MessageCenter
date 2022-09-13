@@ -1,6 +1,7 @@
 package com.imwj.msg.handler.handler;
 
 import com.imwj.msg.common.domain.TaskInfo;
+import com.imwj.msg.support.domain.MessageTemplate;
 
 /**
  * 发送各个渠道的handler
@@ -14,5 +15,15 @@ public interface Handler{
      * @param taskInfo
      */
     void doHandler(TaskInfo taskInfo);
+
+    /**
+     * 撤回消息
+     *
+     * @param messageTemplate
+     * @return
+     */
+    void recall(MessageTemplate messageTemplate);
+
+
 
 }

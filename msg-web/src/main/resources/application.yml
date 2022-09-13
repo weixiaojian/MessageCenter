@@ -120,6 +120,11 @@ msg:
     log:
       topic:
         name: MESSAGE_LOG
+    recall:
+      topic:
+        name: MESSAGE_RECALL
+      group:
+        name: RECALL_GROUP_ID
   async:
     task:
       thread-name-prefix: "async-task-" # task前缀名

@@ -17,6 +17,7 @@ import com.imwj.msg.handler.domain.dingding.DingDingRobotParam;
 import com.imwj.msg.handler.domain.dingding.DingDingRobotResult;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
+import com.imwj.msg.support.domain.MessageTemplate;
 import com.imwj.msg.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
@@ -136,6 +137,11 @@ public class DingDingRobotHandler extends BaseHandler implements Handler {
             log.error("DingDingHandler#assembleSign fail!:{}", Throwables.getStackTraceAsString(e));
         }
         return sign;
+    }
+
+    @Override
+    public void recall(MessageTemplate messageTemplate) {
+
     }
 
 }

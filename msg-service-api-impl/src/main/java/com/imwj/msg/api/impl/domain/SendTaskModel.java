@@ -2,6 +2,7 @@ package com.imwj.msg.api.impl.domain;
 
 import com.imwj.msg.api.domain.MessageParam;
 import com.imwj.msg.common.domain.TaskInfo;
+import com.imwj.msg.support.domain.MessageTemplate;
 import com.imwj.msg.support.pipeline.ProcessModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,4 +35,9 @@ public class SendTaskModel implements ProcessModel {
      * 发送任务的信息
      */
     private List<TaskInfo> taskInfo;
+
+    /**
+     * 撤回任务的信息
+     */
+    private MessageTemplate messageTemplate;
 }

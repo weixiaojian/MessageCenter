@@ -18,6 +18,7 @@ import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
 import com.imwj.msg.handler.script.SmsScriptHolder;
 import com.imwj.msg.support.dao.SmsRecordDao;
+import com.imwj.msg.support.domain.MessageTemplate;
 import com.imwj.msg.support.domain.SmsRecord;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -172,4 +173,8 @@ public class SmsHandler extends BaseHandler implements Handler {
         }
     }
 
+    @Override
+    public void recall(MessageTemplate messageTemplate) {
+
+    }
 }

@@ -17,6 +17,7 @@ import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.common.enums.SendMessageType;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
+import com.imwj.msg.support.domain.MessageTemplate;
 import com.imwj.msg.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -156,4 +157,8 @@ public class DingDingWorkNoticeHandler extends BaseHandler implements Handler {
         return req;
     }
 
+    @Override
+    public void recall(MessageTemplate messageTemplate) {
+
+    }
 }

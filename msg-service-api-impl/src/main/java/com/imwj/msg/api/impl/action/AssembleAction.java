@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Throwables;
 import com.imwj.msg.api.domain.MessageParam;
+import com.imwj.msg.api.enums.BusinessCode;
 import com.imwj.msg.api.impl.domain.SendTaskModel;
 import com.imwj.msg.common.constant.MessageCenterConstant;
 import com.imwj.msg.common.domain.TaskInfo;
@@ -50,8 +51,14 @@ public class AssembleAction implements BusinessProcess<SendTaskModel> {
                 context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.TEMPLATE_NOT_FOUND));
                 return;
             }
-            List<TaskInfo> taskInfos = assembleTaskInfo(sendTaskModel, messageTemplate);
-            sendTaskModel.setTaskInfo(taskInfos);
+            if(BusinessCode.COMMON_SEND.getCode().equals(context.getCode())){
+                // 发送消息
+                List<TaskInfo> taskInfos = assembleTaskInfo(sendTaskModel, messageTemplate);
+                sendTaskModel.setTaskInfo(taskInfos);
+            } else if (BusinessCode.RECALL.getCode().equals(context.getCode())) {
+                // 撤回消息
+                sendTaskModel.setMessageTemplate(messageTemplate);
+            }
         } catch (Exception e) {
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR));
             log.error("assemble task fail! templateId:{}, e:{}", messageTemplateId, Throwables.getStackTraceAsString(e));

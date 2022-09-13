@@ -13,6 +13,7 @@ import com.imwj.msg.handler.eunms.RateLimitStrategy;
 import com.imwj.msg.handler.flowcontrol.FlowControlParam;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
+import com.imwj.msg.support.domain.MessageTemplate;
 import com.imwj.msg.support.utils.AccountUtils;
 import com.sun.mail.util.MailSSLSocketFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -79,5 +80,10 @@ public class EmailHandler extends BaseHandler implements Handler {
             log.error("EmailHandler#getAccount fail!{}", Throwables.getStackTraceAsString(e));
         }
         return account;
+    }
+
+    @Override
+    public void recall(MessageTemplate messageTemplate) {
+
     }
 }

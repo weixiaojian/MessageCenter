@@ -16,6 +16,7 @@ import com.imwj.msg.common.dto.model.MiniProgramContentModel;
 import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
+import com.imwj.msg.support.domain.MessageTemplate;
 import com.imwj.msg.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,5 +117,10 @@ public class MiniProgramAccountHandler extends BaseHandler implements Handler {
         config.setSecret(weChatMiniProgramAccount.getAppSecret());
         wxMaService.setWxMaConfig(config);
         return new WxMaSubscribeServiceImpl(wxMaService);
+    }
+
+    @Override
+    public void recall(MessageTemplate messageTemplate) {
+
     }
 }

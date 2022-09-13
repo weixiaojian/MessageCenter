@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.base.Throwables;
+import com.imwj.msg.api.enums.BusinessCode;
 import com.imwj.msg.api.impl.domain.SendTaskModel;
 import com.imwj.msg.common.enums.RespStatusEnum;
 import com.imwj.msg.common.vo.BasicResultVO;
@@ -28,15 +29,24 @@ public class SendMqAction implements BusinessProcess<SendTaskModel> {
     private KafkaUtils kafkaUtils;
 
     @Value("${msg.business.topic.name}")
-    private String topicName;
+    private String sendMessageTopic;
+
+    @Value("${msg.business.recall.topic.name}")
+    private String recallMessageTopic;
 
     @Override
     public void process(ProcessContext<SendTaskModel> context) {
         SendTaskModel sendTaskModel = context.getProcessModel();
-        String message = JSON.toJSONString(sendTaskModel.getTaskInfo(), new SerializerFeature[]{SerializerFeature.WriteClassName});
-
         try {
-            kafkaUtils.send(topicName, message);
+            if (BusinessCode.COMMON_SEND.getCode().equals(context.getCode())) {
+                // 推送发送消息到mq
+                String message = JSON.toJSONString(sendTaskModel.getTaskInfo(), new SerializerFeature[]{SerializerFeature.WriteClassName});
+                kafkaUtils.send(sendMessageTopic, message);
+            } else if (BusinessCode.RECALL.getCode().equals(context.getCode())) {
+                // 推送撤回消息到mq
+                String message = JSON.toJSONString(sendTaskModel.getMessageTemplate(), new SerializerFeature[]{SerializerFeature.WriteClassName});
+                kafkaUtils.send(recallMessageTopic, message);
+            }
         }catch (Exception e){
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR));
             log.error("send kafka fail! e:{},params:{}", Throwables.getStackTraceAsString(e)

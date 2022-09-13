@@ -19,6 +19,7 @@ import com.imwj.msg.handler.domain.push.getui.SendPushParam;
 import com.imwj.msg.handler.domain.push.getui.SendPushResult;
 import com.imwj.msg.handler.handler.BaseHandler;
 import com.imwj.msg.handler.handler.Handler;
+import com.imwj.msg.support.domain.MessageTemplate;
 import com.imwj.msg.support.utils.AccountUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,6 +163,11 @@ public class PushHandler extends BaseHandler implements Handler {
 
     private SendPushParam assembleParam(PushContentModel pushContentModel) {
         return assembleParam(pushContentModel, null);
+    }
+
+    @Override
+    public void recall(MessageTemplate messageTemplate) {
+
     }
 
 }

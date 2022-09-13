@@ -5,17 +5,14 @@ import com.imwj.msg.api.impl.action.AfterParamCheckAction;
 import com.imwj.msg.api.impl.action.AssembleAction;
 import com.imwj.msg.api.impl.action.PreParamCheckAction;
 import com.imwj.msg.api.impl.action.SendMqAction;
-import com.imwj.msg.support.pipeline.BusinessProcess;
 import com.imwj.msg.support.pipeline.ProcessController;
 import com.imwj.msg.support.pipeline.ProcessTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * 链路组装配置类
