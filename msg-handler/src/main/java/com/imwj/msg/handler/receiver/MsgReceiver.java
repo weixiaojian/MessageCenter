@@ -56,7 +56,6 @@ public class MsgReceiver {
             String messageGroupId = GroupIdMappingUtils.getGroupIdByTaskInfo(CollUtil.getFirst(taskInfos.iterator()));
             //只有消息中的groupId 与 当前消费者的groupId相等才去发送短信
             if(groupId.equals(messageGroupId)){
-                log.info("【"+groupId+"】消费开始：" + JSON.toJSONString(taskInfos));
                 for(TaskInfo taskInfo : taskInfos){
                     logUtils.print(LogParam.builder().bizType(LOG_BIZ_TYPE).object(taskInfo).build(), AnchorInfo.builder().ids(taskInfo.getReceiver()).businessId(taskInfo.getBusinessId()).state(AnchorState.RECEIVE.getCode()).build());
                     //得到参数实体

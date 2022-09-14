@@ -17,12 +17,17 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.api.impl.WxCpMessageServiceImpl;
 import me.chanjar.weixin.cp.api.impl.WxCpServiceImpl;
+import me.chanjar.weixin.cp.bean.article.MpnewsArticle;
+import me.chanjar.weixin.cp.bean.article.NewArticle;
 import me.chanjar.weixin.cp.bean.message.WxCpMessage;
 import me.chanjar.weixin.cp.bean.message.WxCpMessageSendResult;
 import me.chanjar.weixin.cp.config.impl.WxCpDefaultConfigImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 企业微信发送消息handler
@@ -110,15 +115,33 @@ public class EnterpriseWeChatHandler extends BaseHandler implements Handler {
         }
         // 根据消息model来组转消息发送数据实体
         EnterpriseWeChatContentModel model = (EnterpriseWeChatContentModel) taskInfo.getContentModel();
-        // TODO 不同类型组装不同实体,此处只组装了文本类消息
-        if(SendMessageType.TEXT.getCode().toString().equals(model.getSendType())){
-            message = WxCpMessage
-                    .TEXT()
-                    .agentId(agentId)
-                    .toUser(userId)
-                    .content(model.getContent())
-                    .build();
+        // 不同类型组装不同实体,
+        if(SendMessageType.TEXT.getCode().equals(model.getSendType())){
+            message = WxCpMessage.TEXT().content(model.getContent()).build();
+        }else if (SendMessageType.IMAGE.getCode().equals(model.getSendType())) {
+            message = WxCpMessage.IMAGE().mediaId(model.getMediaId()).build();
+        } else if (SendMessageType.VOICE.getCode().equals(model.getSendType())) {
+            message = WxCpMessage.VOICE().mediaId(model.getMediaId()).build();
+        } else if (SendMessageType.VIDEO.getCode().equals(model.getSendType())) {
+            message = WxCpMessage.VIDEO().mediaId(model.getMediaId()).description(model.getDescription()).title(model.getTitle()).build();
+        } else if (SendMessageType.FILE.getCode().equals(model.getSendType())) {
+            message = WxCpMessage.FILE().mediaId(model.getMediaId()).build();
+        } else if (SendMessageType.TEXT_CARD.getCode().equals(model.getSendType())) {
+            message = WxCpMessage.TEXTCARD().url(model.getUrl()).title(model.getTitle()).description(model.getDescription()).btnTxt(model.getBtnTxt()).build();
+        } else if (SendMessageType.NEWS.getCode().equals(model.getSendType())) {
+            List<NewArticle> newArticles = JSON.parseArray(model.getArticles(), NewArticle.class);
+            message = WxCpMessage.NEWS().articles(newArticles).build();
+        } else if (SendMessageType.MP_NEWS.getCode().equals(model.getSendType())) {
+            List<MpnewsArticle> mpNewsArticles = JSON.parseArray(model.getMpNewsArticle(), MpnewsArticle.class);
+            message = WxCpMessage.MPNEWS().articles(mpNewsArticles).build();
+        } else if (SendMessageType.MARKDOWN.getCode().equals(model.getSendType())) {
+            message = WxCpMessage.MARKDOWN().content(model.getContent()).build();
+        } else if (SendMessageType.MINI_PROGRAM_NOTICE.getCode().equals(model.getSendType())) {
+            Map contentItems = JSON.parseObject(model.getContentItems(), Map.class);
+            message = WxCpMessage.newMiniProgramNoticeBuilder().appId(model.getAppId()).page(model.getPage()).emphasisFirstItem(model.getEmphasisFirstItem()).contentItems(contentItems).title(model.getTitle()).description(model.getDescription()).build();
         }
+        message.setAgentId(agentId);
+        message.setToUser(userId);
         return message;
     }
 
