@@ -3,9 +3,9 @@ package com.imwj.msg.support.utils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
 import com.imwj.msg.common.constant.MessageCenterConstant;
+import com.imwj.msg.support.service.ConfigService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountUtils {
 
-    @ApolloConfig("message.center")
-    private Config config;
+    @Autowired
+    private ConfigService config;
 
     /**
      * 获取apollo配置账号信息（应用：key：value）

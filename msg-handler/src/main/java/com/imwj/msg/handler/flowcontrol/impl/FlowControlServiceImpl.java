@@ -2,8 +2,6 @@ package com.imwj.msg.handler.flowcontrol.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
 import com.google.common.util.concurrent.RateLimiter;
 import com.imwj.msg.common.constant.MessageCenterConstant;
 import com.imwj.msg.common.domain.TaskInfo;
@@ -11,7 +9,9 @@ import com.imwj.msg.common.enums.ChannelType;
 import com.imwj.msg.handler.eunms.RateLimitStrategy;
 import com.imwj.msg.handler.flowcontrol.FlowControlParam;
 import com.imwj.msg.handler.flowcontrol.FlowControlService;
+import com.imwj.msg.support.service.ConfigService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,16 +23,15 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class FlowControlServiceImpl implements FlowControlService {
 
-    private static final String FLOW_CONTROL_KEY = "flowControl";
+    private static final String FLOW_CONTROL_KEY = "flowControlRule";
 
     private static final String FLOW_CONTROL_PREFIX = "flow_control_";
 
     /**
      * apollo配置示例：key：flowControl value：{"flow_control_40":1}
      */
-    @ApolloConfig("message.center")
-    private Config config;
-
+    @Autowired
+    private ConfigService config;
 
     @Override
     public void flowControl(TaskInfo taskInfo, FlowControlParam flowControlParam) {

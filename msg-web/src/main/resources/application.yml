@@ -96,19 +96,6 @@ management:
       prometheus:
         enabled: true
 
-##################### wechat properties #####################
-#wx:
-#  mp:
-#    account:
-#      appid: wx6447c1fe6b20697b
-#      secret: 4b912ad95576639faa948011bfce311f
-#      token: langao
-#      aesKey: 2
-#      openId: o5HmTt3gF7lFFAStoLT5Ij4HE1ow
-#  ma:
-#    account:
-#      appid: wxacdb39ee66e9f4dc
-#      secret: a1399286f82fe0f2608edfe8d313ac1d
 ##################### msgCenter properties #####################
 msg:
   business:
@@ -136,3 +123,5 @@ msg:
       allow-core-thread-timeout: true # 是否允许核心线程超时,默认false
       await-termination-seconds: 10 #
       wait-for-tasks-to-complete-on-shut-down: true # 任务执行完,在关闭应用
+  xxl-job:
+    enabled: true #是否开启xxljob服务

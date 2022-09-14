@@ -5,8 +5,6 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
 import com.google.common.base.Throwables;
 import com.imwj.msg.common.constant.MessageCenterConstant;
 import com.imwj.msg.common.domain.TaskInfo;
@@ -20,6 +18,7 @@ import com.imwj.msg.handler.script.SmsScriptHolder;
 import com.imwj.msg.support.dao.SmsRecordDao;
 import com.imwj.msg.support.domain.MessageTemplate;
 import com.imwj.msg.support.domain.SmsRecord;
+import com.imwj.msg.support.service.ConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -52,8 +51,8 @@ public class SmsHandler extends BaseHandler implements Handler {
     @Autowired
     private SmsScriptHolder smsScriptHolder;
 
-    @ApolloConfig("message.center")
-    private Config config;
+    @Autowired
+    private ConfigService config;
 
     @Override
     public boolean handler(TaskInfo taskInfo) {

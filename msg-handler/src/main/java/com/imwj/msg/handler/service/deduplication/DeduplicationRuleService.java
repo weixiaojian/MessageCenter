@@ -1,12 +1,11 @@
 package com.imwj.msg.handler.service.deduplication;
 
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
 import com.imwj.msg.common.constant.MessageCenterConstant;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.enums.DeduplicationType;
 import com.imwj.msg.handler.deduplication.DeduplicationHolder;
 import com.imwj.msg.handler.deduplication.DeduplicationParam;
+import com.imwj.msg.support.service.ConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +19,10 @@ import java.util.List;
 @Service
 public class DeduplicationRuleService {
 
-    public static final String DEDUPLICATION_RULE_KEY = "deduplication";
+    public static final String DEDUPLICATION_RULE_KEY = "deduplicationRule";
 
-    @ApolloConfig("message.center")
-    private Config config;
+    @Autowired
+    private ConfigService config;
 
     @Autowired
     private DeduplicationHolder deduplicationHolder;

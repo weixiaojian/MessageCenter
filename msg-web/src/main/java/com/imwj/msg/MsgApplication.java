@@ -15,7 +15,12 @@ public class MsgApplication {
 
 
     public static void main(String[] args) {
-        // apollo的地址
+        /**
+         * 如果你需要动态配置
+         * 1、启动apollo
+         * 2、将application.properties配置文件的 apollo.enabled 改为true
+         * 3、下方的property替换真实的ip和port
+         */
         System.setProperty("apollo.config-service", "http://192.168.156.128:8080");
 
         SpringApplication.run(MsgApplication.class, args);

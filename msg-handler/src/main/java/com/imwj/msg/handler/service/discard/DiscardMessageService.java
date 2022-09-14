@@ -3,12 +3,11 @@ package com.imwj.msg.handler.service.discard;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
 import com.imwj.msg.common.constant.MessageCenterConstant;
 import com.imwj.msg.common.domain.AnchorInfo;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.enums.AnchorState;
+import com.imwj.msg.support.service.ConfigService;
 import com.imwj.msg.support.utils.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,12 +24,12 @@ public class DiscardMessageService {
     private LogUtils logUtils;
 
     /**
-     * 配置样例：key=discard   value=[1,2,3]
+     * 配置样例：key=DiscardMessageService   value=[1,2,3]
      */
-    private static final String DISCARD_MESSAGE_KEY = "discard";
+    private static final String DISCARD_MESSAGE_KEY = "discardMsgIds";
 
-    @ApolloConfig("message.center")
-    private Config config;
+    @Autowired
+    private ConfigService config;
 
     /**
      * 丢弃消息，配置在apollo
