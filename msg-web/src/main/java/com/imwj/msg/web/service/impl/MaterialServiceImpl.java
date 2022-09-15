@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
+ * 素材service实现类
  * @author wj
  * @create 2022-09-08 17:11
  */

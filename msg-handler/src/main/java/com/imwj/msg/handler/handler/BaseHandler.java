@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.annotation.PostConstruct;
 
 /**
+ * 基础处理器
  * @author wj
  * @create 2022-05-07 10:58
  */

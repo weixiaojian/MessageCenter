@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 /**
+ * 代码生成类
  * @author langao_q
  * @since 2021-12-29 16:22
  */

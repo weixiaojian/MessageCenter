@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 去重数据存储类
  * @author langao_q
  * @since 2022-01-26 16:43
  */

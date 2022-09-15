@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.Set;
 
 /**
+ * 个推批量发送参数
  * @author wj
  * @create 2022-08-30 10:54
  */

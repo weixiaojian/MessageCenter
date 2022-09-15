@@ -26,6 +26,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 消息模板实现类
  * @author wj
  * @create 2022-05-07 11:42
  */

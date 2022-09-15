@@ -1,7 +1,7 @@
 package com.imwj.msg.cron.enums;
 
 /**
- * 调度类型
+ * xxl-job调度类型
  * @author wj
  * @create 2022-05-07 17:41
  */

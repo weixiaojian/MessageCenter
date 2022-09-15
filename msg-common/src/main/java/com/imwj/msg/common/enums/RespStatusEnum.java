@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
+ * 发送消息响应状态枚举
  * @author langao_q
  * @since 2021-12-29 17:29
  */

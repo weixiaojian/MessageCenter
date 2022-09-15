@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 /**
+ * 频率去重
  * @author langao_q
  * @since 2022-01-26 16:40
  */

@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * kafka消费者（发送消息监听器）
+ * kafka消费者（发送/撤回消息监听器）
  * @author langao_q
  * @since 2021-12-30 10:43
  */

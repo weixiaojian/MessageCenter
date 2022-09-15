@@ -21,6 +21,7 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 
 /**
+ * 任务处理器实现类
  * @author wj
  * @create 2022-05-26 16:52
  */

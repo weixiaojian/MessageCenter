@@ -1,12 +1,9 @@
 package com.imwj.msg.cron.constant;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-
 /**
+ * 缓冲等待 常量
  * @author wj
  * @create 2022-07-04 16:00
- * 缓冲等待 常量
  */
 public class PendingConstant {
 

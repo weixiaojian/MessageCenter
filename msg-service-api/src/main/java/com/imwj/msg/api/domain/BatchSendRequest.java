@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 import java.util.List;
 
 /**
+ * 批量发送request
  * @author langao_q
  * @since 2021-12-29 16:49
  */

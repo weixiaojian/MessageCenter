@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * 撤回消息serice实现类
  * @author wj
  * @create 2022-09-08 17:54
  */

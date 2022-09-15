@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 延迟消费 阻塞队列-消费者和生产者实现
  * @author wj
  * @create 2022-07-04 16:05
  */
@@ -67,6 +68,7 @@ public abstract class AbstractLazyPending<T> {
                     }
                     // 判断是否停止当前线程
                     if (stop && CollUtil.isEmpty(tasks)) {
+                        executorService.shutdown();
                         break;
                     }
                 }catch (Exception e){
@@ -74,7 +76,6 @@ public abstract class AbstractLazyPending<T> {
                 }
             }
         });
-        executorService.shutdown();
     }
 
     /**

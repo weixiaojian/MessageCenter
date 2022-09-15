@@ -6,6 +6,7 @@ import com.imwj.msg.cron.entity.XxlJobGroup;
 import com.imwj.msg.cron.entity.XxlJobInfo;
 
 /**
+ * xxl-job service
  * @author wj
  * @create 2022-05-07 17:47
  */

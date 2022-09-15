@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
+ * 数据统一返回对象
  * @author langao_q
  * @since 2021-12-29 17:28
  */

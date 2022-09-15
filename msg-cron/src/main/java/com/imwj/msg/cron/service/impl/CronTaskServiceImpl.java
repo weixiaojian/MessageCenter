@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * xxl-job  serice实现类
  * @author wj
  * @create 2022-05-07 17:48
  */

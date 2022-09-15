@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
+ * 消息状态枚举
  * @author wj
  * @create 2022-05-07 11:25
  */

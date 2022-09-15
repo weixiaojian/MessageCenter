@@ -6,6 +6,7 @@ import com.imwj.msg.api.domain.SendRequest;
 import com.imwj.msg.api.domain.SendResponse;
 
 /**
+ * 发送消息接口
  * @author langa.o_q
  * @since 2021-12-29 16:47
  */

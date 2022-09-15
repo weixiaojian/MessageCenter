@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.annotation.PostConstruct;
 
 /**
+ * 构建去重抽象类
  * @author langao_q
  * @since 2022-01-26 16:42
  */

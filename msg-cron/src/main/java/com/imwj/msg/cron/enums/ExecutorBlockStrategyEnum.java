@@ -1,7 +1,7 @@
 package com.imwj.msg.cron.enums;
 
 /**
- * 执行阻塞队列
+ * xxl-job执行阻塞队列
  * @author wj
  * @create 2022-05-07 17:41
  */

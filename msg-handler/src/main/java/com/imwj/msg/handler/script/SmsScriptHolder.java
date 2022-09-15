@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 短信发送存储器（服务名 -> 对应处理器）
  * @author wj
  * @create 2022-08-31 16:54
  */

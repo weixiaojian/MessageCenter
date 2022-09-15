@@ -5,6 +5,7 @@ import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.handler.deduplication.DeduplicationParam;
 
 /**
+ * 构建去重接口
  * @author langao_q
  * @since 2022-01-26 16:39
  */

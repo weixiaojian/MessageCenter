@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 去重抽象service
  * @author wj
  * @create 2022-08-22 11:05
  */

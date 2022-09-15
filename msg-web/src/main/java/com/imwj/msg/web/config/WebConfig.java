@@ -5,6 +5,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 /**
+ * mvc配置：配置跨域、拦截器等
  * @author langao_q
  * @since 2020-11-25 18:22
  */

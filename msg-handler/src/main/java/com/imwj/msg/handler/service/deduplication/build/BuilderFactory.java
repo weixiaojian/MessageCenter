@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 去重构建工厂
  * @author wj
  * @create 2022-08-17 17:17
  */
