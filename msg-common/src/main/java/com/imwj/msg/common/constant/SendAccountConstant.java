@@ -80,4 +80,11 @@ public class SendAccountConstant {
 
     public static final Integer YUN_PIAN_SMS_CODE = 76;
 
+    /**
+     * 飞书群机器人 账号
+     */
+    public static final String FEI_SHU_ROBOT_ACCOUNT_KEY = "feiShuAccountRobot";
+    public static final String FEI_SHU_ROBOT_PREFIX = "fei_shu_robot_";
+
+
 }
