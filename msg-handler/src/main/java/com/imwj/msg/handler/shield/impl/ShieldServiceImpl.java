@@ -36,6 +36,11 @@ public class ShieldServiceImpl implements ShieldService {
 
     @Override
     public void shield(TaskInfo taskInfo) {
+
+        if (ShieldType.NIGHT_NO_SHIELD.getCode().equals(taskInfo.getShieldType())) {
+            return;
+        }
+
         /**
          * 当消息满足以下两点条件，就不进行消息发送 而是第二天早上进行发送
          * 1.当前时间小于8点

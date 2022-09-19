@@ -36,7 +36,7 @@ public class KafkaUtils {
      * @param jsonMessage
      */
     public void send(String topicName, String jsonMessage) {
-        kafkaTemplate.send(topicName, jsonMessage);
+        send(topicName, jsonMessage, null);
     }
 
     /**
