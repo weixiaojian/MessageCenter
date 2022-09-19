@@ -34,6 +34,9 @@ public class SendMqAction implements BusinessProcess<SendTaskModel> {
     @Value("${msg.business.recall.topic.name}")
     private String recallMessageTopic;
 
+    @Value("${msg.business.tagId.value}")
+    private String tagId;
+
     @Override
     public void process(ProcessContext<SendTaskModel> context) {
         SendTaskModel sendTaskModel = context.getProcessModel();
@@ -41,11 +44,11 @@ public class SendMqAction implements BusinessProcess<SendTaskModel> {
             if (BusinessCode.COMMON_SEND.getCode().equals(context.getCode())) {
                 // 推送发送消息到mq
                 String message = JSON.toJSONString(sendTaskModel.getTaskInfo(), new SerializerFeature[]{SerializerFeature.WriteClassName});
-                kafkaUtils.send(sendMessageTopic, message);
+                kafkaUtils.send(sendMessageTopic, message, tagId);
             } else if (BusinessCode.RECALL.getCode().equals(context.getCode())) {
                 // 推送撤回消息到mq
                 String message = JSON.toJSONString(sendTaskModel.getMessageTemplate(), new SerializerFeature[]{SerializerFeature.WriteClassName});
-                kafkaUtils.send(recallMessageTopic, message);
+                kafkaUtils.send(recallMessageTopic, message, tagId);
             }
         }catch (Exception e){
             context.setNeedBreak(true).setResponse(BasicResultVO.fail(RespStatusEnum.SERVICE_ERROR));

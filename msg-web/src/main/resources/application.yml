@@ -112,6 +112,9 @@ msg:
         name: MESSAGE_RECALL
       group:
         name: RECALL_GROUP_ID
+    tagId:
+      key: kafka_tag_id
+      value: io.imwj.msg
   async:
     task:
       thread-name-prefix: "async-task-" # task前缀名

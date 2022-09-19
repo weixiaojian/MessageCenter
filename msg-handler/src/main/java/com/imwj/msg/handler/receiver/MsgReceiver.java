@@ -48,7 +48,7 @@ public class MsgReceiver {
     @Autowired
     private HandlerHolder handlerHolder;
 
-    @KafkaListener(topics = "#{'${msg.business.topic.name}'}")
+    @KafkaListener(topics = "#{'${msg.business.topic.name}'}", containerFactory = "filterContainerFactory")
     public void consumer(ConsumerRecord<?, String> consumerRecord, @Header(KafkaHeaders.GROUP_ID) String groupId) {
         Optional<String> kafkaMessage = Optional.ofNullable(consumerRecord.value());
         if(kafkaMessage.isPresent()){
@@ -71,7 +71,8 @@ public class MsgReceiver {
      * 撤回消息
      * @param consumerRecord
      */
-    @KafkaListener(topics = "#{'${msg.business.recall.topic.name}'}",groupId = "#{'${msg.business.recall.group.name}'}")
+    @KafkaListener(topics = "#{'${msg.business.recall.topic.name}'}",groupId = "#{'${msg.business.recall.group.name}'}",
+            containerFactory = "filterContainerFactory")
     public void recall(ConsumerRecord<?,String> consumerRecord){
         Optional<String> kafkaMessage = Optional.ofNullable(consumerRecord.value());
         if(kafkaMessage.isPresent()){
