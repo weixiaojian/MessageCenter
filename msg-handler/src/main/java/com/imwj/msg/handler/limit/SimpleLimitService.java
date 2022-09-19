@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 简单去重器（目前承载着 N分钟相同内容去重）
+ * 简单去重器（采用普通的计数去重方法，限制的是每天发送的条数。）
  * @author wj
  * @create 2022-08-22 11:07
  */

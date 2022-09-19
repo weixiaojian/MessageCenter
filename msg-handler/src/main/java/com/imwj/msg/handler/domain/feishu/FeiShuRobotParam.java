@@ -95,7 +95,7 @@ public class FeiShuRobotParam {
                  * content
                  */
                 @JSONField(name = "content")
-                private List<List<PostContentDTO>> content;
+                private List<List<ContentDTO.PostDTO.ZhCnDTO.PostContentDTO>> content;
 
                 /**
                  * ContentDTO
@@ -281,11 +281,7 @@ public class FeiShuRobotParam {
                  */
                 @JSONField(name = "type")
                 private String type;
-                /**
-                 * value
-                 */
-                @JSONField(name = "value")
-                private ValueDTO value;
+
 
                 /**
                  * TextDTO
@@ -298,10 +294,8 @@ public class FeiShuRobotParam {
                 /**
                  * ValueDTO
                  */
-                @NoArgsConstructor
                 @Data
-                @AllArgsConstructor
-                @Builder
+                @NoArgsConstructor
                 public static class ValueDTO {
                 }
             }
