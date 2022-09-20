@@ -35,9 +35,11 @@ public class ConfigServiceImpl implements ConfigService {
     @Override
     public String getProperty(String key, String defaultValue) {
         if (enableApollo) {
+            // apollo启用时读取服务器上的配置
             Config config = com.ctrip.framework.apollo.ConfigService.getConfig(namespaces.split(StrUtil.COMMA)[0]);
             return config.getProperty(key, defaultValue);
         } else {
+            // apollo未启用读取`local.properties`文件配置
             return props.getProperty(key, defaultValue);
         }
     }

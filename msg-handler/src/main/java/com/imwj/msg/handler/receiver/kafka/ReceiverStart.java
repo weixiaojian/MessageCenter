@@ -1,10 +1,12 @@
-package com.imwj.msg.handler.receiver;
+package com.imwj.msg.handler.receiver.kafka;
 
 import com.imwj.msg.handler.utils.GroupIdMappingUtils;
+import com.imwj.msg.support.constans.MessageQueuePipeline;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.header.Header;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListenerAnnotationBeanPostProcessor;
@@ -26,6 +28,7 @@ import java.util.Optional;
  */
 @Slf4j
 @Service
+@ConditionalOnProperty(name = "msg.mq.pipeline", havingValue = MessageQueuePipeline.KAFKA)
 public class ReceiverStart {
 
     @Autowired

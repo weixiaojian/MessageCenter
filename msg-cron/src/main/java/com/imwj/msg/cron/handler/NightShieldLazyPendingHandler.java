@@ -6,12 +6,12 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.base.Throwables;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.support.config.SupportThreadPoolConfig;
-import com.imwj.msg.support.utils.KafkaUtils;
 import com.imwj.msg.support.utils.RedisUtils;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -29,7 +29,7 @@ public class NightShieldLazyPendingHandler {
     private static final String NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY = "night_shield_send";
 
     @Autowired
-    private KafkaUtils kafkaUtils;
+    private KafkaTemplate kafkaTemplate;
     @Value("${msg.business.topic.name}")
     private String topicName;
     @Autowired
@@ -46,7 +46,7 @@ public class NightShieldLazyPendingHandler {
                 String taskInfo = redisUtils.lPop(NIGHT_SHIELD_BUT_NEXT_DAY_SEND_KEY);
                 if (StrUtil.isNotBlank(taskInfo)) {
                     try {
-                        kafkaUtils.send(topicName, JSON.toJSONString(Arrays.asList(JSON.parseObject(taskInfo, TaskInfo.class)), new SerializerFeature[]{SerializerFeature.WriteClassName}));
+                        kafkaTemplate.send(topicName, JSON.toJSONString(Arrays.asList(JSON.parseObject(taskInfo, TaskInfo.class)), new SerializerFeature[]{SerializerFeature.WriteClassName}));
                     } catch (Exception e) {
                         log.error("nightShieldLazyJob send kafka fail! e:{},params:{}", Throwables.getStackTraceAsString(e), taskInfo);
                     }

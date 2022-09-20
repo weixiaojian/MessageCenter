@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
 /**
- * 存储 每种消息类型 与 TaskPending 的关系
+ * 存储 每种消息类型 与 TaskPending 的关系（保存线程池）
  * @author langao_q
  * @since 2021-12-30 10:54
  */

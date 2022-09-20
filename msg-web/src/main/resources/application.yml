@@ -128,3 +128,5 @@ msg:
       wait-for-tasks-to-complete-on-shut-down: true # 任务执行完,在关闭应用
   xxl-job:
     enabled: true #是否开启xxljob服务
+  mq:
+    pipeline: kafka #mq消息总线：eventbus、kafka、rocketMq
