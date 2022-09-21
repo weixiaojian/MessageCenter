@@ -32,6 +32,9 @@ spring:
     host: 192.168.156.128
     port: 6379
     password: 123456
+  # 项目用的是kafka但集成了rabbitmq(会自动连接),所以此处排除掉 需要使用rabbitmq时需要将其去掉
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
 
 ##################### mybatis-plus properties #####################
 mybatis-plus:
