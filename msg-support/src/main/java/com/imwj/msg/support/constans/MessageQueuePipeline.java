@@ -19,4 +19,8 @@ public interface MessageQueuePipeline {
      * rocketMq
      */
     String ROCKET_MQ = "rocketMq";
+    /**
+     * rabbitMq
+     */
+    String RABBIT_MQ = "rabbitMq";
 }

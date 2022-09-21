@@ -5,7 +5,7 @@ import com.google.common.eventbus.EventBus;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.support.constans.MessageQueuePipeline;
 import com.imwj.msg.support.domain.MessageTemplate;
-import com.imwj.msg.support.mq.kafka.SendMqService;
+import com.imwj.msg.support.mq.SendMqService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
- * 发送实现类
+ * 消息总线发送实现类
  * @author wj
  * @create 2022-09-20 11:45
  */

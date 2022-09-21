@@ -1,8 +1,8 @@
-package com.imwj.msg.support.mq.kafka.impl;
+package com.imwj.msg.support.mq.kafka;
 
 import cn.hutool.core.util.StrUtil;
 import com.imwj.msg.support.constans.MessageQueuePipeline;
-import com.imwj.msg.support.mq.kafka.SendMqService;
+import com.imwj.msg.support.mq.SendMqService;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.Header;
 import org.apache.kafka.common.header.internals.RecordHeader;

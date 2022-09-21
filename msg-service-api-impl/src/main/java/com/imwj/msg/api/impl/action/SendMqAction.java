@@ -8,7 +8,7 @@ import com.imwj.msg.api.enums.BusinessCode;
 import com.imwj.msg.api.impl.domain.SendTaskModel;
 import com.imwj.msg.common.enums.RespStatusEnum;
 import com.imwj.msg.common.vo.BasicResultVO;
-import com.imwj.msg.support.mq.kafka.SendMqService;
+import com.imwj.msg.support.mq.SendMqService;
 import com.imwj.msg.support.pipeline.BusinessProcess;
 import com.imwj.msg.support.pipeline.ProcessContext;
 import lombok.extern.slf4j.Slf4j;

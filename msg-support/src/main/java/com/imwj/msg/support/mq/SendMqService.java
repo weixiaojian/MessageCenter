@@ -1,4 +1,4 @@
-package com.imwj.msg.support.mq.kafka;
+package com.imwj.msg.support.mq;
 
 /**
  * 消息发送service
