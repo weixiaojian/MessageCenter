@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 /**
+ * RabbitMQ消息发送实现类
  * @author wj
  * @create 2022-09-21 16:00
  */

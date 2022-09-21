@@ -130,3 +130,27 @@ msg:
     enabled: true #是否开启xxljob服务
   mq:
     pipeline: kafka #mq消息总线：eventbus、kafka、rocketMq
+
+##################### Rabbit properties #####################
+# #RabbitMq所在服务器IP
+# spring.rabbitmq.host=127.0.0.1
+# #连接端口号
+# spring.rabbitmq.port=5672
+# #用户名
+# spring.rabbitmq.username=root
+# #用户密码
+# spring.rabbitmq.password=123456
+# # 开启发送确认
+# spring.rabbitmq.publisher-confirm-type=correlated
+# # 开启发送失败退回
+# spring.rabbitmq.publisher-returns=true
+# spring.rabbitmq.virtual-host=/
+# austin.rabbitmq.topic.name=msgRabbit
+# austin.rabbitmq.exchange.name=msgExchange
+
+##################### rocketmq properties #####################
+# msg-rocketmq-nameserver-ip=127.0.0.1
+# msg-rocketmq-nameserver-port=9876
+# msg-rocketmq-producer-group=unique-producer-group
+# msg-rocketmq-biz-consumer-group=unique-biz-consumer-group
+# msg-rocketmq-recall-consumer-group=unique-recall-consumer-group
