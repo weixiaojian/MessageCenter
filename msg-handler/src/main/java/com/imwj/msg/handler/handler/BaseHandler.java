@@ -4,7 +4,7 @@ import com.imwj.msg.common.domain.AnchorInfo;
 import com.imwj.msg.common.domain.TaskInfo;
 import com.imwj.msg.common.enums.AnchorState;
 import com.imwj.msg.handler.flowcontrol.FlowControlParam;
-import com.imwj.msg.handler.flowcontrol.FlowControlService;
+import com.imwj.msg.handler.flowcontrol.impl.FlowControlFactory;
 import com.imwj.msg.support.utils.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,7 +33,7 @@ public abstract class BaseHandler implements Handler {
     @Autowired
     private LogUtils logUtils;
     @Autowired
-    private FlowControlService flowControlService;
+    private FlowControlFactory flowControlFactory;
 
     /**
      * 初始化渠道与Handler的映射关系
@@ -69,7 +69,7 @@ public abstract class BaseHandler implements Handler {
     public void flowControl(TaskInfo taskInfo) {
         // 只有子类指定了限流参数，才需要限流
         if (flowControlParam != null) {
-            flowControlService.flowControl(taskInfo, flowControlParam);
+            flowControlFactory.flowControl(taskInfo, flowControlParam);
         }
     }
 }

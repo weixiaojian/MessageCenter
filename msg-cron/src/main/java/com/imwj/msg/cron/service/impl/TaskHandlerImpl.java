@@ -39,7 +39,7 @@ public class TaskHandlerImpl implements TaskHandler {
         log.info("TaskHandler handle:{}", Thread.currentThread().getName());
         //查询模板数据中的文件相关信息
         MessageTemplate messageTemplate = messageTemplateDao.selectById(messageTemplateId);
-        if(messageTemplate == null || StrUtil.isBlank(messageTemplate.getCronCrowdPath())){
+        if(StrUtil.isBlank(messageTemplate.getCronCrowdPath())){
             log.error("TaskHandler#handle crowdPath empty!");
             return;
         }
