@@ -70,8 +70,7 @@ public class ReceiverStart {
             if (element instanceof Method) {
                 String name = ((Method) element).getDeclaringClass().getSimpleName() + "." + ((Method) element).getName();
                 if (RECEIVER_METHOD_NAME.equals(name)) {
-                    attrs.put("groupId", groupIds.get(index));
-                    index++;
+                    attrs.put("groupId", groupIds.get(index++));
                 }
             }
             return attrs;
@@ -79,26 +78,26 @@ public class ReceiverStart {
     }
 
     /**
-     * 针对tag消息过滤（将tag写到handler里面）
-     * @param tagIdKey
-     * @param tagIdValue
+     * 针对tag消息过滤
+     * producer 将tag写进header里
      * @return
      */
     @Bean
     public ConcurrentKafkaListenerContainerFactory filterContainerFactory(@Value("${msg.business.tagId.key}") String tagIdKey,
-                                                                          @Value("${msg.business.tagId.value}") String tagIdValue){
+                                                                          @Value("${msg.business.tagId.value}") String tagIdValue) {
         ConcurrentKafkaListenerContainerFactory factory = new ConcurrentKafkaListenerContainerFactory();
         factory.setConsumerFactory(consumerFactory);
         factory.setAckDiscarded(true);
+
         factory.setRecordFilterStrategy(consumerRecord -> {
-            if(Optional.ofNullable(consumerRecord.value()).isPresent()){
+            if (Optional.ofNullable(consumerRecord.value()).isPresent()) {
                 for (Header header : consumerRecord.headers()) {
                     if (header.key().equals(tagIdKey) && new String(header.value()).equals(new String(tagIdValue.getBytes(StandardCharsets.UTF_8)))) {
                         return false;
                     }
                 }
             }
-            // 返回true代表数据将会丢弃
+            //返回true将会被丢弃
             return true;
         });
         return factory;

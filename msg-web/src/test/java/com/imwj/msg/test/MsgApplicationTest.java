@@ -1,10 +1,9 @@
 package com.imwj.msg.test;
 
-import com.imwj.msg.handler.handler.HandlerHolder;
+import com.imwj.msg.support.utils.NacosUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * @author langao_q
@@ -14,16 +13,11 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 class MsgApplicationTest {
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private NacosUtils nacosUtils;
 
     @Test
     public void test(){
-        redisTemplate.opsForValue().set("test1.a","1");
-        redisTemplate.opsForValue().set("test1.b","1");
-
-        System.out.println(redisTemplate.opsForValue().get("test:*"));
-        System.out.println(redisTemplate.keys("test:*"));
-
+        System.out.println(nacosUtils.getProperty("sms_66", ""));;
     }
 
 }

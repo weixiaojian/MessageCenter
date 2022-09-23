@@ -133,6 +133,12 @@ msg:
     enabled: true #是否开启xxljob服务
   mq:
     pipeline: kafka #mq消息总线：eventbus、kafka、rocketMq
+  nacos:
+    enabled: false
+    server: 192.168.156.128
+    group: DEFAULT_GROUP
+    dataId: message_center
+    namespace: e085b488-eeb9-43a1-9d07-73135969a0af
 
 ##################### Rabbit properties #####################
 # #RabbitMq所在服务器IP

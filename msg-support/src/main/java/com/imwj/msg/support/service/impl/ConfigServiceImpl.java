@@ -4,6 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.setting.dialect.Props;
 import com.ctrip.framework.apollo.Config;
 import com.imwj.msg.support.service.ConfigService;
+import com.imwj.msg.support.utils.NacosUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,13 @@ public class ConfigServiceImpl implements ConfigService {
     private Boolean enableApollo;
     @Value("${apollo.bootstrap.namespaces}")
     private String namespaces;
-
+    /**
+     * nacos配置
+     */
+    @Value("${msg.nacos.enabled}")
+    private Boolean enableNacos;
+    @Autowired
+    private NacosUtils nacosUtils;
 
     @Override
     public String getProperty(String key, String defaultValue) {
@@ -38,6 +46,9 @@ public class ConfigServiceImpl implements ConfigService {
             // apollo启用时读取服务器上的配置
             Config config = com.ctrip.framework.apollo.ConfigService.getConfig(namespaces.split(StrUtil.COMMA)[0]);
             return config.getProperty(key, defaultValue);
+        }else if(enableNacos){
+            // nacos启用时读取服务器上的配置
+            return nacosUtils.getProperty(key, defaultValue);
         } else {
             // apollo未启用读取`local.properties`文件配置
             return props.getProperty(key, defaultValue);
