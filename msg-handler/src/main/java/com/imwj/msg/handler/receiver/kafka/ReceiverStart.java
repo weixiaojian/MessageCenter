@@ -50,13 +50,21 @@ public class ReceiverStart {
      * 下标(用于迭代groupIds位置)
      */
     private static Integer index = 0;
+    @Value("${msg.nacos.enabled}")
+    private Boolean nacosEnabled;
 
     /**
      * 为每个渠道不同的消息类型 创建一个Receiver对象
      */
     @PostConstruct
     public void init() {
-        for (int i = 0; i < groupIds.size(); i++) {
+        int total = groupIds.size();
+        if (nacosEnabled) {
+            // 当nacos开启时 会导致Receiver提前加载 所以这里getBean次数-1
+            // nacos issue: https://github.com/nacos-group/nacos-spring-project/issues/249
+            total -= 1;
+        }
+        for (int i = 0; i < total; i++) {
             context.getBean(MsgReceiver.class);
         }
     }

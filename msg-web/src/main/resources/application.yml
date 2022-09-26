@@ -140,6 +140,11 @@ msg:
     dataId: message_center
     namespace: e085b488-eeb9-43a1-9d07-73135969a0af
 
+##################### nacos properties #####################
+nacos:
+  config:
+    enabled: ${msg.nacos.enabled}
+
 ##################### Rabbit properties #####################
 # #RabbitMq所在服务器IP
 # spring.rabbitmq.host=127.0.0.1
