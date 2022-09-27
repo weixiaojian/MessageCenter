@@ -6,11 +6,10 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.base.Throwables;
 import com.imwj.msg.common.domain.AnchorInfo;
 import com.imwj.msg.common.domain.LogParam;
-import com.imwj.msg.support.constans.MessageQueuePipeline;
+import com.imwj.msg.support.mq.SendMqService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,10 +22,7 @@ import org.springframework.stereotype.Component;
 public class LogUtils extends CustomLogListener {
 
     @Autowired
-    private KafkaTemplate kafkaTemplate;
-
-    @Value("${msg.mq.pipeline}")
-    private String mqPipeline;
+    private SendMqService sendMqService;
 
     @Value("${msg.business.log.topic.name}")
     private String topicName;
@@ -55,13 +51,11 @@ public class LogUtils extends CustomLogListener {
         anchorInfo.setTimestamp(System.currentTimeMillis());
         String message = JSON.toJSONString(anchorInfo);
         log.info(JSON.toJSONString(anchorInfo));
-        if (MessageQueuePipeline.KAFKA.equals(mqPipeline)) {
-            try {
-                kafkaTemplate.send(topicName, message);
-            } catch (Exception e) {
-                log.error("LogUtils#print kafka fail! e:{},params:{}", Throwables.getStackTraceAsString(e)
-                        , JSON.toJSONString(anchorInfo));
-            }
+        try {
+            sendMqService.send(topicName, message);
+        } catch (Exception e) {
+            log.error("LogUtils#print kafka fail! e:{},params:{}", Throwables.getStackTraceAsString(e)
+                    , JSON.toJSONString(anchorInfo));
         }
     }
 

@@ -66,7 +66,7 @@ app:
   id: MessageCenter
 apollo:
   bootstrap:
-    enabled: true
+    enabled: ${msg.apollo.enabled}
     namespaces: message.center,dynamic-tp-apollo-dtp.yml
 
 ##################### xxl-job properties #####################
@@ -131,10 +131,12 @@ msg:
       wait-for-tasks-to-complete-on-shut-down: true # 任务执行完,在关闭应用
   xxl-job:
     enabled: true #是否开启xxljob服务
+  apollo:
+    enabled: true #是否开启apollo服务
   mq:
     pipeline: kafka #mq消息总线：eventbus、kafka、rocketMq
   nacos:
-    enabled: false
+    enabled: true
     server: 192.168.156.128
     group: DEFAULT_GROUP
     dataId: message_center

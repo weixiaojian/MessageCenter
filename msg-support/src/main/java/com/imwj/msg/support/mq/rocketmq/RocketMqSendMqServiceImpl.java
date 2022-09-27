@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@ConditionalOnProperty(name = "austin-mq-pipeline", havingValue = MessageQueuePipeline.ROCKET_MQ)
+@ConditionalOnProperty(name = "msg.mq.pipeline", havingValue = MessageQueuePipeline.ROCKET_MQ)
 public class RocketMqSendMqServiceImpl implements SendMqService {
 
     @Autowired

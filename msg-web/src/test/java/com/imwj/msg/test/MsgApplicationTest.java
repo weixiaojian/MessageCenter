@@ -17,7 +17,7 @@ class MsgApplicationTest {
 
     @Test
     public void test(){
-        System.out.println(nacosUtils.getProperty("sms_66", ""));;
+        System.out.println(nacosUtils.getProperty("smsAccount", ""));;
     }
 
 }
