@@ -13,5 +13,5 @@ EXPOSE 8080
 # 运行jar包
 ENTRYPOINT ["sh","-c","java -jar $JAVA_OPTS MessageCenter.jar $PARAMS"]
 
-
+# docker build -t MessageCenter:0.1 .
 # docker run -e PARAMS="--MessageCenter-database-ip= --MessageCenter-database-port=3306 --MessageCenter-redis-ip= --MessageCenter-mq-pipeline=eventbus  " -p 8080:8080 --name MessageCenter:1.0

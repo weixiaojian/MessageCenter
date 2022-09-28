@@ -13,6 +13,7 @@
         <module>msg-web</module>
         <module>msg-cron</module>
         <module>msg-stream</module>
+        <module>msg-client</module>
     </modules>
 
     <parent>
