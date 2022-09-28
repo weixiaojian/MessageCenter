@@ -9,6 +9,8 @@ import com.imwj.msg.web.service.ChannelAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author wj
  * @create 2022-09-27 17:08
@@ -34,5 +36,15 @@ public class ChannelAccountServiceImpl implements ChannelAccountService {
         QueryWrapper<ChannelAccount> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("channel_type", channelType);
         return channelAccountDao.selectOne(queryWrapper);
+    }
+
+    @Override
+    public List<ChannelAccount> list() {
+        return channelAccountDao.selectList(new QueryWrapper<>());
+    }
+
+    @Override
+    public void deleteByIds(List<Long> idList) {
+        channelAccountDao.deleteBatchIds(idList);
     }
 }

@@ -2,6 +2,8 @@ package com.imwj.msg.web.service;
 
 import com.imwj.msg.support.domain.ChannelAccount;
 
+import java.util.List;
+
 /**
  * 渠道账号service
  * @author wj
@@ -21,4 +23,16 @@ public interface ChannelAccountService {
      * @return
      */
     ChannelAccount queryByChannelType(Integer channelType);
+
+    /**
+     * 所有的渠道账号信息
+     * @return
+     */
+    List<ChannelAccount> list();
+
+    /**
+     * 根据Ids删除
+     * @param idList
+     */
+    void deleteByIds(List<Long> idList);
 }
