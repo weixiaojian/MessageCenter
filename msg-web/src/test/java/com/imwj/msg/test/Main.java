@@ -1,5 +1,6 @@
 package com.imwj.msg.test;
 
+import cn.hutool.core.io.file.FileWriter;
 import com.google.common.util.concurrent.RateLimiter;
 
 /**
@@ -9,11 +10,20 @@ import com.google.common.util.concurrent.RateLimiter;
 public class Main {
 
     public static void main(String[] args) {
-        int[] nums = {1,2,3};
-        int[] ints = twoSum(nums, 5);
-        for(int i=0; i< ints.length; i++){
-            System.out.println(ints[i]);
+        long millis = System.currentTimeMillis();
+        StringBuilder builder = new StringBuilder();
+        for (int i=0; i<10000000; i++){
+            builder.append("有两种常见的方法来实现单例。两者都基于保持构造方法私有和导出公共静态成员以提供对唯一实例的访问。在第一种方法中，成员是 final 修饰的属性：");
         }
+
+        long ms1 = System.currentTimeMillis() - millis;
+        System.out.println("耗时1：" + ms1);
+
+        FileWriter writer = new FileWriter("e://test.log");
+        writer.write(builder.toString());
+
+        long ms2 = System.currentTimeMillis() - millis;
+        System.out.println("耗时2：" + ms2);
     }
 
 
