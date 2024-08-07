@@ -62,3 +62,5 @@
 * 2.定时任务中处理文件使用了线程池(CronAsyncThreadPoolConfig.getXxlCronExecutor) - 动态线程池
 * 3.定时任务读取文件后将消息推送出去使用了线程池(CronAsyncThreadPoolConfig.getConsumePendingThreadPool) - 普通线程池  
     3.1这里还用了一个线程的单线程池SupportThreadPoolConfig.java（在此类初始化的时候用一个单线程循环去启用多线程池去推送消息）
+
+## 增加说明！
